@@ -19,7 +19,15 @@ const Chat = ({ location }) => {
     setName(name);
     setRoom(room);
 
-    socket.emit("join", { name, room });
+    socket.emit("join", { name, room }, () => {
+    });
+
+    // Unmount part
+    return () => {
+        socket.emit('disconnect');
+
+        socket.off();
+    };
   }, [ENDPOINT, location.search]);
 
   return (
