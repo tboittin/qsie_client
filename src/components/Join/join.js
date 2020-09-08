@@ -8,8 +8,8 @@ const Join = () => {
     const [room, setRoom] = useState('');
 
     return(
-        <div className="joinOutercontainer">
-            <div className="joinInnercontainer">
+        <div className="joinOuterContainer">
+            <div className="joinInnerContainer">
                 <h1 className="heading">Join</h1>
                 <div><input placeholder="Name" className="joinInput" type="text" onChange={(event) => setName(event.target.value)} /></div>
                 <div><input placeholder="Room" className="joinInput mt-20" type="text" onChange={(event) => setRoom(event.target.value)} /></div>
