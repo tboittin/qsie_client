@@ -4,10 +4,10 @@ import io from "socket.io-client";
 
 import "./game.css";
 
-import Chat from "../Chat/chat";
-import GameHeader from "../GameHeader/gameHeader";
+import Chat from "./Chat/chat";
+import GameHeader from "./GameHeader/gameHeader";
 import { Col, Row, Container } from "reactstrap";
-import GameGrid from "../GameGrid/gameGrid";
+import GameGrid from "./GameGrid/gameGrid";
 
 let socket;
 
