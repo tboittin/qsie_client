@@ -6,7 +6,7 @@ import "./game.css";
 
 import Chat from "./Chat/chat";
 import GameHeader from "./GameHeader/gameHeader";
-import { Col, Row, Container } from "reactstrap";
+import { Col, Row} from "reactstrap";
 import GameGrid from "./GameGrid/gameGrid";
 
 let socket;
@@ -52,12 +52,15 @@ const Game = ({ location }) => {
     }
   };
 
+  
+  let userCharacter = {name: "10"};
+
   return (
     <div className="outerContainer">
         <Row className="w-100 h-100 m-0">
           <Col xs="8" className="p-0">
             <GameHeader />
-            <GameGrid />
+            <GameGrid userCharacter={userCharacter} />
           </Col>
           <Col xs="4" className="p-0 h-100">
             <Chat
