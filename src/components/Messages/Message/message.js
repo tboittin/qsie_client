@@ -5,17 +5,25 @@ import "./message.css";
 import ReactEmoji from 'react-emoji';
 
 const Message = ({ message: { user, text }, name }) => {
-  let isSentByCurrentUser = false;
+  let sentBy = '';
 
   const trimmedName = name.trim().toLowerCase();
 
-  if (user === trimmedName) {
-    isSentByCurrentUser = true;
+  switch (user) {
+    case 'admin' :
+      sentBy = 'admin';
+      break;
+    case trimmedName :
+      sentBy = 'currentUser';
+      break;
+    default :
+      sentBy = 'opponent';
+      break;
   }
 
   return (
     <>
-      {isSentByCurrentUser && (
+      {(sentBy === 'currentUser') && (
         <div className="messageContainer justifyEnd">
           <p className="sentText pr-10">{trimmedName}</p>
           <div className="messageBox backgroundBlue">
@@ -23,12 +31,19 @@ const Message = ({ message: { user, text }, name }) => {
           </div>
         </div>
       )}
-      {!isSentByCurrentUser && (
+      {(sentBy === 'opponent') && (
         <div className="messageContainer justifyStart">
           <div className="messageBox backgroundWhite">
             <p className="messageText colorDark">{ReactEmoji.emojify(text)}</p>
           </div>
-          <p className="sentText">{user}</p>
+          <p className="sentText pl-10">{user}</p>
+        </div>
+      )}
+      {(sentBy === 'admin') && (
+        <div className="messageContainer justifyCenter">
+          <div className="messageBox backgroundWhite">
+            <p className="messageText colorDark">{ReactEmoji.emojify(text)}</p>
+          </div>
         </div>
       )}
     </>
