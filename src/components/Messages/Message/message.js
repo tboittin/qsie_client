@@ -25,24 +25,24 @@ const Message = ({ message: { user, text }, name }) => {
     <>
       {(sentBy === 'currentUser') && (
         <div className="messageContainer justifyEnd">
-          <p className="sentText pr-10">{trimmedName}</p>
+          <p className="sentText pr-10 m-0">{trimmedName}</p>
           <div className="messageBox backgroundBlue">
-            <p className="messageText colorWhite">{ReactEmoji.emojify(text)}</p>
+            <p className="messageText colorWhite m-0">{ReactEmoji.emojify(text)}</p>
           </div>
         </div>
       )}
       {(sentBy === 'opponent') && (
         <div className="messageContainer justifyStart">
           <div className="messageBox backgroundWhite">
-            <p className="messageText colorDark">{ReactEmoji.emojify(text)}</p>
+            <p className="messageText colorDark m-0">{ReactEmoji.emojify(text)}</p>
           </div>
-          <p className="sentText pl-10">{user}</p>
+          <p className="sentText pl-10 m-0">{user}</p>
         </div>
       )}
       {(sentBy === 'admin') && (
         <div className="messageContainer justifyCenter">
           <div className="messageBox backgroundWhite">
-            <p className="messageText colorDark">{ReactEmoji.emojify(text)}</p>
+            <p className="messageText colorDark m-0">{ReactEmoji.emojify(text)}</p>
           </div>
         </div>
       )}

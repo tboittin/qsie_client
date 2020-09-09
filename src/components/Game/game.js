@@ -5,6 +5,9 @@ import io from "socket.io-client";
 import "./game.css";
 
 import Chat from "../Chat/chat";
+import GameHeader from "../GameHeader/gameHeader";
+import { Col, Row, Container } from "reactstrap";
+import GameGrid from "../GameGrid/gameGrid";
 
 let socket;
 
@@ -36,12 +39,10 @@ const Game = ({ location }) => {
   }, [ENDPOINT, location.search]);
 
   useEffect(() => {
-      socket.on("message", (message) => {
-        setMessages([...messages, message]);
-      });
-    },
-    [messages]
-  );
+    socket.on("message", (message) => {
+      setMessages([...messages, message]);
+    });
+  }, [messages]);
 
   const sendMessage = (event) => {
     event.preventDefault();
@@ -53,14 +54,22 @@ const Game = ({ location }) => {
 
   return (
     <div className="outerContainer">
-      <Chat
-        name={name}
-        room={room}
-        sendMessage={sendMessage}
-        message={message}
-        messages={messages}
-        setMessage={setMessage}
-      />
+        <Row className="w-100 h-100 m-0">
+          <Col xs="8" className="p-0">
+            <GameHeader />
+            <GameGrid />
+          </Col>
+          <Col xs="4" className="p-0 h-100">
+            <Chat
+              name={name}
+              room={room}
+              sendMessage={sendMessage}
+              message={message}
+              messages={messages}
+              setMessage={setMessage}
+            />
+          </Col>
+        </Row>
     </div>
   );
 };
