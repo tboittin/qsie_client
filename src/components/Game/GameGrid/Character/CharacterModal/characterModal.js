@@ -20,7 +20,7 @@ const CharacterModal = ({ character, toggle }) => {
         <Container>
           <Row>
             <Col xs="4">{character.name}</Col>
-            <Col xs={{ size: "7", offset: "1" }}>
+            <Col xs={{ size: "7", offset: "1" }} className="modal-menu">
               <p className="character-description">
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
                 eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
@@ -30,10 +30,19 @@ const CharacterModal = ({ character, toggle }) => {
                 nulla pariatur. Excepteur sint occaecat cupidatat non proident,
                 sunt in culpa qui officia deserunt mollit anim id est laborum.
               </p>
-              <Button color="secondary" onClick={elimination}>
+              <Button
+                className="modal-button"
+                color="danger"
+                onClick={elimination}
+              >
                 Elimination
               </Button>
-              <Button color="secondary" onClick={choixFinal}>
+              
+              <Button
+                className="modal-button"
+                color="success"
+                onClick={choixFinal}
+              >
                 Choix Final
               </Button>
             </Col>
