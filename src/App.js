@@ -3,12 +3,12 @@ import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import Join from './components/Join/join';
-import Chat from './components/Chat/chat';
+import Game from './components/Game/game';
 
 const App = () => (
     <Router>
         <Route path="/" exact component={Join} />
-        <Route path="/chat" component={Chat} />
+        <Route path="/game" component={Game} />
     </Router>
 )
 
