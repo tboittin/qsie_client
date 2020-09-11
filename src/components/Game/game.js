@@ -4,6 +4,8 @@ import io from "socket.io-client";
 
 import "./game.css";
 
+import * as CHARACTERS from '../../characters.json';
+
 import Chat from "./Chat/chat";
 import GameHeader from "./GameHeader/gameHeader";
 import { Col, Row} from "reactstrap";
@@ -14,6 +16,7 @@ let socket;
 const Game = ({ location }) => {
   const [name, setName] = useState("");
   const [room, setRoom] = useState("");
+  // const [characters, setCharacters] = useState([]);
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
 
@@ -44,7 +47,16 @@ const Game = ({ location }) => {
     });
   }, [messages]);
 
-  const sendMessage = (event) => {
+// Faire en sorte que ça marche
+  // useEffect(()=> {
+  //   const feedCharacters = food => {
+  //     setCharacters(food);
+  //   }
+  //   feedCharacters(CHARACTERS.default);
+  //   console.log(characters)
+  // })
+
+  const sendMessage = event => {
     event.preventDefault();
 
     if (message) {
@@ -52,15 +64,15 @@ const Game = ({ location }) => {
     }
   };
 
-  
-  let userCharacter = {name: "10"};
+  const characters = CHARACTERS.default;
 
+  let opponentCharacter = {name: "5000"};
   return (
     <div className="outerContainer">
         <Row className="w-100 h-100 m-0">
           <Col xs="8" className="p-0">
             <GameHeader />
-            <GameGrid userCharacter={userCharacter} />
+            <GameGrid opponentCharacter={opponentCharacter} characters={characters} />
           </Col>
           <Col xs="4" className="p-0 h-100">
             <Chat
