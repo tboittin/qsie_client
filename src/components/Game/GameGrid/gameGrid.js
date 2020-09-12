@@ -16,10 +16,12 @@ const GameGrid = ({ opponentCharacter, characters }) => {
       const rightSizeDeck = shuffle(characters).slice(0, size);
       // je vérifie que le personnage y est
       if (rightSizeDeck.find((e) => e.name === opponentCharacter.name)) {
-        // S'il y est je ne fais rien
+        // S'il y est je le remplace avec l'élément
+        let i = rightSizeDeck.find((e) => e.name === opponentCharacter.name)
+        rightSizeDeck[i].name = opponentCharacter.name;
         finalDeck = rightSizeDeck;
       } else {
-        // S'il n'y est pas, je le remplace avec un personnage au hasard du jeu
+        // S'il n'y est pas, je le mets à la place d'un personnage au hasard du jeu
         let i = Math.floor(Math.random() * rightSizeDeck.length);
         rightSizeDeck[i].name = opponentCharacter.name;
         finalDeck = rightSizeDeck;
