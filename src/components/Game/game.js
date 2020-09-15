@@ -13,20 +13,17 @@ import GameGrid from "./GameGrid/gameGrid";
 
 let socket;
 
-const Game = ({ location }) => {
+const Game = ({endpoint}) => {
   const [name, setName] = useState("");
   const [room, setRoom] = useState("");
   // const [characters, setCharacters] = useState([]);
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
 
-  // const ENDPOINT = 'http://localhost:5000/';
-  const ENDPOINT = "https://qsie-server.herokuapp.com/";
-
   useEffect(() => {
-    const { name, room } = queryString.parse(location.search);
+    const { name, room } = queryString.parse(window.location.search);
 
-    socket = io(ENDPOINT);
+    socket = io(endpoint);
 
     setName(name);
     setRoom(room);
@@ -39,7 +36,7 @@ const Game = ({ location }) => {
 
       socket.off();
     };
-  }, [ENDPOINT, location.search]);
+  }, [endpoint, window.location.search]);
 
   useEffect(() => {
     socket.on("message", (message) => {
