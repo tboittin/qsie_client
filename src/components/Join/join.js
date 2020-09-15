@@ -13,6 +13,9 @@ const Join = () => {
     <div className="joinOuterContainer">
       <div className="joinInnerContainer">
         <Container>
+            <h1>
+              Bienvenue !
+            </h1>
           <Row>
             <Col xs="8">
               <h1 className="heading">Description</h1>
@@ -27,7 +30,7 @@ const Join = () => {
               </p>
             </Col>
             <Col xs="4">
-              <h1 className="heading">Join</h1>
+              <h1>Indique ton nom</h1>
               <div>
                 <input
                   placeholder="Name"
