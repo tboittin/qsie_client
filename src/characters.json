@@ -1,27 +1,127 @@
 [
-  { "name": "Harry Potter", "opponentCharacter": false, "display": "unknown" },
-  { "name": "Ron Weasley", "opponentCharacter": false, "display": "unknown"  },
-  { "name": "Hermione Granger", "opponentCharacter": false, "display": "unknown"  },
-  { "name": "Drago Malfoy", "opponentCharacter": false, "display": "unknown"  },
-  { "name": "Luna Lovegood", "opponentCharacter": false, "display": "unknown"  },
-  { "name": "Neville Londubat", "opponentCharacter": false, "display": "unknown"  },
-  { "name": "Fred Weasley", "opponentCharacter": false, "display": "unknown"  },
-  { "name": "Georges Weasle", "opponentCharacter": false, "display": "unknown"  },
-  { "name": "Giny Weasley", "opponentCharacter": false, "display": "unknown"  },
-  { "name": "Milicent Bullstrod", "opponentCharacter": false, "display": "unknown"  },
-  { "name": "Cho Chang", "opponentCharacter": false, "display": "unknown"  },
-  { "name": "Cedric Diggory", "opponentCharacter": false, "display": "unknown"  },
-  { "name": "Rubeus Hagrid", "opponentCharacter": false, "display": "unknown"  },
-  { "name": "Minerva McGonagall", "opponentCharacter": false, "display": "unknown"  },
-  { "name": "Albus Dumbledore", "opponentCharacter": false, "display": "unknown"  },
-  { "name": "Parvati Patil", "opponentCharacter": false, "display": "unknown"  },
-  { "name": "Lavande Brown", "opponentCharacter": false, "display": "unknown"  },
-  { "name": "Percy Weasley", "opponentCharacter": false, "display": "unknown"  },
-  { "name": "Sirius Black", "opponentCharacter": false, "display": "unknown"  },
-  { "name": "Viktor Krum", "opponentCharacter": false, "display": "unknown"  },
-  { "name": "Fleur Delacour", "opponentCharacter": false, "display": "unknown"  },
-  { "name": "Beatrix Lestrange", "opponentCharacter": false, "display": "unknown"  },
-  { "name": "Dobby", "opponentCharacter": false, "display": "unknown"  },
-  { "name": "Norbert Dragonneau", "opponentCharacter": false, "display": "unknown"  },
-  { "name": "Tom Elvis Jedusor", "opponentCharacter": false, "display": "unknown"  }
+  {
+    "name": "Harry Potter",
+    "opponentCharacter": false,
+    "display": "unknown"
+  },
+  {
+    "name": "Ron Weasley",
+    "opponentCharacter": false,
+    "display": "unknown"
+  },
+  {
+    "name": "Hermione Granger",
+    "opponentCharacter": false,
+    "display": "unknown"
+  },
+  {
+    "name": "Drago Malfoy",
+    "opponentCharacter": false,
+    "display": "unknown"
+  },
+  {
+    "name": "Luna Lovegood",
+    "opponentCharacter": false,
+    "display": "unknown"
+  },
+  {
+    "name": "Neville Londubat",
+    "opponentCharacter": false,
+    "display": "unknown"
+  },
+  {
+    "name": "Fred Weasley",
+    "opponentCharacter": false,
+    "display": "unknown"
+  },
+  {
+    "name": "Georges Weasle",
+    "opponentCharacter": false,
+    "display": "unknown"
+  },
+  {
+    "name": "Giny Weasley",
+    "opponentCharacter": false,
+    "display": "unknown"
+  },
+  {
+    "name": "Milicent Bullstrod",
+    "opponentCharacter": false,
+    "display": "unknown"
+  },
+  {
+    "name": "Cho Chang",
+    "opponentCharacter": false,
+    "display": "unknown"
+  },
+  {
+    "name": "Cedric Diggory",
+    "opponentCharacter": false,
+    "display": "unknown"
+  },
+  {
+    "name": "Rubeus Hagrid",
+    "opponentCharacter": false,
+    "display": "unknown"
+  },
+  {
+    "name": "Minerva McGonagall",
+    "opponentCharacter": false,
+    "display": "unknown"
+  },
+  {
+    "name": "Albus Dumbledore",
+    "opponentCharacter": false,
+    "display": "unknown"
+  },
+  {
+    "name": "Parvati Patil",
+    "opponentCharacter": false,
+    "display": "unknown"
+  },
+  {
+    "name": "Lavande Brown",
+    "opponentCharacter": false,
+    "display": "unknown"
+  },
+  {
+    "name": "Percy Weasley",
+    "opponentCharacter": false,
+    "display": "unknown"
+  },
+  {
+    "name": "Sirius Black",
+    "opponentCharacter": false,
+    "display": "unknown"
+  },
+  {
+    "name": "Viktor Krum",
+    "opponentCharacter": false,
+    "display": "unknown"
+  },
+  {
+    "name": "Fleur Delacour",
+    "opponentCharacter": false,
+    "display": "unknown"
+  },
+  {
+    "name": "Beatrix Lestrange",
+    "opponentCharacter": false,
+    "display": "unknown"
+  },
+  {
+    "name": "Dobby",
+    "opponentCharacter": false,
+    "display": "unknown"
+  },
+  {
+    "name": "Norbert Dragonneau",
+    "opponentCharacter": false,
+    "display": "unknown"
+  },
+  {
+    "name": "Tom Elvis Jedusor",
+    "opponentCharacter": false,
+    "display": "unknown"
+  }
 ]
