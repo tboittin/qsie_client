@@ -1,24 +1,57 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { Col, Container, Row } from "reactstrap";
 
-import './join.css';
+import "./join.css";
 
 const Join = () => {
-    const [name, setName] = useState('');
-    const [room, setRoom] = useState('');
+  const [name, setName] = useState("");
 
-    return(
-        <div className="joinOuterContainer">
-            <div className="joinInnerContainer">
-                <h1 className="heading">Join</h1>
-                <div><input placeholder="Name" className="joinInput" type="text" onChange={(event) => setName(event.target.value)} /></div>
-                <div><input placeholder="Room" className="joinInput mt-20" type="text" onChange={(event) => setRoom(event.target.value)} /></div>
-                <Link onClick={event => (!name || !room) ? event.preventDefault() : null} to={`/game?name=${name}&room=${room}`}>
-                    <button className="button mt-20" type="submit">Sign In</button>
-                </Link>
-            </div>
-        </div>
-    )
-}
+  // TODO: socket pour créer un salon dans un array en back-end
+
+  return (
+    <div className="joinOuterContainer">
+      <div className="joinInnerContainer">
+        <Container>
+          <Row>
+            <Col xs="8">
+              <h1 className="heading">Description</h1>
+              <p className="character-description">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+                nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+                sunt in culpa qui officia deserunt mollit anim id est laborum.
+              </p>
+            </Col>
+            <Col xs="4">
+              <h1 className="heading">Join</h1>
+              <div>
+                <input
+                  placeholder="Name"
+                  className="joinInput"
+                  type="text"
+                  onChange={(event) => setName(event.target.value)}
+                />
+              </div>
+              <Link
+                onClick={(event) =>
+                  !name ? event.preventDefault() : null
+                }
+                to={`/rooms?name=${name}`}
+              >
+                <button className="button mt-20" type="submit">
+                  Entrer
+                </button>
+              </Link>
+            </Col>
+          </Row>
+        </Container>
+      </div>
+    </div>
+  );
+};
 
 export default Join;
