@@ -23,7 +23,9 @@ const ChooseCharacter = ({ location }) => {
 
   const pickCharacter = () => {
     let i = Math.floor(Math.random() * CHARACTER.default.length);
-    setUserCharacter(CHARACTER.default[i]);
+    const userCharacter = CHARACTER.default[i];
+    userCharacter.opponentCharacter = true;
+    setUserCharacter(userCharacter);
   };
   
   useEffect(() => {

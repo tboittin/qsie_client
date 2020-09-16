@@ -4,16 +4,16 @@ import io from "socket.io-client";
 
 import "./game.css";
 
-import * as CHARACTERS from '../../characters.json';
+import * as CHARACTERS from "../../characters.json";
 
 import Chat from "./Chat/chat";
 import GameHeader from "./GameHeader/gameHeader";
-import { Col, Row} from "reactstrap";
+import { Col, Row } from "reactstrap";
 import GameGrid from "./GameGrid/gameGrid";
 
 let socket;
 
-const Game = ({endpoint}) => {
+const Game = ({ endpoint }) => {
   const [name, setName] = useState("");
   const [room, setRoom] = useState("");
   // const [characters, setCharacters] = useState([]);
@@ -44,7 +44,7 @@ const Game = ({endpoint}) => {
     });
   }, [messages]);
 
-// Faire en sorte que ça marche
+  // Faire en sorte que ça marche
   // useEffect(()=> {
   //   const feedCharacters = food => {
   //     setCharacters(food);
@@ -53,7 +53,7 @@ const Game = ({endpoint}) => {
   //   console.log(characters)
   // })
 
-  const sendMessage = event => {
+  const sendMessage = (event) => {
     event.preventDefault();
 
     if (message) {
@@ -63,25 +63,33 @@ const Game = ({endpoint}) => {
 
   const characters = CHARACTERS.default;
 
-  let opponentCharacter = {name: "5000"};
+  let opponentCharacter = {
+    name: "5000",
+    opponentCharacter: true,
+    display: "unknown",
+  };
+
   return (
     <div className="outerContainer">
-        <Row className="w-100 h-100 m-0">
-          <Col xs="8" className="p-0">
-            <GameHeader />
-            <GameGrid opponentCharacter={opponentCharacter} characters={characters} />
-          </Col>
-          <Col xs="4" className="p-0 h-100">
-            <Chat
-              name={name}
-              room={room}
-              sendMessage={sendMessage}
-              message={message}
-              messages={messages}
-              setMessage={setMessage}
-            />
-          </Col>
-        </Row>
+      <Row className="w-100 h-100 m-0">
+        <Col xs="8" className="p-0">
+          <GameHeader />
+          <GameGrid
+            opponentCharacter={opponentCharacter}
+            characters={characters}
+          />
+        </Col>
+        <Col xs="4" className="p-0 h-100">
+          <Chat
+            name={name}
+            room={room}
+            sendMessage={sendMessage}
+            message={message}
+            messages={messages}
+            setMessage={setMessage}
+          />
+        </Col>
+      </Row>
     </div>
   );
 };
