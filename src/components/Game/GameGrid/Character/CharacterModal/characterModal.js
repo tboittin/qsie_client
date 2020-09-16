@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import queryString from "query-string";
 
 import "./characterModal.scss";
 import {
@@ -9,17 +10,50 @@ import {
   Row,
   Col,
 } from "reactstrap";
+import { Redirect } from "react-router";
 
 const CharacterModal = ({ character, toggle }) => {
-  const elimination = () => alert("Ce personnage est éliminé");
+  
+  const [name, setName] = useState("");
+  const [room, setRoom] = useState("");
+  const [win, setWin] = useState(false);
 
-  const choixFinal = () => alert("Ce personnage est choisi comme choix final");
+  useEffect(() => {
+    const { name, room } = queryString.parse(window.location.search);
+    setName(name);
+    setRoom(room);
+  },[window.location.search]);
+
+  const elimination = () => {
+    toggle();
+    character.display = 'innocent';
+  };
+
+  const choixFinal = () => {
+    toggle();
+    if (character.opponentCharacter === true) {
+      alert("GAGNE")
+      setWin(true)
+    } else {
+      character.display = 'wrong';
+      return alert("Ce n'était pas le bon personnage");
+    }
+  };
+
+  if (win) {
+    return <Redirect to={`/winScreen?name=${name}&room=${room}`} />
+  }
+  
   return (
     <>
       <ModalBody>
         <Container>
           <Row>
-            <Col xs="4">{character.name}</Col>
+            <Col xs="4">
+              <h2>
+                {character.name}
+              </h2>
+            </Col>
             <Col xs={{ size: "7", offset: "1" }} className="modal-menu">
               <p className="character-description">
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
@@ -35,7 +69,7 @@ const CharacterModal = ({ character, toggle }) => {
                 color="danger"
                 onClick={elimination}
               >
-                Elimination
+                Désactiver le personnage
               </Button>
               
               <Button

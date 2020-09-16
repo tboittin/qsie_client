@@ -9,10 +9,24 @@ const Character = ({ character }) => {
   const [modal, setModal] = useState(false);
 
   const toggle = () => setModal(!modal);
+  
+  const characterDisplay = () => {
+    switch (character.display) {
+      case 'wrong' :
+        return 'display-wrong';
+        break;
+      case 'innocent' :
+        return 'display-innocent';
+        break;
+      default :
+        return '';
+        break;
+    }
+  }
 
   return (
     <>
-      <div className="character bg-white" onClick={toggle}>
+      <div className={`character bg-white ${characterDisplay()}`} onClick={toggle}>
         <p>{character.name}</p>
         <Modal
           key={"modal-" + character.name}
