@@ -19,7 +19,7 @@ const Rooms = () => {
         <Row>
           <Col>
             {rooms.map((room) => (
-              <Link to={`chooseCharacter?name=${name}&room=${room}`}>
+              <Link to={`chooseCharacter?name=${name}&room=${room}`} key={room}>
                 <h1>{room}</h1>
               </Link>
             ))}

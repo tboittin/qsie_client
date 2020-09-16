@@ -7,7 +7,7 @@ import "./join.css";
 const Join = () => {
   const [name, setName] = useState("");
 
-  // TODO: socket pour créer un salon dans un array en back-end
+  // TODO: socket pour checker name
 
   return (
     <div className="joinOuterContainer">
