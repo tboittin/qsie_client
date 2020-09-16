@@ -8,6 +8,7 @@ import Home from "./components/Home/home";
 import Rules from "./components/Rules/rules";
 import ChooseCharacter from "./components/ChooseCharacter/chooseCharacter";
 import Rooms from "./components/Rooms/rooms";
+import WinScreen from "./components/winScreen/winScreen";
 
 const App = () => {
   // const ENDPOINT = 'http://localhost:5000/';
@@ -32,7 +33,10 @@ const App = () => {
           <ChooseCharacter />
         </Route>
         <Route path="/game">
-          <Game endpoint={ENDPOINT}/>
+          <Game endpoint={ENDPOINT} />
+        </Route>
+        <Route path="/winScreen">
+          <WinScreen />
         </Route>
       </Switch>
     </Router>
