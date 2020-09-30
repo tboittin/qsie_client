@@ -1,40 +1,25 @@
-import React, { useEffect, useState } from "react";
-import queryString from "query-string";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Button, Container, Row, Col } from "reactstrap";
 
 import "./chooseCharacter.scss";
 
-import * as CHARACTER from "../../characters.json";
-// import { socket } from "socket.io-client";
+const ChooseCharacter = ({
+  userCharacter,
+  pickCharacter,
+  characterPicked
+}) => {
 
-const ChooseCharacter = ({ location }) => {
   
-  const [name, setName] = useState("");
-  const [room, setRoom] = useState("");
-
-  const [userCharacter, setUserCharacter] = useState({});
-
-  useEffect(() => {
-    const { name, room } = queryString.parse(window.location.search);
-    setName(name);
-    setRoom(room);
-  }, [window.location.href]);
-
-  const pickCharacter = () => {
-    let i = Math.floor(Math.random() * CHARACTER.default.length);
-    const userCharacter = CHARACTER.default[i];
-    userCharacter.opponentCharacter = true;
-    setUserCharacter(userCharacter);
-  };
-  
+  // useEffect for picking character
   useEffect(() => {
     pickCharacter();
-  });
-
-  // const validateCharacter = (userCharacter) => {
-  //   socket.emit('validate character', {userCharacter}, ()=>{})
-  // }
+  }, []);
+  
+  // useEffect(() => {
+  //   console.log("props");
+  //   console.log(props);
+  // }, [props]);
 
   return (
     <Container>
@@ -50,14 +35,17 @@ const ChooseCharacter = ({ location }) => {
             pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
             culpa qui officia deserunt mollit anim id est laborum.
           </p>
+
           <Button color="warning" onClick={pickCharacter}>
             Je veux un autre personnage !
           </Button>
 
-          <Link to={`/game?name=${name}&room=${room}`}>
-            <Button color="success" 
-            // onClick={validateCharacter}
-            >Je valide ce personnage</Button>
+          <Link to={`/game`} onClick={characterPicked}>
+            <Button
+              color="success"
+            >
+              Je valide ce personnage
+            </Button>
           </Link>
         </Col>
       </Row>

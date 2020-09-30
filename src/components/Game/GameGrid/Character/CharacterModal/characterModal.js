@@ -1,6 +1,4 @@
-import React, { useEffect, useState } from "react";
-import queryString from "query-string";
-
+import React from "react";
 import "./characterModal.scss";
 import {
   ModalFooter,
@@ -10,19 +8,8 @@ import {
   Row,
   Col,
 } from "reactstrap";
-import { Redirect } from "react-router";
 
-const CharacterModal = ({ character, toggle }) => {
-  
-  const [name, setName] = useState("");
-  const [room, setRoom] = useState("");
-  const [win, setWin] = useState(false);
-
-  useEffect(() => {
-    const { name, room } = queryString.parse(window.location.search);
-    setName(name);
-    setRoom(room);
-  },[window.location.search]);
+const CharacterModal = ({ character, toggle, setWinner, setIsGameOver }) => {
 
   const elimination = () => {
     toggle();
@@ -32,17 +19,14 @@ const CharacterModal = ({ character, toggle }) => {
   const choixFinal = () => {
     toggle();
     if (character.opponentCharacter === true) {
-      alert("GAGNE")
-      setWin(true)
+      alert("GAGNE");
+      setWinner(true);
+      setIsGameOver(true);
     } else {
       character.display = 'wrong';
       return alert("Ce n'était pas le bon personnage");
     }
   };
-
-  if (win) {
-    return <Redirect to={`/winScreen?name=${name}&room=${room}`} />
-  }
   
   return (
     <>

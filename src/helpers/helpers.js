@@ -1,3 +1,5 @@
+import queryString from "query-string";
+
 export const shuffle = (array) => {
   let m = array.length;
   let t;
@@ -12,3 +14,20 @@ export const shuffle = (array) => {
 
   return array;
 };
+
+export const retrieveName = (updateName) => {
+  console.log('retrieving Name');
+  let { name} = queryString.parse(window.location.search);
+  updateName(name);
+}
+
+export const retrieveRoom = (updateRoom) => {
+  console.log('retrieving Room');
+  let { room } = queryString.parse(window.location.search);
+  updateRoom(room);
+}
+
+export const retrieveNameAndRoom = ({updateName}, {updateRoom}) => {
+  retrieveName(updateName);
+  retrieveRoom(updateRoom);
+}

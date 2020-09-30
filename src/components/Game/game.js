@@ -1,89 +1,76 @@
-import React, { useEffect, useState } from "react";
-import queryString from "query-string";
-import io from "socket.io-client";
+import React, { useEffect } from "react";
 
 import "./game.css";
-
-import * as CHARACTERS from "../../characters.json";
 
 import Chat from "./Chat/chat";
 import GameHeader from "./GameHeader/gameHeader";
 import { Col, Row } from "reactstrap";
 import GameGrid from "./GameGrid/gameGrid";
+import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
 
-let socket;
-
-const Game = ({ endpoint }) => {
-  const [name, setName] = useState("");
-  const [room, setRoom] = useState("");
-  // const [characters, setCharacters] = useState([]);
-  const [message, setMessage] = useState("");
-  const [messages, setMessages] = useState([]);
-
-  useEffect(() => {
-    const { name, room } = queryString.parse(window.location.search);
-
-    socket = io(endpoint);
-
-    setName(name);
-    setRoom(room);
-
-    socket.emit("join", { name, room }, () => {});
-
-    // Unmount part
-    return () => {
-      socket.emit("disconnect");
-
-      socket.off();
-    };
-  }, [endpoint, window.location.search]);
+const Game = ({
+  name,
+  room,
+  userCharacter,
+  opponentName,
+  opponentCharacter,
+  characters,
+  message,
+  messages,
+  isGameStarted,
+  isGameOver,
+  setMessage,
+  sendMessage,
+  setWinner,
+  setIsGameOver,
+  sendEndGame,
+}) => {
 
   useEffect(() => {
-    socket.on("message", (message) => {
-      setMessages([...messages, message]);
-    });
-  }, [messages]);
+    if (isGameOver) {
+      sendEndGame();
+      return <Redirect to={`/winScreen`} />;
+    }
+  }, [isGameOver]);
 
-  // Faire en sorte que ça marche
-  // useEffect(()=> {
-  //   const feedCharacters = food => {
-  //     setCharacters(food);
-  //   }
-  //   feedCharacters(CHARACTERS.default);
-  //   console.log(characters)
-  // })
-
-  const sendMessage = (event) => {
-    event.preventDefault();
-
+  const sendLocalMessage = (event) => {
     if (message) {
-      socket.emit("sendMessage", message, () => setMessage(""));
+      sendMessage();
     }
   };
 
-  const characters = CHARACTERS.default;
-
-  let opponentCharacter = {
-    name: "5000",
-    opponentCharacter: true,
-    display: "unknown",
-  };
+  if (!opponentCharacter) {
+    opponentCharacter = {
+      name: "5000",
+      opponentCharacter: true,
+      display: "unknown",
+    };
+  }
 
   return (
     <div className="outerContainer">
       <Row className="w-100 h-100 m-0">
         <Col xs="8" className="p-0">
-          <GameHeader />
-          <GameGrid
-            opponentCharacter={opponentCharacter}
-            characters={characters}
+          <GameHeader
+            name={name}
+            opponentName={opponentName}
+            userCharacter={userCharacter}
           />
+          {isGameStarted && (
+            <GameGrid
+              opponentCharacter={opponentCharacter}
+              characters={characters}
+              setWinner={setWinner}
+              setIsGameOver={setIsGameOver}
+            />
+          )}
+          {!isGameStarted && <h1>Wait for the other player...</h1>}
         </Col>
         <Col xs="4" className="p-0 h-100">
           <Chat
             name={name}
             room={room}
-            sendMessage={sendMessage}
+            sendLocalMessage={sendLocalMessage}
             message={message}
             messages={messages}
             setMessage={setMessage}

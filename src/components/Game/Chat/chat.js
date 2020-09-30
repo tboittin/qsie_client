@@ -6,7 +6,7 @@ import InfoBar from "./InfoBar/infoBar";
 import Input from "./Input/input";
 import Messages from "./Messages/messages";
 
-const Chat = ({name, room, messages, message, setMessage, sendMessage}) => {
+const Chat = ({name, room, messages, message, setMessage, sendLocalMessage}) => {
 
   return (
     <div className="chat">
@@ -18,7 +18,7 @@ const Chat = ({name, room, messages, message, setMessage, sendMessage}) => {
       <Input
         message={message}
         setMessage={setMessage}
-        sendMessage={sendMessage}
+        sendLocalMessage={sendLocalMessage}
       />
     </div>
   );

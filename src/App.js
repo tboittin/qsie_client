@@ -1,6 +1,6 @@
-import React from "react";
-
+import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import io from "socket.io-client";
 
 import Join from "./components/Join/join";
 import Game from "./components/Game/game";
@@ -10,9 +10,144 @@ import ChooseCharacter from "./components/ChooseCharacter/chooseCharacter";
 import Rooms from "./components/Rooms/rooms";
 import WinScreen from "./components/winScreen/winScreen";
 
+import * as CHARACTERS from "./characters.json";
+
+let socket;
+
 const App = () => {
-  // const ENDPOINT = 'http://localhost:5000/';
-  const ENDPOINT = "https://qsie-server.herokuapp.com/";
+  const ENDPOINT = "http://localhost:5000/";
+  // const ENDPOINT = "https://qsie-server.herokuapp.com/";
+  const characters = CHARACTERS.default
+  const [name, setName] = useState("");
+  const [opponentName, setOpponentName] = useState("");
+  const [room, setRoom] = useState("");
+  const [rooms, setRooms] = useState([
+    // { id: 0, name: "Green Room", numberOfPlayers: 0 },
+    // { id: 1, name: "Red Room", numberOfPlayers: 0 },
+  ]);
+  const [userCharacter, setUserCharacter] = useState({});
+  const [opponentCharacter, setOpponentCharacter] = useState({});
+  const [isGameStarted, setIsGameStarted] = useState(false);
+  const [isGameOver, setIsGameOver] = useState(false);
+  const [winner, setWinner] = useState(false);
+  const [message, setMessage] = useState("");
+  const [messages, setMessages] = useState([]);
+
+  // Dans Join
+  // // updateName: ajouter le joueur dans le back & vérifier que son nom n'est pas déjà pris + déconnecter quand l'user quitte la page
+  const updateName = (name) => {
+    setName(name);
+    socket.emit("login", { name }, (error) => {
+      alert(error)
+    });
+
+    // Unmount part
+    return () => {
+      socket.emit("disconnect");
+
+      socket.off();
+    };
+  };
+
+  // Dans Room
+  // // recevoir les rooms pour les afficher -useEffect
+  const getRooms = () => {
+    socket.emit("getRooms");
+  };
+
+  // // ajouter la room créée dans le state
+  const updateRoom = (room) => {
+    setRoom(room);
+  };
+
+  // // rejoint la room
+  const joinRoom = () => {
+    socket.emit("joinRoom", { name, room }, (error) => {
+      alert(error)
+    });
+    console.log(`${name} joined ${room}`);
+  };
+
+  // Dans chooseCharacter
+  // // choisir aléatoirement un personnage dans la liste et le positionner en tant que userCharacter -useEffect
+  const pickCharacter = () => {
+    let i = Math.floor(Math.random() * CHARACTERS.default.length);
+    let character = CHARACTERS.default[i];
+    character.opponentCharacter = true;
+    setUserCharacter(character);
+  };
+
+  const characterPicked = () => {
+    console.log(`${userCharacter.name} picked in ${room}`);
+    socket.emit("characterPicked", ({clientCharacter: userCharacter, room}));
+  };
+
+  // Game
+  // // reçoit les joueurs dans la Room
+  const getUsersInRoom = () => {
+      socket.on("usersInRoom", (users) => {
+        console.log(users)
+      })
+  }
+
+  // // envoie un message au socket
+  const sendMessage = () => {
+    socket.emit("sendMessage", ({message,room,name}));
+  };
+
+  // // provoque la fin de la partie et supprime les joueurs choisis par les deux joueurs -useEffect
+  const sendEndGame = () => {
+    socket.emit("sendEndGame", room);
+    setUserCharacter({});
+    setOpponentCharacter({});
+  };
+
+  // WinScreen
+  // // retourne à l'écran de choix des rooms et supprime la value de room
+  const changeRoom = () => {
+    setRoom("");
+    socket.emit("changeRoom");
+  };
+
+  // useEffect for socket
+  useEffect(() => {
+    socket = io(ENDPOINT);
+  }, []);
+
+  useEffect(() => {
+    socket.on("rooms", (rooms) => {setRooms(rooms)})
+  },[setRooms, rooms])
+
+  useEffect(() => {
+    socket.on("startGame", ({opponentName, opponentCharacter}) => {
+      setIsGameStarted(true);
+      setOpponentName(opponentName);
+      setOpponentCharacter(opponentCharacter);
+    });
+  }, [])
+
+
+  useEffect(() => {
+    socket.on("message", (message) => {
+      setMessages([...messages, message]);
+    });
+  }, [messages])
+
+  useEffect(() => {
+    socket.on("endGame", () => {
+      setIsGameOver(true);
+    });
+  }, [])
+
+  useEffect(() => {
+    socket.on("users", (users) => {
+      console.log(users)
+    })
+  }, [])
+
+  useEffect(() => {
+    getUsersInRoom()
+  }, [])
 
   return (
     <Router>
@@ -20,23 +155,57 @@ const App = () => {
         <Route path="/" exact>
           <Home />
         </Route>
-        <Route path="/join">
-          <Join />
-        </Route>
-        <Route path="/rooms">
-          <Rooms />
-        </Route>
         <Route path="/rules">
           <Rules />
         </Route>
+        <Route path="/join">
+          <Join
+            name={name}
+            updateName={updateName}
+          />
+        </Route>
+        <Route path="/rooms"> 
+          <Rooms
+            room={room}
+            rooms={rooms} // TODO Afficher les rooms avec 0 ou 1 joueur
+            getRooms={getRooms}
+            updateRoom={updateRoom}
+            joinRoom={joinRoom}
+          />
+        </Route>
         <Route path="/chooseCharacter">
-          <ChooseCharacter />
+          <ChooseCharacter
+            userCharacter={userCharacter}
+            pickCharacter={pickCharacter}
+            characterPicked={characterPicked}
+          />
         </Route>
         <Route path="/game">
-          <Game endpoint={ENDPOINT} />
+          <Game
+            name={name} // TODO fenêtre attente du 2e joueur
+            room={room}
+            userCharacter={userCharacter}
+            opponentName={opponentName}
+            opponentCharacter={opponentCharacter}
+            characters={characters}
+            message={message}
+            messages={messages}
+            isGameStarted={isGameStarted}
+            isGameOver={isGameOver} //TODO
+            getUsersInRoom={getUsersInRoom}
+            setMessage={setMessage}
+            sendMessage={sendMessage}
+            setWinner={setWinner}
+            setIsGameOver={setIsGameOver}
+            sendEndGame={sendEndGame}
+          />
         </Route>
         <Route path="/winScreen">
-          <WinScreen />
+          <WinScreen
+            opponentName={opponentName}
+            winner={winner}
+            changeRoom={changeRoom}
+          />
         </Route>
       </Switch>
     </Router>

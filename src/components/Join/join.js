@@ -4,18 +4,14 @@ import { Col, Container, Row } from "reactstrap";
 
 import "./join.css";
 
-const Join = () => {
-  const [name, setName] = useState("");
-
-  // TODO: socket pour checker name
+const Join = ({ name, updateName }) => {
+  const [joinName, setJoinName] = useState("");
 
   return (
     <div className="joinOuterContainer">
       <div className="joinInnerContainer">
         <Container>
-            <h1>
-              Bienvenue !
-            </h1>
+          <h1>Bienvenue !</h1>
           <Row>
             <Col xs="8">
               <h1 className="heading">Description</h1>
@@ -36,18 +32,22 @@ const Join = () => {
                   placeholder="Name"
                   className="joinInput"
                   type="text"
-                  onChange={(event) => setName(event.target.value)}
+                  onChange={(event) => {
+                    setJoinName(event.target.value);
+                  }}
                 />
               </div>
               <Link
+                to={`/rooms`}
                 onClick={(event) =>
-                  !name ? event.preventDefault() : null
+                  !name
+                    ? event.preventDefault(
+                        updateName(joinName)
+                      )
+                    : null
                 }
-                to={`/rooms?name=${name}`}
               >
-                <button className="button mt-20" type="submit">
-                  Entrer
-                </button>
+                <button className="button mt-20">Entrer</button>
               </Link>
             </Col>
           </Row>

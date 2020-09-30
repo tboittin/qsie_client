@@ -1,27 +1,35 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import queryString from "query-string";
-const { Container, Row, Col, Button } = require("reactstrap");
+import { Socket } from "socket.io-client";
+const { Container, Row, Col, Button, Modal } = require("reactstrap");
 
-const Rooms = () => {
-  const [name, setName] = useState("");
-  const [room, setRoom] = useState("");
-  const [rooms, setRooms] = useState(["101", "Green Room"]);
+const Rooms = ({ room, rooms, getRooms, updateRoom, joinRoom }) => {
+  const [localRoom, setLocalRoom] = useState("");
+  const [modal, setModal] = useState(false);
+
+  const toggle = () => setModal(!modal);
 
   useEffect(() => {
-    const { name } = queryString.parse(window.location.search);
-    setName(name);
-  }, [window.location.href]);
+    getRooms();
+    console.log('rooms gotten');
+  }, []);
 
+  console.log(rooms);
   return (
     <div>
       <Container>
         <Row>
           <Col>
-            {rooms.map((room) => (
-              <Link to={`chooseCharacter?name=${name}&room=${room}`} key={room}>
-                <h1>{room}</h1>
-              </Link>
+            {rooms.map((r) => (
+              <Button
+                key={r.id}
+                onClick={() => {
+                  updateRoom(r.name);
+                  toggle();
+                }}
+              >
+                {r.name}
+              </Button>
             ))}
           </Col>
           <Col>
@@ -31,23 +39,28 @@ const Rooms = () => {
               className="joinInput mt-20"
               type="text"
               onChange={(event) => {
-                setRoom(event.target.value);
+                setLocalRoom(event.target.value);
               }}
             />
-            <Link to={`chooseCharacter?name=${name}&room=${room}`}>
-              <Button
-                color="success"
-                onSubmit={(room) => {
-                  setRooms([...room]);
-                  console.log(rooms);
-                }}
-              >
-                Join the room
-              </Button>
-            </Link>
+            <Button
+              color="success"
+              onClick={() => {
+                updateRoom(localRoom);
+                toggle();
+              }}
+            >
+              Join the room
+            </Button>
           </Col>
         </Row>
       </Container>
+      <Modal isOpen={modal} toggle={toggle} size="md">
+        Voulez-vous rejoindre le salon: {room} ?
+        <Link onClick={joinRoom} to={`chooseCharacter`}>
+          <Button color="success">Oui</Button>
+        </Link>
+        <Button color="danger">Non</Button>
+      </Modal>
     </div>
   );
 };
