@@ -166,6 +166,7 @@ const App = () => {
         </Route>
         <Route path="/rooms"> 
           <Rooms
+            name={name}
             room={room}
             rooms={rooms} // TODO Afficher les rooms avec 0 ou 1 joueur
             getRooms={getRooms}

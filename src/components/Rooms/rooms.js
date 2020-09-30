@@ -3,8 +3,7 @@ import { Link } from "react-router-dom";
 import { Socket } from "socket.io-client";
 const { Container, Row, Col, Button, Modal } = require("reactstrap");
 
-const Rooms = ({ room, rooms, getRooms, updateRoom, joinRoom }) => {
-  const [localRoom, setLocalRoom] = useState("");
+const Rooms = ({ name, room, rooms, getRooms, updateRoom, joinRoom }) => {
   const [modal, setModal] = useState(false);
 
   const toggle = () => setModal(!modal);
@@ -33,23 +32,14 @@ const Rooms = ({ room, rooms, getRooms, updateRoom, joinRoom }) => {
             ))}
           </Col>
           <Col>
-            <h1>Create a New Room</h1>
-            <input
-              placeholder="Room"
-              className="joinInput mt-20"
-              type="text"
-              onChange={(event) => {
-                setLocalRoom(event.target.value);
-              }}
-            />
             <Button
               color="success"
               onClick={() => {
-                updateRoom(localRoom);
+                updateRoom(name);
                 toggle();
               }}
             >
-              Join the room
+              Créer son propre salon
             </Button>
           </Col>
         </Row>
