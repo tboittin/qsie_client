@@ -1,3 +1,5 @@
+$color-blue: rgb(89, 89, 235);
+
 body {
   font-size: 1.5vw;
   font-family: 'filson-soft';
@@ -5,4 +7,24 @@ body {
   justify-content: center;
   align-content: center;
   height: 100%;
+
+  .button {
+    color: #fff !important;
+    text-transform: uppercase;
+    text-decoration: none;
+    background: #2979ff;
+    padding: 20px;
+    border-radius: 5px;
+    display: inline-block;
+    border: none;
+    width: 100%;
+    margin: 1vh;
+  }
+
+  input[type=text] {
+    border: none;
+    border-bottom: 2px solid $color-blue;
+    width: 100%;
+    margin: 1vh;
+  }
 }

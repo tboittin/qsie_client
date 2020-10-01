@@ -1,0 +1,17 @@
+.join {
+  display: flex;
+  width: 30vw;
+  height: 100vh;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+
+  h1 {
+    margin: 1vh
+  }
+
+  .lightblue {
+    color: lightblue;
+    margin: 2vh;
+  }
+}

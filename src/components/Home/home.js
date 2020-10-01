@@ -8,7 +8,7 @@ const Home = () => {
     <>
       <h1>Homescreen</h1>
       <Link
-        to={`/join`}
+        to={`/rules`}
       >
         <button className="button mt-20">
           Proceed
