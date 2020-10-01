@@ -79,7 +79,7 @@ const App = () => {
 
   const characterPicked = () => {
     console.log(`${userCharacter.name} picked in ${room}`);
-    socket.emit("characterPicked", ({clientCharacter: userCharacter, room}));
+    socket.emit("characterPicked", ({name, clientCharacter: userCharacter, room}));
   };
 
   // Game
@@ -148,6 +148,10 @@ const App = () => {
   useEffect(() => {
     getUsersInRoom()
   }, [])
+
+  useEffect(() => {
+    console.log(opponentCharacter)
+  }, [opponentCharacter])
 
   return (
     <Router>

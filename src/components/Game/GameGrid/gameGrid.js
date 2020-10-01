@@ -29,7 +29,7 @@ const GameGrid = ({ opponentCharacter, characters, setWinner, setIsGameOver }) =
     };
 
     characterDeck(opponentCharacter, characters, 20);
-  }, []);
+  }, [opponentCharacter]);
   // Comprendre pourquoi j'ai des warning de missing depencies
 
   return (
