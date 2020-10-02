@@ -1,0 +1,65 @@
+.rooms {
+    display: flex;
+    width: 30vw;
+    height: 100vh;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+
+    .rooms-list {
+        display: inline-flex;
+        justify-content: space-around;
+        margin-bottom: 7vh;
+
+        .initiale {
+            border-radius: 50%;
+            border: 2px solid black;
+            height: 10vh;
+            width: 10vh;
+            justify-content: center;
+            align-content: center;
+            padding: 1vh;
+            margin: 2vh;
+            font-size: 6vh;
+            text-align: center;
+            font-weight: bolder;
+            line-height: 1.3;
+        }
+
+        .subtitle {
+            align-content: center;
+            text-align: center;
+        }
+    }
+
+    h1 {
+        text-align: center;
+    }
+}
+
+.modal-content {
+    padding: 2vh !important;
+    text-align: center;
+}
+
+.button-green {
+    width: 75%;
+    color: #fff;
+    background-color: green;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 20px;
+    border-radius: 5px;
+    margin: 1vh;
+}
+
+.button-red {
+    width: 75%;
+    color: #fff;
+    background-color: red;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 20px;
+    border-radius: 5px;
+    margin: 1vh;
+}

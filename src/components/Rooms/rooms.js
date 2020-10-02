@@ -1,57 +1,90 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Socket } from "socket.io-client";
-const { Container, Row, Col, Button, Modal } = require("reactstrap");
 
-const Rooms = ({ name, room, rooms, getRooms, updateRoom, joinRoom }) => {
+import "./rooms.scss";
+
+const { Modal } = require("reactstrap");
+
+const Rooms = ({
+  name,
+  room,
+  rooms,
+  getRooms,
+  updateRoom,
+  joinRoom,
+  setRooms, // Supprimer après design
+}) => {
   const [modal, setModal] = useState(false);
 
   const toggle = () => setModal(!modal);
 
   useEffect(() => {
-    getRooms();
-    console.log('rooms gotten');
+    // getRooms();
+    setRooms([
+      // Supprimer après design
+      {
+        id: 0,
+        name: "Géraldine",
+      },
+      {
+        id: 1,
+        name: "Vanessa",
+      },
+      {
+        id: 2,
+        name: "Reggie",
+      },
+    ]);
+    console.log("rooms gotten");
   }, []);
 
-  console.log(rooms);
+  const roomInitiale = (roomName) => {
+    let initiale = roomName.substring(0, 1);
+    return initiale;
+  };
+
   return (
-    <div>
-      <Container>
-        <Row>
-          <Col>
-            {rooms.map((r) => (
-              <Button
-                key={r.id}
-                onClick={() => {
-                  updateRoom(r.name);
-                  toggle();
-                }}
-              >
-                {r.name}
-              </Button>
-            ))}
-          </Col>
-          <Col>
-            <Button
-              color="success"
+    <>
+      <div className="rooms">
+        <h1>Choisis un.e partenaire de jeu</h1>
+        <div className="rooms-list">
+          {rooms.map((r) => (
+            <div
+              key={r.id}
               onClick={() => {
-                updateRoom(name);
+                updateRoom(r.name);
                 toggle();
               }}
             >
-              Créer son propre salon
-            </Button>
-          </Col>
-        </Row>
-      </Container>
-      <Modal isOpen={modal} toggle={toggle} size="md">
-        Voulez-vous rejoindre le salon: {room} ?
-        <Link onClick={joinRoom} to={`chooseCharacter`}>
-          <Button color="success">Oui</Button>
-        </Link>
-        <Button color="danger">Non</Button>
+              <div className="initiale">{roomInitiale(r.name)}</div>
+              <div className="subtitle">{r.name}</div>
+            </div>
+          ))}
+        </div>
+        <div className="own-room">
+          <h1>Ou crée ton propre salon</h1>
+          <button
+            className="button"
+            onClick={() => {
+              updateRoom(name);
+              toggle();
+            }}
+          >
+            Créer son propre salon
+          </button>
+        </div>
+      </div>
+
+      <Modal isOpen={modal} toggle={toggle} size="lg">
+        <div className="rooms-modal">
+          Voulez-vous rejoindre le salon: {room} ?
+          <Link onClick={joinRoom} to={`chooseCharacter`}>
+            <button className="button-green">Oui</button>
+          </Link>
+          <button onClick={toggle} className="button-red">Non</button>
+        </div>
       </Modal>
-    </div>
+    </>
   );
 };
 
