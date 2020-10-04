@@ -6,12 +6,9 @@
   align-content: center;
   flex-direction: column;
 
-  h1 {
-    margin: 1vh
-  }
-
-  .lightblue {
-    color: lightblue;
+  .light {
+    color: rgba(181,181,181,1);
     margin: 2vh;
+    font-size: 15px;
   }
 }

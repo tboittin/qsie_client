@@ -1,0 +1,33 @@
+.choose-character-outer {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    height: 100vh;
+    width: 100vw;
+    flex-direction: column;
+
+    .choose-character-inner {
+        display: inline-flex;
+        justify-content: space-around;
+        height: auto;
+
+        .text {
+            margin: 2vw;
+        }
+
+        .personnage {
+            text-align: center;
+            margin-right: 10vw;
+            :hover {
+                cursor: pointer;
+            }
+
+            .characterChange {
+                color: rgba(181, 181, 181, 1);
+                text-decoration: underline;
+                font-weight: 400;
+            }
+        }
+
+    }
+}

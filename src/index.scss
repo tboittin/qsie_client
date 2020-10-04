@@ -10,9 +10,8 @@ body {
 
   .button {
     color: #fff !important;
-    text-transform: uppercase;
     text-decoration: none;
-    background: #2979ff;
+    background: rgba(77,84,191,1);
     padding: 20px;
     border-radius: 5px;
     display: inline-block;
@@ -26,5 +25,14 @@ body {
     border-bottom: 2px solid $color-blue;
     width: 100%;
     margin: 1vh;
+  }
+
+  h1 {
+    color: rgba(54,44,115,1);
+    font-size: 24px;
+  }
+
+  p {
+    color: rgba(54,44,115,0.5)
   }
 }

@@ -19,7 +19,7 @@ const Rooms = ({
   const toggle = () => setModal(!modal);
 
   useEffect(() => {
-    // getRooms();
+    // getRooms(); //Remettre après design
     setRooms([
       // Supprimer après design
       {
