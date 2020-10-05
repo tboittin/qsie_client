@@ -27,7 +27,7 @@ const Character = ({ character, setWinner, setIsGameOver }) => {
   return (
     <>
       <div
-        className={`character bg-white ${characterDisplay()}`}
+        className={`character ${characterDisplay()}`}
         onClick={toggle}
       >
         <p>{character.name}</p>
