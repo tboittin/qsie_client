@@ -19,7 +19,6 @@ const CharacterModal = ({ character, toggle, setWinner, setIsGameOver }) => {
   const choixFinal = () => {
     toggle();
     if (character.opponentCharacter === true) {
-      alert("GAGNE");
       setWinner(true);
       setIsGameOver(true);
     } else {
