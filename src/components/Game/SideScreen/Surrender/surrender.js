@@ -2,9 +2,9 @@ import React from 'react';
 
 import './surrender.scss';
 
-const Surrender = () => {
+const Surrender = ({sendEndGame}) => {
     return (
-        <div className="surrender">Abandonner la partie</div>
+        <div className="surrender" onClick={sendEndGame}>Abandonner la partie</div>
     )
 };
 
