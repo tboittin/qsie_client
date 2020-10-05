@@ -34,6 +34,11 @@ const App = () => {
   const [messages, setMessages] = useState([]);
   // const [nameError, setNameError] = useState(false)
 
+  const cleanCharacters = () => {
+    setUserCharacter({});
+    setOpponentCharacter({});
+  }
+
   // Dans Join
   // // updateName: ajouter le joueur dans le back & vérifier que son nom n'est pas déjà pris + déconnecter quand l'user quitte la page
   const updateName = (name) => {
@@ -100,17 +105,23 @@ const App = () => {
 
   // // provoque la fin de la partie et supprime les joueurs choisis par les deux joueurs -useEffect
   const sendEndGame = () => {
+    cleanCharacters()
     socket.emit("sendEndGame", room);
-    setUserCharacter({});
-    setOpponentCharacter({});
   };
 
   // WinScreen
   // // retourne à l'écran de choix des rooms et supprime la value de room
   const changeRoom = () => {
+    console.log('changeRoom')
     setRoom("");
-    socket.emit("changeRoom");
+    socket.emit("changeRoom"); //TODO
   };
+
+  // Replay
+  const replay = () => {
+    console.log('replay')
+    socket.emit('replay'); //TODO
+  }
 
   // useEffect for socket
   useEffect(() => {
@@ -201,6 +212,9 @@ const App = () => {
             messages={messages}
             isGameStarted={isGameStarted}
             isGameOver={isGameOver} //TODO
+            winner={winner}
+            changeRoom={changeRoom}
+            replay={replay}
             getUsersInRoom={getUsersInRoom}
             setMessage={setMessage}
             sendMessage={sendMessage}
