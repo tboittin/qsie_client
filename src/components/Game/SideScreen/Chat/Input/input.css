@@ -1,9 +1,9 @@
 .form {
-  position: absolute;
   width: 100%;
   display: flex;
   border-top: 2px solid #d3d3d3;
   bottom: 0px;
+  padding: 15px;
 }
 
 .input {
