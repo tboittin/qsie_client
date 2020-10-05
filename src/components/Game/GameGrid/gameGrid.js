@@ -18,13 +18,12 @@ const GameGrid = ({
     if (opponentCharacter) {
       characterDeck(opponentCharacter, characters, 20);
     }
-  }, [opponentCharacter, characters]);
+  }, [opponentCharacter]);
   // Comprendre pourquoi j'ai des warning de missing depencies
 
   const characterDeck = (opponentCharacter, characters, size) => {
     console.log("opponentCharacter in gameGrid");
     console.log(opponentCharacter);
-    debugger
     let finalDeck = [];
 
     // Fixe le bug selon lequel le personnage du jouer est une solution
