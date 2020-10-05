@@ -11,30 +11,14 @@ const Rooms = ({
   rooms,
   getRooms,
   updateRoom,
-  joinRoom,
-  setRooms, // Supprimer après design
+  joinRoom
 }) => {
   const [modal, setModal] = useState(false);
 
   const toggle = () => setModal(!modal);
 
   useEffect(() => {
-    // getRooms(); //Remettre après design
-    setRooms([
-      // Supprimer après design
-      {
-        id: 0,
-        name: "Géraldine",
-      },
-      {
-        id: 1,
-        name: "Vanessa",
-      },
-      {
-        id: 2,
-        name: "Reggie",
-      },
-    ]);
+    getRooms(); //Remettre après design
     console.log("rooms gotten");
   }, []);
 
