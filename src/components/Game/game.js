@@ -61,6 +61,7 @@ const Game = ({
               characters={characters}
               setWinner={setWinner}
               setIsGameOver={setIsGameOver}
+              userCharacter={userCharacter}
             />
           )}
           {!isGameStarted && <h1>Wait for the other player...</h1>}

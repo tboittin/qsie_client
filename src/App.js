@@ -17,7 +17,7 @@ let socket;
 const App = () => {
   const ENDPOINT = "http://localhost:5000/";
   // const ENDPOINT = "https://qsie-server.herokuapp.com/";
-  const characters = CHARACTERS.default
+  const characters = [...CHARACTERS.default];
   const [name, setName] = useState("");
   const [opponentName, setOpponentName] = useState("");
   const [room, setRoom] = useState("");
@@ -32,6 +32,7 @@ const App = () => {
   const [winner, setWinner] = useState(false);
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
+  // const [nameError, setNameError] = useState(false)
 
   // Dans Join
   // // updateName: ajouter le joueur dans le back & vérifier que son nom n'est pas déjà pris + déconnecter quand l'user quitte la page
@@ -39,6 +40,7 @@ const App = () => {
     setName(name);
     socket.emit("login", { name }, (error) => {
       alert(error)
+      // setNameError(true);
     });
 
     // Unmount part
@@ -71,8 +73,9 @@ const App = () => {
   // Dans chooseCharacter
   // // choisir aléatoirement un personnage dans la liste et le positionner en tant que userCharacter -useEffect
   const pickCharacter = () => {
-    let i = Math.floor(Math.random() * CHARACTERS.default.length);
-    let character = CHARACTERS.default[i];
+    let charactersCopy = [...CHARACTERS.default];
+    let i = Math.floor(Math.random() * charactersCopy.length);
+    let character = charactersCopy[i];
     character.opponentCharacter = true;
     setUserCharacter(character);
   };
@@ -120,9 +123,9 @@ const App = () => {
 
   useEffect(() => {
     socket.on("startGame", ({opponentName, opponentCharacter}) => {
-      setIsGameStarted(true);
       setOpponentName(opponentName);
       setOpponentCharacter(opponentCharacter);
+      setIsGameStarted(true);
     });
   }, [])
 
@@ -172,7 +175,8 @@ const App = () => {
           <Rooms
             name={name}
             room={room}
-            rooms={rooms} // TODO Afficher les rooms avec 0 ou 1 joueur
+            rooms={rooms}
+            // nameError={nameError}
             getRooms={getRooms}
             updateRoom={updateRoom}
             joinRoom={joinRoom}
