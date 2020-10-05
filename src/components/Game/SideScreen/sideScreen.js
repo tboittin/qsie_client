@@ -14,6 +14,7 @@ const SideScreen = ({
   message,
   messages,
   setMessage,
+  sendEndGame
 }) => {
   return (
     <div className="sideScreen">
@@ -30,7 +31,7 @@ const SideScreen = ({
         messages={messages}
         setMessage={setMessage}
       />
-      <Surrender />
+      <Surrender sendEndGame={sendEndGame} />
     </div>
   );
 };
