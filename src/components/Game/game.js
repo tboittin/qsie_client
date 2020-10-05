@@ -27,6 +27,7 @@ const Game = ({
   winner,
   replay,
   changeRoom,
+  proximity,
 }) => {
   const [modal, setModal] = useState(false);
   const toggle = () => setModal(!modal);
@@ -94,6 +95,7 @@ const Game = ({
             messages={messages}
             setMessage={setMessage}
             sendEndGame={sendEndGame}
+            proximity={proximity}
           />
         </Col>
       </Row>

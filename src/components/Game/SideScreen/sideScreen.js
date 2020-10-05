@@ -14,7 +14,8 @@ const SideScreen = ({
   message,
   messages,
   setMessage,
-  sendEndGame
+  sendEndGame,
+  proximity
 }) => {
   return (
     <div className="sideScreen">
@@ -23,14 +24,17 @@ const SideScreen = ({
         opponentName={opponentName}
         userCharacter={userCharacter}
       />
-      <Chat
-        name={name}
-        room={room}
-        sendLocalMessage={sendLocalMessage}
-        message={message}
-        messages={messages}
-        setMessage={setMessage}
-      />
+      {(proximity === 'distance') &&
+        <Chat
+          name={name}
+          room={room}
+          sendLocalMessage={sendLocalMessage}
+          message={message}
+          messages={messages}
+          setMessage={setMessage}
+        />
+      }
+      
       <Surrender sendEndGame={sendEndGame} />
     </div>
   );

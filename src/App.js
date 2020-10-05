@@ -8,9 +8,9 @@ import Home from "./components/Home/home";
 import Rules from "./components/Rules/rules";
 import ChooseCharacter from "./components/ChooseCharacter/chooseCharacter";
 import Rooms from "./components/Rooms/rooms";
-import WinScreen from "./components/winScreen/winScreen";
 
 import * as CHARACTERS from "./characters.json";
+import Proximity from "./components/Proximity/proximity";
 
 let socket;
 
@@ -32,6 +32,7 @@ const App = () => {
   const [winner, setWinner] = useState(false);
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
+  const [proximity, setProximity] = useState('distance');
   // const [nameError, setNameError] = useState(false)
 
   const cleanCharacters = () => {
@@ -193,6 +194,9 @@ const App = () => {
             joinRoom={joinRoom}
           />
         </Route>
+        <Route path="/proximity">
+          <Proximity setProximity={setProximity} />
+        </Route>
         <Route path="/chooseCharacter">
           <ChooseCharacter
             userCharacter={userCharacter}
@@ -213,6 +217,7 @@ const App = () => {
             isGameStarted={isGameStarted}
             isGameOver={isGameOver} //TODO
             winner={winner}
+            proximity={proximity}
             changeRoom={changeRoom}
             replay={replay}
             getUsersInRoom={getUsersInRoom}
@@ -221,13 +226,6 @@ const App = () => {
             setWinner={setWinner}
             setIsGameOver={setIsGameOver}
             sendEndGame={sendEndGame}
-          />
-        </Route>
-        <Route path="/winScreen">
-          <WinScreen
-            opponentName={opponentName}
-            winner={winner}
-            changeRoom={changeRoom}
           />
         </Route>
       </Switch>

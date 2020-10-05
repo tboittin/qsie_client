@@ -1,30 +1,32 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
 
 import "./rooms.scss";
 
 const { Modal } = require("reactstrap");
 
-const Rooms = ({
-  name,
-  room,
-  rooms,
-  getRooms,
-  updateRoom,
-  joinRoom
-}) => {
+const Rooms = ({ name, room, rooms, getRooms, updateRoom, joinRoom }) => {
   const [modal, setModal] = useState(false);
 
   const toggle = () => setModal(!modal);
 
+  const [redirectToProximity, setRedirectToProximity] = useState(
+    false
+  );
+
   useEffect(() => {
-    getRooms(); //Remettre après design
+    getRooms();
     console.log("rooms gotten");
   }, []);
 
   const roomInitiale = (roomName) => {
     let initiale = roomName.substring(0, 1);
     return initiale;
+  };
+
+  const handleJoinRoom = () => {
+    joinRoom();
+    setRedirectToProximity(true);
   };
 
   return (
@@ -61,13 +63,13 @@ const Rooms = ({
 
       <Modal isOpen={modal} toggle={toggle} size="lg">
         <div className="rooms-modal">
-          Voulez-vous rejoindre le salon: {room} ?
-          <Link onClick={joinRoom} to={`chooseCharacter`}>
-            <button className="button-green">Oui</button>
-          </Link>
-          <button onClick={toggle} className="button-red">Non</button>
+          Veux-tu rejoindre le salon: {room} ?
+          <button onClick={handleJoinRoom} className="button">Oui</button>
+          <span onClick={toggle}>Non</span>
         </div>
       </Modal>
+
+      {redirectToProximity && <Redirect to="/proximity" />}
     </>
   );
 };
