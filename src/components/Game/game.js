@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
 
-import "./game.css";
+import "./game.scss";
 
-import Chat from "./Chat/chat";
 import GameHeader from "./GameHeader/gameHeader";
 import { Col, Row } from "reactstrap";
 import GameGrid from "./GameGrid/gameGrid";
 import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
+import SideScreen from "./SideScreen/sideScreen";
 
 const Game = ({
   name,
@@ -25,7 +25,6 @@ const Game = ({
   setIsGameOver,
   sendEndGame,
 }) => {
-
   useEffect(() => {
     if (isGameOver) {
       sendEndGame();
@@ -48,14 +47,14 @@ const Game = ({
   }
 
   return (
-    <div className="outerContainer">
+    <div className="game">
       <Row className="w-100 h-100 m-0">
         <Col xs="8" className="p-0">
-          <GameHeader
-            name={name}
-            opponentName={opponentName}
-            userCharacter={userCharacter}
-          />
+        <GameHeader
+          name={name}
+          opponentName={opponentName}
+          userCharacter={userCharacter}
+        />
           {isGameStarted && (
             <GameGrid
               opponentCharacter={opponentCharacter}
@@ -67,8 +66,10 @@ const Game = ({
           {!isGameStarted && <h1>Wait for the other player...</h1>}
         </Col>
         <Col xs="4" className="p-0 h-100">
-          <Chat
+          <SideScreen
             name={name}
+            opponentName={opponentName}
+            userCharacter={userCharacter}
             room={room}
             sendLocalMessage={sendLocalMessage}
             message={message}
