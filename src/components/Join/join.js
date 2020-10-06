@@ -13,35 +13,35 @@ const Join = ({ updateName, nameError }) => {
       alert("Merci d'indiquer ton nom");
     } else {
       updateName(joinName);
-      !nameError && setRedirectToRoom(true); // TODO réparer bug login même si problème de nom
+      !nameError && handleRedirectToRoom();
     }
+  };
+
+  const handleRedirectToRoom = () => {
+    setRedirectToRoom(true);
   };
 
   return (
     <>
-      {!redirectToRoom && (
-        <div className="join">
-          <h1>Indique ton nom ou ton pseudo ici.</h1>
-          <div>
-            <input
-              placeholder="Nom ou pseudo"
-              className="joinInput"
-              type="text"
-              onChange={(event) => {
-                setJoinName(event.target.value);
-              }}
-              onKeyUp={(event) => event.key === "Enter" && goToRooms(event)}
-            />
-          </div>
-          <button className="button" onClick={(event) => goToRooms(event)}>
-            Prochaine étape
-          </button>
-          <p className="light">Les données ne sortent pas du jeu.</p>
+      <div className="join">
+        <h1>Indique ton nom ou ton pseudo ici.</h1>
+        <div>
+          <input
+            placeholder="Nom ou pseudo"
+            className="joinInput"
+            type="text"
+            onChange={(event) => {
+              setJoinName(event.target.value);
+            }}
+            onKeyUp={(event) => event.key === "Enter" && goToRooms(event)}
+          />
         </div>
-      )}
-      {redirectToRoom &&
-        <Redirect to={"/rooms"} />
-      }
+        <button className="button" onClick={(event) => goToRooms(event)}>
+          Prochaine étape
+        </button>
+        <p className="light">Les données ne sortent pas du jeu.</p>
+      </div>
+      {redirectToRoom && <Redirect to={"/rooms"} />}
     </>
   );
 };

@@ -15,8 +15,8 @@ import Proximity from "./components/Proximity/proximity";
 let socket;
 
 const App = () => {
-  const ENDPOINT = "http://localhost:5000/";
-  // const ENDPOINT = "https://qsie-server.herokuapp.com/";
+  // const ENDPOINT = "http://localhost:5000/";
+  const ENDPOINT = "https://qsie-server.herokuapp.com/";
   const characters = [...CHARACTERS.default];
   const [name, setName] = useState("");
   const [opponentName, setOpponentName] = useState("");
@@ -33,7 +33,7 @@ const App = () => {
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
   const [proximity, setProximity] = useState('distance');
-  // const [nameError, setNameError] = useState(false)
+  const [nameError, setNameError] = useState(false)
 
   const cleanCharacters = () => {
     setUserCharacter({});
@@ -46,7 +46,7 @@ const App = () => {
     setName(name);
     socket.emit("login", { name }, (error) => {
       alert(error)
-      // setNameError(true);
+      setNameError(true);
     });
 
     // Unmount part
@@ -179,8 +179,8 @@ const App = () => {
         </Route>
         <Route path="/join">
           <Join
-            name={name}
             updateName={updateName}
+            nameError={nameError}
           />
         </Route>
         <Route path="/rooms"> 
