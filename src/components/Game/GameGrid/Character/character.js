@@ -30,6 +30,7 @@ const Character = ({ character, setWinner, setIsGameOver }) => {
         className={`character ${characterDisplay()}`}
         onClick={toggle}
       >
+        <img src={character.image} alt={character.name} />
         <p>{character.name}</p>
         <Modal
           key={"modal-" + character.name}
@@ -43,6 +44,7 @@ const Character = ({ character, setWinner, setIsGameOver }) => {
             toggle={toggle}
             setWinner={setWinner}
             setIsGameOver={setIsGameOver}
+            displayButtons={true}
           />
         </Modal>
       </div>

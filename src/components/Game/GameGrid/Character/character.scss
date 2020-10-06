@@ -1,7 +1,19 @@
-.display-wrong {
-  border: 2px solid red;
-}
+.character {
+  width: 10vw;
+  height: 12vw;
+  margin: 1% 1%;
+  text-align: center;
 
-.display-innocent {
-  border: 2px solid gray;
+  img{
+    object-fit: cover;
+    height: 80%;
+  }
+
+  .display-wrong {
+    border: 2px solid red;
+  }
+
+  .display-innocent {
+    border: 2px solid gray;
+  }
 }
