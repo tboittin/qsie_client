@@ -34,6 +34,14 @@ const App = () => {
   const [messages, setMessages] = useState([]);
   const [proximity, setProximity] = useState("distance");
   const [nameError, setNameError] = useState(false);
+  const [opponentStillThere, setOpponentStillThere] = useState(true);
+  const [redirected, setRedirected] = useState(false);
+
+  const varMonitoring = () => {
+    console.log('isGameStarted: ', isGameStarted);
+    console.log('isGameOver: ', isGameOver);
+    console.log('winner: ', winner);
+  }
 
   const cleanCharacters = () => {
     setUserCharacter({});
@@ -114,23 +122,37 @@ const App = () => {
 
   // // provoque la fin de la partie et supprime les joueurs choisis par les deux joueurs -useEffect
   const sendEndGame = () => {
-    cleanCharacters();
     socket.emit("sendEndGame", room);
   };
 
   // WinScreen
+
+  // Replay
+  const replay = () => {
+    cleanCharacters();
+    setWinner(false);
+    setIsGameOver(false);
+    setIsGameStarted(false);
+    socket.emit("replay");
+  };
   // // retourne à l'écran de choix des rooms et supprime la value de room
   const changeRoom = () => {
     console.log("changeRoom");
     setRoom("");
-    socket.emit("changeRoom"); //TODO
+    setWinner(false);
+    setIsGameOver(false);
+    setIsGameStarted(false);
+    socket.emit("changeRoom", room); //TODO
   };
 
-  // Replay
-  const replay = () => {
-    console.log("replay");
-    socket.emit("replay"); //TODO
-  };
+  const redirectedToRooms = () => {
+    socket.emit("redirectedToRooms", room);
+    setRoom("");
+    setWinner(false);
+    setIsGameOver(false);
+    setIsGameStarted(false);
+    setRedirected(true);
+  }
 
   // useEffect for socket
   useEffect(() => {
@@ -177,6 +199,13 @@ const App = () => {
     console.log(opponentCharacter);
   }, [opponentCharacter]);
 
+  useEffect(()=> {
+    socket.on("redirectToRooms", () => {
+      console.log('redirected to room')
+      setOpponentStillThere(false);
+    })
+  })
+
   return (
     <Router>
       <Switch>
@@ -193,21 +222,37 @@ const App = () => {
           <Rooms
             name={name}
             room={room}
+            setRoom={setRoom}
             rooms={rooms}
             // nameError={nameError}
             getRooms={getRooms}
             updateRoom={updateRoom}
             joinRoom={joinRoom}
+            varMonitoring={varMonitoring} // Delete after tests
+            opponentStillThere={opponentStillThere}
+            redirected={redirected}
+            setRedirected={setRedirected}
+            setWinner={setWinner}
+            setIsGameOver={setIsGameOver}
+            setIsGameStarted={setIsGameStarted}
+            redirectedToRooms={redirectedToRooms}
+            setOpponentStillThere={setOpponentStillThere}
           />
         </Route>
         <Route path="/proximity">
-          <Proximity setProximity={setProximity} />
+          <Proximity
+            setProximity={setProximity}
+            varMonitoring={varMonitoring} // Delete after tests
+            opponentStillThere={opponentStillThere}
+          />
         </Route>
         <Route path="/chooseCharacter">
           <ChooseCharacter
             userCharacter={userCharacter}
             pickCharacter={pickCharacter}
             characterPicked={characterPicked}
+            varMonitoring={varMonitoring} // Delete after tests
+            opponentStillThere={opponentStillThere}
           />
         </Route>
         <Route path="/game">
@@ -232,6 +277,8 @@ const App = () => {
             setWinner={setWinner}
             setIsGameOver={setIsGameOver}
             sendEndGame={sendEndGame}
+            varMonitoring={varMonitoring} // Delete after tests
+            opponentStillThere={opponentStillThere}
           />
         </Route>
       </Switch>

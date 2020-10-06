@@ -1,32 +1,48 @@
 import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 
 import "./chooseCharacter.scss";
 
-const ChooseCharacter = ({ userCharacter, pickCharacter, characterPicked }) => {
+const ChooseCharacter = ({
+  userCharacter,
+  pickCharacter,
+  characterPicked,
+  varMonitoring,
+  opponentStillThere,
+}) => {
   // useEffect for picking character
   useEffect(() => {
     pickCharacter();
   }, []);
 
+  console.log("chooseCharacter monitoring");
+  varMonitoring();
+
   return (
-    <div className="choose-character-outer">
-      <div className="choose-character-inner">
-        <div className="text">
-          <h1>Choisis le personnage que tu incarneras</h1>
-          <Link to={`/game`} onClick={characterPicked}>
-            <button className="button">Jouer</button>
-          </Link>
-        </div>
-        <div className="personnage">
-          <p>{userCharacter.name}</p>
-          <img src={userCharacter.image} alt={userCharacter.name} />
-          <p className="characterChange" onClick={pickCharacter}>
-            Choisir un autre personnage
-          </p>
+    <>
+      <div className="choose-character-outer">
+        <div className="choose-character-inner">
+          <div className="text">
+            <h1>Choisis le personnage que tu incarneras</h1>
+            <Link to={`/game`} onClick={characterPicked}>
+              <button className="button">Jouer</button>
+            </Link>
+          </div>
+          <div className="personnage">
+            <p>{userCharacter.name}</p>
+            <img src={userCharacter.image} alt={userCharacter.name} />
+            <p className="characterChange" onClick={pickCharacter}>
+              Choisir un autre personnage
+            </p>
+          </div>
         </div>
       </div>
-    </div>
+      {!opponentStillThere && (
+        <div>
+          <Redirect to="/rooms" />
+        </div>
+      )}
+    </>
   );
 };
 

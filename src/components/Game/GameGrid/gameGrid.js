@@ -10,7 +10,7 @@ const GameGrid = ({
   characters,
   setWinner,
   setIsGameOver,
-  userCharacter
+  userCharacter,
 }) => {
   const [charactersDeck, setCharactersDeck] = useState([]);
 
@@ -27,8 +27,10 @@ const GameGrid = ({
     let finalDeck = [];
 
     // Fixe le bug selon lequel le personnage du jouer est une solution
-    let u = characters.findIndex((c) => c.name === userCharacter.name);
-    characters[u].opponentCharacter = false;
+    if (userCharacter.name) {
+      let u = characters.findIndex((c) => c.name === userCharacter.name);
+      characters[u].opponentCharacter = false;
+    }
 
     // je mélange l'array & je le limite à la taille voulue
     const rightSizeDeck = shuffle(characters).slice(0, size);

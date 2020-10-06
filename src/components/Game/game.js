@@ -28,6 +28,8 @@ const Game = ({
   replay,
   changeRoom,
   proximity,
+  varMonitoring,
+  opponentStillThere
 }) => {
   const [modal, setModal] = useState(false);
   const toggle = () => setModal(!modal);
@@ -38,6 +40,7 @@ const Game = ({
 
   useEffect(() => {
     if (isGameOver) {
+      sendEndGame();
       toggle();
     }
   }, [isGameOver]);
@@ -59,6 +62,9 @@ const Game = ({
       display: "unknown",
     };
   }
+
+  console.log("Game Monitoring");
+  varMonitoring();
 
   return (
     <div className="game">
@@ -113,12 +119,19 @@ const Game = ({
             <button onClick={handleReplay} className="button replay">
               Rejouer
             </button>
-            <span onClick={handleChangeRoom} className="changeRoom">Changer de salon</span>
+            <span onClick={handleChangeRoom} className="changeRoom">
+              Changer de salon
+            </span>
           </div>
         </div>
       </Modal>
       {redirectToChooseCharacter && <Redirect to={"/chooseCharacter"} />}
       {redirectToRooms && <Redirect to={"/rooms"} />}
+      {!opponentStillThere && (
+        <div>
+          <Redirect to="/rooms" />
+        </div>
+      )}
     </div>
   );
 };

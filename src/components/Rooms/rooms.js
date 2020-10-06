@@ -5,19 +5,36 @@ import "./rooms.scss";
 
 const { Modal } = require("reactstrap");
 
-const Rooms = ({ name, room, rooms, getRooms, updateRoom, joinRoom }) => {
+const Rooms = ({
+  name,
+  room,
+  rooms,
+  getRooms,
+  updateRoom,
+  joinRoom,
+  varMonitoring,
+  opponentStillThere,
+  redirected,
+  setRedirected,
+  redirectedToRooms,
+  setOpponentStillThere
+}) => {
   const [modal, setModal] = useState(false);
 
   const toggle = () => setModal(!modal);
 
-  const [redirectToProximity, setRedirectToProximity] = useState(
-    false
-  );
+  const [redirectToProximity, setRedirectToProximity] = useState(false);
 
   useEffect(() => {
     getRooms();
     console.log("rooms gotten");
   }, []);
+
+  useEffect(() => {
+    if (!opponentStillThere) {
+      redirectedToRooms()
+    }
+  });
 
   const roomInitiale = (roomName) => {
     let initiale = roomName.substring(0, 1);
@@ -29,6 +46,13 @@ const Rooms = ({ name, room, rooms, getRooms, updateRoom, joinRoom }) => {
     setRedirectToProximity(true);
   };
 
+  console.log("Rooms monitoring");
+  varMonitoring();
+
+  const toggleRedirectedModal = () => {
+    setRedirected(false);
+    setOpponentStillThere(true);
+  }
   return (
     <>
       <div className="rooms">
@@ -59,13 +83,27 @@ const Rooms = ({ name, room, rooms, getRooms, updateRoom, joinRoom }) => {
             Créer son propre salon
           </button>
         </div>
+        <div className="refresh">
+          <img src="./change_icon.png" alt="actualiser la liste des joueurs" onClick={getRooms} />
+        </div>
       </div>
 
       <Modal isOpen={modal} toggle={toggle} size="lg">
         <div className="rooms-modal">
           Veux-tu rejoindre le salon: {room} ?
-          <button onClick={handleJoinRoom} className="button">Oui</button>
+          <button onClick={handleJoinRoom} className="button">
+            Oui
+          </button>
           <span onClick={toggle}>Non</span>
+        </div>
+      </Modal>
+
+      <Modal isOpen={redirected} toggle={toggleRedirectedModal} size="sm">
+        <div className="redirected">
+          <p>
+            Tu es revenu à l'écran des joueur car ton adversaire a quitté la
+            partie
+          </p>
         </div>
       </Modal>
 

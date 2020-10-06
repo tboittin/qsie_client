@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Redirect } from "react-router";
 
-const Proximity = ({ setProximity }) => {
+const Proximity = ({ setProximity, varMonitoring, opponentStillThere }) => {
   const [redirectToChooseCharacter, setRedirectToChooseCharacter] = useState(
     false
   );
@@ -20,20 +20,28 @@ const Proximity = ({ setProximity }) => {
     handleRedirectToChooseCharacter();
   };
 
+  console.log("Proximity monitoring");
+  varMonitoring();
+
   return (
     <>
       <div className="proximity">
-          <h1>Votre partenaire de jeu se trouve</h1>
-          <button className="button" onClick={setProximityToDistance}>
-            À distance
-          </button>
-          <button className="button" onClick={setProximityToProximity}>
-            À proximité
-          </button>
+        <h1>Votre partenaire de jeu se trouve</h1>
+        <button className="button" onClick={setProximityToDistance}>
+          À distance
+        </button>
+        <button className="button" onClick={setProximityToProximity}>
+          À proximité
+        </button>
       </div>
       {redirectToChooseCharacter && (
         <div>
           <Redirect to="/chooseCharacter" />
+        </div>
+      )}
+      {!opponentStillThere && (
+        <div>
+          <Redirect to="/rooms" />
         </div>
       )}
     </>

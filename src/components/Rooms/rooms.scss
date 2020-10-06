@@ -10,11 +10,12 @@
         display: inline-flex;
         justify-content: space-around;
         margin-bottom: 7vh;
+        height: 12vh;
 
         .initiale {
             border-radius: 50%;
-            border: 2px solid rgba(0,0,0,0.2);
-            height: 10vh;
+            border: 2px solid rgba(0, 0, 0, 0.2);
+            height: 80%;
             width: 10vh;
             justify-content: center;
             align-content: center;
@@ -29,37 +30,25 @@
         .subtitle {
             align-content: center;
             text-align: center;
+            height: 20%;
         }
     }
 
     h1 {
         text-align: center;
     }
+
+    .refresh {
+        margin:2vh;
+        text-align: center;
+        img {
+            object-fit: cover;
+            height: 8vh;
+        }
+    }
 }
 
 .modal-content {
     padding: 2vh !important;
     text-align: center;
-}
-
-.button-green {
-    width: 75%;
-    color: #fff;
-    background-color: green;
-    text-transform: uppercase;
-    text-decoration: none;
-    padding: 20px;
-    border-radius: 5px;
-    margin: 1vh;
-}
-
-.button-red {
-    width: 75%;
-    color: #fff;
-    background-color: red;
-    text-transform: uppercase;
-    text-decoration: none;
-    padding: 20px;
-    border-radius: 5px;
-    margin: 1vh;
 }
