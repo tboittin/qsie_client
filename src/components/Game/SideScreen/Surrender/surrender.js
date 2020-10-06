@@ -1,11 +1,34 @@
-import React from 'react';
+import React, { useState } from "react";
+import { Modal } from "reactstrap";
 
-import './surrender.scss';
+import "./surrender.scss";
 
-const Surrender = ({sendEndGame}) => {
-    return (
-        <div className="surrender" onClick={sendEndGame}>Abandonner la partie</div>
-    )
+const Surrender = ({ handleChangeRoom, sendEndGame }) => {
+  const [modal, setModal] = useState(false);
+  const toggle = () => setModal(!modal);
+  
+  const handleSurrender = () => {
+      sendEndGame(true);
+      handleChangeRoom();
+  }
+  return (
+    <>
+      <div className="surrender" onClick={toggle}>
+        Abandonner la partie
+      </div>
+      <Modal isOpen={modal} size="lg" centered={true} toggle={toggle}>
+        <div className="surrenderModal">
+          <span>Es-tu sûr de vouloir abandonner la partie ?</span>
+          <button className="button-modal" onClick={toggle}>
+            Non, je veux continuer à jouer
+          </button>
+          <p onClick={handleSurrender}>
+            Oui, je veux retourner à l'écran des joueurs
+          </p>
+        </div>
+      </Modal>
+    </>
+  );
 };
 
 export default Surrender;

@@ -48,7 +48,14 @@
     }
 }
 
-.modal-content {
+.rooms-modal {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
     padding: 2vh !important;
     text-align: center;
+    .button-modal {
+        align-self: center;
+    }
 }

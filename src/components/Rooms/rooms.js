@@ -90,11 +90,11 @@ const Rooms = ({
 
       <Modal isOpen={modal} toggle={toggle} size="lg">
         <div className="rooms-modal">
-          Veux-tu rejoindre le salon: {room} ?
-          <button onClick={handleJoinRoom} className="button">
+          <span>Veux-tu rejoindre le salon: {room} ?</span>
+          <button onClick={handleJoinRoom} className="button-modal">
             Oui
           </button>
-          <span onClick={toggle}>Non</span>
+          <p onClick={toggle}>Non</p>
         </div>
       </Modal>
 

@@ -10,13 +10,13 @@ const SideScreen = ({
   opponentName,
   userCharacter,
   room,
-  sendLocalMessage,
   message,
   messages,
   setMessage,
   sendMessage,
-  sendEndGame,
-  proximity
+  proximity,
+  handleChangeRoom,
+  sendEndGame
 }) => {
   return (
     <div className="sideScreen">
@@ -36,7 +36,7 @@ const SideScreen = ({
         />
       }
       
-      <Surrender sendEndGame={sendEndGame} />
+      <Surrender handleChangeRoom={handleChangeRoom} sendEndGame={sendEndGame} />
     </div>
   );
 };

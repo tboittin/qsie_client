@@ -98,6 +98,7 @@ const Game = ({
             setMessage={setMessage}
             sendEndGame={sendEndGame}
             proximity={proximity}
+            handleChangeRoom={handleChangeRoom}
           />
         </Col>
       </Row>
