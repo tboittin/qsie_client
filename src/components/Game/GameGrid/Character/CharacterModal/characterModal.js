@@ -1,19 +1,16 @@
 import React from "react";
 import "./characterModal.scss";
-import {
-  ModalFooter,
-  Button,
-  ModalBody,
-  Container,
-  Row,
-  Col,
-} from "reactstrap";
 
-const CharacterModal = ({ character, toggle, setWinner, setIsGameOver }) => {
-
+const CharacterModal = ({
+  character,
+  toggle,
+  setWinner,
+  setIsGameOver,
+  displayButtons,
+}) => {
   const elimination = () => {
     toggle();
-    character.display = 'innocent';
+    character.display = "innocent";
   };
 
   const choixFinal = () => {
@@ -22,22 +19,25 @@ const CharacterModal = ({ character, toggle, setWinner, setIsGameOver }) => {
       setWinner(true);
       setIsGameOver(true);
     } else {
-      character.display = 'wrong';
+      character.display = "wrong";
       return alert("Ce n'était pas le bon personnage");
     }
   };
-  
+
   return (
     <>
-      <ModalBody>
-        <Container>
-          <Row>
-            <Col xs="4">
-              <h2>
-                {character.name}
-              </h2>
-            </Col>
-            <Col xs={{ size: "7", offset: "1" }} className="modal-menu">
+      <div className="characterModalOuter">
+        <p className="underline" onClick={toggle}>
+          Revenir au jeu
+        </p>
+        <div className="characterModalInner">
+          <div className="face">
+            <img src={character.image} alt={character.name} />
+            <h2>{character.name}</h2>
+            <h2>{character.pronoun}</h2>
+          </div>
+          <div className="modal-menu">
+            {!character.description && (
               <p className="character-description">
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
                 eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
@@ -47,30 +47,21 @@ const CharacterModal = ({ character, toggle, setWinner, setIsGameOver }) => {
                 nulla pariatur. Excepteur sint occaecat cupidatat non proident,
                 sunt in culpa qui officia deserunt mollit anim id est laborum.
               </p>
-              <Button
-                className="modal-button"
-                color="danger"
-                onClick={elimination}
-              >
-                Désactiver le personnage
-              </Button>
-              
-              <Button
-                className="modal-button"
-                color="success"
-                onClick={choixFinal}
-              >
-                Choix Final
-              </Button>
-            </Col>
-          </Row>
-        </Container>
-      </ModalBody>
-      <ModalFooter>
-        <Button color="secondary" onClick={toggle}>
-          Revenir au jeu
-        </Button>
-      </ModalFooter>
+            )}
+            {character.description && <p>{character.description}</p>}
+            {displayButtons && (
+              <>
+                <button className="button" onClick={choixFinal}>
+                  Je suis sur.e, c'est iel!
+                </button>
+                <button className="button grey" onClick={elimination}>
+                  Ce n'est pas iel.
+                </button>
+              </>
+            )}
+          </div>
+        </div>
+      </div>
     </>
   );
 };
