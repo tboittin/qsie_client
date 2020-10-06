@@ -10,23 +10,30 @@ const VS = ({ name, opponentName, userCharacter }) => {
   return (
     <>
       <div className="vs">
-        <div className="opponent">
+        <div className="user">
           <img
             src={userCharacter.image}
             alt={userCharacter.name}
             onClick={toggle}
           />
-          <h4>{name}</h4>
+          <h4>{userCharacter.name} ({name})</h4>
         </div>
-        <div className="user">
-          ?<h4>{opponentName}</h4>
+        <div className="opponent">
+          <p>
+            
+          </p><h4>{opponentName}</h4>
         </div>
       </div>
-      <Modal>
+      <Modal
+       isOpen={modal}
+       toggle={toggle}
+       size="xl"
+      >
         <CharacterModal
           character={userCharacter}
           modal={modal}
           toggle={toggle}
+          displayButtons={false}
         />
       </Modal>
     </>
