@@ -31,7 +31,9 @@ const Game = ({
 }) => {
   const [modal, setModal] = useState(false);
   const toggle = () => setModal(!modal);
-  const [redirectToChooseCharacter, setRedirectToChooseCharacter] = useState(false);
+  const [redirectToChooseCharacter, setRedirectToChooseCharacter] = useState(
+    false
+  );
   const [redirectToRooms, setRedirectToRooms] = useState(false);
 
   useEffect(() => {
@@ -49,12 +51,12 @@ const Game = ({
   const handleReplay = () => {
     replay();
     setRedirectToChooseCharacter(true);
-  }
+  };
 
   const handleChangeRoom = () => {
     changeRoom();
     setRedirectToRooms(true);
-  }
+  };
 
   if (!opponentCharacter) {
     opponentCharacter = {
@@ -100,7 +102,7 @@ const Game = ({
         </Col>
       </Row>
       <Modal isOpen={modal} size="xl" centered={true}>
-        <div>
+        <div className="winModal">
           {winner && <h1>Tu as gagné contre {opponentName}!</h1>}
           {!winner && <h1>{opponentName} a gagné!</h1>}
           <div className="characters">
@@ -113,16 +115,16 @@ const Game = ({
               <p>{opponentCharacter.name}</p>
             </div>
           </div>
-          <button onClick={handleReplay} className="button">Rejouer</button>
-          <span onClick={handleChangeRoom}>Changer de salon</span>
+          <div className="winButtons">
+            <button onClick={handleReplay} className="button replay">
+              Rejouer
+            </button>
+            <span onClick={handleChangeRoom} className="changeRoom">Changer de salon</span>
+          </div>
         </div>
       </Modal>
-      {redirectToChooseCharacter && 
-        <Redirect to={'/chooseCharacter'} />
-      }
-      {redirectToRooms &&
-        <Redirect to={'/rooms'} />
-      }
+      {redirectToChooseCharacter && <Redirect to={"/chooseCharacter"} />}
+      {redirectToRooms && <Redirect to={"/rooms"} />}
     </div>
   );
 };

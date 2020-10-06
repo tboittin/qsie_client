@@ -2,3 +2,50 @@
   height: 100vh;
   width: 100vw;
 }
+
+
+.winModal {
+  display: flex;
+  flex-direction: column;
+  height: 80%;
+  
+  padding-top: 10%;
+  padding-bottom: 10%;
+  .characters {
+    display: flex;
+    flex-direction: row;
+    height: 50vh;
+    img{
+      object-fit: contain;
+      height: 60%;
+    }
+    .user {
+      width: 50%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .opponent {
+      width: 50%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    img{
+      object-fit: contain;
+      width: 100%;
+    }
+  }
+  .winButtons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    .replay {
+      width: 40%;
+    }
+    .changeRoom {
+      width: 40%;
+      align-self: center;
+    }
+  }
+}
