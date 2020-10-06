@@ -14,6 +14,7 @@ const SideScreen = ({
   message,
   messages,
   setMessage,
+  sendMessage,
   sendEndGame,
   proximity
 }) => {
@@ -28,7 +29,7 @@ const SideScreen = ({
         <Chat
           name={name}
           room={room}
-          sendLocalMessage={sendLocalMessage}
+          sendMessage={sendMessage}
           message={message}
           messages={messages}
           setMessage={setMessage}

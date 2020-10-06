@@ -5,7 +5,7 @@ import "./chat.css";
 import Input from "./Input/input";
 import Messages from "./Messages/messages";
 
-const Chat = ({name, room, messages, message, setMessage, sendLocalMessage}) => {
+const Chat = ({name, messages, message, setMessage, sendMessage}) => {
 
   return (
     <div className="chat">
@@ -16,7 +16,7 @@ const Chat = ({name, room, messages, message, setMessage, sendLocalMessage}) => 
       <Input
         message={message}
         setMessage={setMessage}
-        sendLocalMessage={sendLocalMessage}
+        sendMessage={sendMessage}
       />
     </div>
   );

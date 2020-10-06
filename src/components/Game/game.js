@@ -42,12 +42,6 @@ const Game = ({
     }
   }, [isGameOver]);
 
-  const sendLocalMessage = (event) => {
-    if (message) {
-      sendMessage();
-    }
-  };
-
   const handleReplay = () => {
     replay();
     setRedirectToChooseCharacter(true);
@@ -92,7 +86,7 @@ const Game = ({
             opponentName={opponentName}
             userCharacter={userCharacter}
             room={room}
-            sendLocalMessage={sendLocalMessage}
+            sendMessage={sendMessage}
             message={message}
             messages={messages}
             setMessage={setMessage}

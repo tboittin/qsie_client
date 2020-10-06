@@ -15,8 +15,8 @@ import Proximity from "./components/Proximity/proximity";
 let socket;
 
 const App = () => {
-  // const ENDPOINT = "http://localhost:5000/";
-  const ENDPOINT = "https://qsie-server.herokuapp.com/";
+  const ENDPOINT = "http://localhost:5000/";
+  // const ENDPOINT = "https://qsie-server.herokuapp.com/";
   const characters = [...CHARACTERS.default];
   const [name, setName] = useState("");
   const [opponentName, setOpponentName] = useState("");
@@ -32,26 +32,26 @@ const App = () => {
   const [winner, setWinner] = useState(false);
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
-  const [proximity, setProximity] = useState('distance');
-  const [nameError, setNameError] = useState(false)
+  const [proximity, setProximity] = useState("distance");
+  const [nameError, setNameError] = useState(false);
 
   const cleanCharacters = () => {
     setUserCharacter({});
     setOpponentCharacter({});
-  }
+  };
 
   // Dans Join
   // // updateName: ajouter le joueur dans le back & vérifier que son nom n'est pas déjà pris + déconnecter quand l'user quitte la page
   const updateName = (name) => {
     setName(name);
     socket.emit("login", { name }, (error) => {
-      alert(error)
+      alert(error);
       setNameError(true);
     });
 
     // Unmount part
     return () => {
-      socket.emit("disconnect");
+      socket.emit("disconnect"); // TODO abandonner s'il est en game
 
       socket.off();
     };
@@ -71,7 +71,7 @@ const App = () => {
   // // rejoint la room
   const joinRoom = () => {
     socket.emit("joinRoom", { name, room }, (error) => {
-      alert(error)
+      alert(error);
     });
     console.log(`${name} joined ${room}`);
   };
@@ -88,41 +88,49 @@ const App = () => {
 
   const characterPicked = () => {
     console.log(`${userCharacter.name} picked in ${room}`);
-    socket.emit("characterPicked", ({name, clientCharacter: userCharacter, room}));
+    socket.emit("characterPicked", {
+      name,
+      clientCharacter: userCharacter,
+      room,
+    });
   };
 
   // Game
   // // reçoit les joueurs dans la Room
   const getUsersInRoom = () => {
-      socket.on("usersInRoom", (users) => {
-        console.log(users)
-      })
-  }
+    socket.on("usersInRoom", (users) => {
+      console.log(users);
+    });
+  };
 
   // // envoie un message au socket
-  const sendMessage = () => {
-    socket.emit("sendMessage", ({message,room,name}));
+  const sendMessage = (event) => {
+    if (message) {
+      event.preventDefault();
+      socket.emit("sendMessage", { message, room, name });
+      setMessage('');
+    }
   };
 
   // // provoque la fin de la partie et supprime les joueurs choisis par les deux joueurs -useEffect
   const sendEndGame = () => {
-    cleanCharacters()
+    cleanCharacters();
     socket.emit("sendEndGame", room);
   };
 
   // WinScreen
   // // retourne à l'écran de choix des rooms et supprime la value de room
   const changeRoom = () => {
-    console.log('changeRoom')
+    console.log("changeRoom");
     setRoom("");
     socket.emit("changeRoom"); //TODO
   };
 
   // Replay
   const replay = () => {
-    console.log('replay')
-    socket.emit('replay'); //TODO
-  }
+    console.log("replay");
+    socket.emit("replay"); //TODO
+  };
 
   // useEffect for socket
   useEffect(() => {
@@ -130,43 +138,44 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    socket.on("rooms", (rooms) => {setRooms(rooms)})
-  },[setRooms, rooms])
+    socket.on("rooms", (rooms) => {
+      setRooms(rooms);
+    });
+  }, [setRooms, rooms]);
 
   useEffect(() => {
-    socket.on("startGame", ({opponentName, opponentCharacter}) => {
+    socket.on("startGame", ({ opponentName, opponentCharacter }) => {
       setOpponentName(opponentName);
       setOpponentCharacter(opponentCharacter);
       setIsGameStarted(true);
     });
-  }, [])
-
+  }, []);
 
   useEffect(() => {
     socket.on("message", (message) => {
       setMessages([...messages, message]);
     });
-  }, [messages])
+  }, [messages]);
 
   useEffect(() => {
     socket.on("endGame", () => {
       setIsGameOver(true);
     });
-  }, [])
+  }, []);
 
   useEffect(() => {
     socket.on("users", (users) => {
-      console.log(users)
-    })
-  }, [])
+      console.log(users);
+    });
+  }, []);
 
   useEffect(() => {
-    getUsersInRoom()
-  }, [])
+    getUsersInRoom();
+  }, []);
 
   useEffect(() => {
-    console.log(opponentCharacter)
-  }, [opponentCharacter])
+    console.log(opponentCharacter);
+  }, [opponentCharacter]);
 
   return (
     <Router>
@@ -178,12 +187,9 @@ const App = () => {
           <Rules />
         </Route>
         <Route path="/join">
-          <Join
-            updateName={updateName}
-            nameError={nameError}
-          />
+          <Join updateName={updateName} nameError={nameError} />
         </Route>
-        <Route path="/rooms"> 
+        <Route path="/rooms">
           <Rooms
             name={name}
             room={room}
