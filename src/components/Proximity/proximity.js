@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Redirect } from "react-router";
 
+import './proximity.scss';
+
 const Proximity = ({ setProximity, varMonitoring, opponentStillThere }) => {
   const [redirectToChooseCharacter, setRedirectToChooseCharacter] = useState(
     false
