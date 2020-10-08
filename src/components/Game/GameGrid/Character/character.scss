@@ -1,5 +1,5 @@
 .character {
-  width: 10vw;
+  width: 12vw;
   height: 12vw;
   margin: 1% 1%;
   text-align: center;
@@ -19,16 +19,17 @@
   }
 
   .display-wrong {
-    background-color: rgba(255,0,0,0.2);
+    background-color: rgba(255, 0, 0, 0.2);
   }
 
   .display-innocent {
-    background-color: rgba(255,255,255,0.7);
+    background-color: rgba(255, 255, 255, 0.7);
   }
 
   .characterName {
     position: relative;
     bottom: 80%;
+    margin: 0;
   }
 
 }
@@ -36,8 +37,15 @@
 @media (min-width: 1025px) {
   .character {
     height: 20vh;
-    width: 13vw;
+    width: 20vh;
     margin: 0;
+
+    .overlay {
+      display: block;
+      margin: auto;
+      height: 0.8*20vh;
+      width: 0.8*20vh;
+    }
 
     p {
       font-size: 18px;
