@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import "./game.scss";
 
 import GameHeader from "./GameHeader/gameHeader";
-import { Col, Modal, Row } from "reactstrap";
+import { Modal } from "reactstrap";
 import GameGrid from "./GameGrid/gameGrid";
 import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
 import SideScreen from "./SideScreen/sideScreen";
@@ -68,8 +68,7 @@ const Game = ({
 
   return (
     <div className="game">
-      <Row className="w-100 h-100 m-0">
-        <Col xs="8" className="p-0">
+      <div className="left-panel">
           <GameHeader
             name={name}
             opponentName={opponentName}
@@ -89,8 +88,8 @@ const Game = ({
               <h1>En attente de l'autre joueur...</h1>
             </div>
           )}
-        </Col>
-        <Col xs="4" className="p-0 h-100">
+      </div>
+      <div className="right-pannel">
           <SideScreen
             name={name}
             opponentName={opponentName}
@@ -104,8 +103,7 @@ const Game = ({
             proximity={proximity}
             handleChangeRoom={handleChangeRoom}
           />
-        </Col>
-      </Row>
+      </div>
       <Modal isOpen={modal} size="xl" centered={true}>
         <div className="winModal">
           {winner && <h1>Tu as gagné contre {opponentName}!</h1>}
