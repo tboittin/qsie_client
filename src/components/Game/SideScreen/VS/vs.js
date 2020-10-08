@@ -16,12 +16,12 @@ const VS = ({ name, opponentName, userCharacter }) => {
             alt={userCharacter.name}
             onClick={toggle}
           />
-          <h4>{userCharacter.name} ({name})</h4>
+          <p className="charName">{userCharacter.name} ({name})</p>
         </div>
         <div className="opponent">
           <p>
             
-          </p><h4>{opponentName}</h4>
+          </p><p className="charName">{opponentName}</p>
         </div>
       </div>
       <Modal

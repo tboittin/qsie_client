@@ -17,7 +17,7 @@ const Rooms = ({
   redirected,
   setRedirected,
   redirectedToRooms,
-  setOpponentStillThere
+  setOpponentStillThere,
 }) => {
   const [modal, setModal] = useState(false);
 
@@ -31,7 +31,7 @@ const Rooms = ({
 
   useEffect(() => {
     if (!opponentStillThere) {
-      redirectedToRooms()
+      redirectedToRooms();
     }
   });
 
@@ -52,7 +52,7 @@ const Rooms = ({
     getRooms();
     setRedirected(false);
     setOpponentStillThere(true);
-  }
+  };
   return (
     <>
       <div className="rooms">
@@ -60,13 +60,14 @@ const Rooms = ({
         <div className="rooms-list">
           {rooms.map((r) => (
             <div
+              className="initiale"
               key={r.id}
               onClick={() => {
                 updateRoom(r.name);
                 toggle();
               }}
             >
-              <div className="initiale">{roomInitiale(r.name)}</div>
+              <span>{roomInitiale(r.name)}</span>
               <div className="subtitle">{r.name}</div>
             </div>
           ))}
@@ -84,7 +85,11 @@ const Rooms = ({
           </button>
         </div>
         <div className="refresh">
-          <img src="./change_icon.png" alt="actualiser la liste des joueurs" onClick={getRooms} />
+          <img
+            src="./change_icon.png"
+            alt="actualiser la liste des joueurs"
+            onClick={getRooms}
+          />
         </div>
       </div>
 

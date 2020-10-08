@@ -8,3 +8,9 @@
   padding: 2vh;
   overflow: hidden;
 }
+
+@media (min-width: 1025px) {
+  .grid {
+    height: 80%;
+  }
+}

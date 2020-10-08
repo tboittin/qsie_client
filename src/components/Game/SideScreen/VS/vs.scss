@@ -6,16 +6,19 @@
 
     img {
         object-fit: cover;
-        height: 16vh;   
+        height: 16vh;
     }
 
-    .h4 {
+    .charName {
         height: 2vh;
+        font-size: 1.2rem;
     }
+
     .opponent {
         height: 100%;
         width: 20vh;
         text-align: center;
+
         p {
             height: 16vh;
             margin-bottom: 0;

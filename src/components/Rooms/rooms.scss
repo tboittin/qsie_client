@@ -10,28 +10,36 @@
         display: inline-flex;
         justify-content: space-around;
         margin-bottom: 7vh;
-        height: 12vh;
+        height: 22vh;
 
         .initiale {
-            border-radius: 50%;
-            border: 2px solid rgba(0, 0, 0, 0.2);
-            height: 80%;
-            width: 10vh;
+            font-weight: 800;
+            display: flex;
+            flex-direction: column;
             justify-content: center;
             align-content: center;
-            padding: 1vh;
-            margin: 2vh;
-            font-size: 72px;
-            text-align: center;
-            font-weight: 800;
-            line-height: 71px;
+
+            span {
+                border-radius: 50%;
+                border: 2px solid rgba(0, 0, 0, 0.2);
+                font-size: 72px;
+                align-self: center;
+                line-height: 71px;
+                height: 9vw;
+                width: 9vw;
+                margin: 2vh;
+                text-align: center;
+                justify-self: center;
+                align-self: center;
+            }
+
+            .subtitle {
+                align-content: center;
+                text-align: center;
+                height: 20%;
+            }
         }
 
-        .subtitle {
-            align-content: center;
-            text-align: center;
-            height: 20%;
-        }
     }
 
     h1 {
@@ -39,8 +47,9 @@
     }
 
     .refresh {
-        margin:2vh;
+        margin: 2vh;
         text-align: center;
+
         img {
             object-fit: cover;
             height: 8vh;
@@ -55,6 +64,7 @@
     align-content: center;
     padding: 2vh !important;
     text-align: center;
+
     .button-modal {
         align-self: center;
     }
