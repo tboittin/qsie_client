@@ -15,8 +15,8 @@ import Proximity from "./components/Proximity/proximity";
 let socket;
 
 const App = () => {
-  const ENDPOINT = "http://localhost:5000/";
-  // const ENDPOINT = "https://qsie-server.herokuapp.com/";
+  // const ENDPOINT = "http://localhost:5000/";
+  const ENDPOINT = "https://qsie-server.herokuapp.com/";
   const characters = [...CHARACTERS.default];
   const [name, setName] = useState("");
   const [opponentName, setOpponentName] = useState("");
