@@ -29,7 +29,7 @@ const Game = ({
   changeRoom,
   proximity,
   varMonitoring,
-  opponentStillThere
+  opponentStillThere,
 }) => {
   const [modal, setModal] = useState(false);
   const toggle = () => setModal(!modal);
@@ -84,7 +84,11 @@ const Game = ({
               userCharacter={userCharacter}
             />
           )}
-          {!isGameStarted && <h1>Wait for the other player...</h1>}
+          {!isGameStarted && (
+            <div className="waiting">
+              <h1>En attente de l'autre joueur...</h1>
+            </div>
+          )}
         </Col>
         <Col xs="4" className="p-0 h-100">
           <SideScreen
