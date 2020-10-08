@@ -21,10 +21,7 @@ const App = () => {
   const [name, setName] = useState("");
   const [opponentName, setOpponentName] = useState("");
   const [room, setRoom] = useState("");
-  const [rooms, setRooms] = useState([
-    // { id: 0, name: "Green Room", numberOfPlayers: 0 },
-    // { id: 1, name: "Red Room", numberOfPlayers: 0 },
-  ]);
+  const [rooms, setRooms] = useState([]);
   const [userCharacter, setUserCharacter] = useState({});
   const [opponentCharacter, setOpponentCharacter] = useState({});
   const [isGameStarted, setIsGameStarted] = useState(false);
@@ -52,14 +49,15 @@ const App = () => {
   // // updateName: ajouter le joueur dans le back & vérifier que son nom n'est pas déjà pris + déconnecter quand l'user quitte la page
   const updateName = (name) => {
     setName(name);
-    socket.emit("login", { name }, (error) => {
+    socket.emit("login", { name }, (error) => { //
       alert(error);
       setNameError(true);
     });
 
     // Unmount part
     return () => {
-      socket.emit("disconnect"); // TODO abandonner s'il est en game
+      socket.emit("disconnecting-message")
+      socket.emit("disconnect", {name, room}); // TODO abandonner s'il est en game
 
       socket.off();
     };
@@ -138,15 +136,17 @@ const App = () => {
   // // retourne à l'écran de choix des rooms et supprime la value de room
   const changeRoom = () => {
     console.log("changeRoom");
+    setMessages([]);
     setRoom("");
     setWinner(false);
     setIsGameOver(false);
     setIsGameStarted(false);
-    socket.emit("changeRoom", room); //TODO
+    socket.emit("changeRoom", room);
   };
 
   const redirectedToRooms = () => {
     socket.emit("redirectedToRooms", room);
+    setMessages([]);
     setRoom("");
     setWinner(false);
     setIsGameOver(false);
@@ -201,7 +201,7 @@ const App = () => {
 
   useEffect(()=> {
     socket.on("redirectToRooms", () => {
-      console.log('redirected to room')
+      console.log('redirected to room');
       setOpponentStillThere(false);
     })
   })

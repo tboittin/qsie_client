@@ -27,7 +27,6 @@ const Rooms = ({
 
   useEffect(() => {
     getRooms();
-    console.log("rooms gotten");
   }, []);
 
   useEffect(() => {
@@ -50,6 +49,7 @@ const Rooms = ({
   varMonitoring();
 
   const toggleRedirectedModal = () => {
+    getRooms();
     setRedirected(false);
     setOpponentStillThere(true);
   }
