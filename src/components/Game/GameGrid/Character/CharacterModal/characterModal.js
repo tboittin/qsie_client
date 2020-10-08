@@ -27,7 +27,7 @@ const CharacterModal = ({
   return (
     <>
       <div className="characterModalOuter">
-        <p className="underline" onClick={toggle}>
+        <p className="underline hover" onClick={toggle}>
           Revenir au jeu
         </p>
         <div className="characterModalInner">

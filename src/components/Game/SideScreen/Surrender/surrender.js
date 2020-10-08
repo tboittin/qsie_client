@@ -13,7 +13,7 @@ const Surrender = ({ handleChangeRoom, sendEndGame }) => {
   }
   return (
     <>
-      <div className="surrender" onClick={toggle}>
+      <div className="surrender hover" onClick={toggle}>
         Abandonner la partie
       </div>
       <Modal isOpen={modal} size="lg" centered={true} toggle={toggle}>
@@ -22,7 +22,7 @@ const Surrender = ({ handleChangeRoom, sendEndGame }) => {
           <button className="button-modal" onClick={toggle}>
             Non, je veux continuer à jouer
           </button>
-          <p onClick={handleSurrender}>
+          <p className="hover" onClick={handleSurrender}>
             Oui, je veux retourner à l'écran des joueurs
           </p>
         </div>

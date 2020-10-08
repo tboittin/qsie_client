@@ -14,24 +14,24 @@ const Character = ({ character, setWinner, setIsGameOver }) => {
     switch (character.display) {
       case "wrong":
         return "display-wrong";
-        break;
       case "innocent":
         return "display-innocent";
-        break;
       default:
         return "";
-        break;
     }
   };
 
   return (
     <>
       <div
-        className={`character ${characterDisplay()}`}
+        className={`character hover`}
         onClick={toggle}
       >
-        <img src={character.image} alt={character.name} />
-        <p>{character.name}</p>
+        <img
+        src={character.image} alt={character.name} 
+        />
+        <div className={`overlay ${characterDisplay()}`}></div>
+        <p className="characterName">{character.name}</p>
         <Modal
           key={"modal-" + character.name}
           isOpen={modal}

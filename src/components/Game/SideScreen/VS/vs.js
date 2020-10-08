@@ -10,7 +10,7 @@ const VS = ({ name, opponentName, userCharacter }) => {
   return (
     <>
       <div className="vs">
-        <div className="user">
+        <div className="user hover">
           <img
             src={userCharacter.image}
             alt={userCharacter.name}
@@ -18,7 +18,7 @@ const VS = ({ name, opponentName, userCharacter }) => {
           />
           <p className="charName">{userCharacter.name} ({name})</p>
         </div>
-        <div className="opponent">
+        <div className="opponent hover">
           <p>
             
           </p><p className="charName">{opponentName}</p>

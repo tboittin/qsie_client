@@ -4,18 +4,33 @@
   margin: 1% 1%;
   text-align: center;
 
-  img{
+  img {
     object-fit: cover;
     height: 80%;
+
+  }
+
+  .overlay {
+    height: 80%;
+    z-index: 10;
+    bottom: 80%;
+    position: relative;
+    border-radius: 50%;
   }
 
   .display-wrong {
-    border: 2px solid red;
+    background-color: rgba(255,0,0,0.2);
   }
 
   .display-innocent {
-    border: 2px solid gray;
+    background-color: rgba(255,255,255,0.7);
   }
+
+  .characterName {
+    position: relative;
+    bottom: 80%;
+  }
+
 }
 
 @media (min-width: 1025px) {
@@ -23,6 +38,7 @@
     height: 20vh;
     width: 13vw;
     margin: 0;
+
     p {
       font-size: 18px;
       margin: 0;

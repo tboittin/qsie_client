@@ -60,7 +60,7 @@ const Rooms = ({
         <div className="rooms-list">
           {rooms.map((r) => (
             <div
-              className="initiale"
+              className="initiale hover"
               key={r.id}
               onClick={() => {
                 updateRoom(r.name);
@@ -99,11 +99,11 @@ const Rooms = ({
           <button onClick={handleJoinRoom} className="button-modal">
             Oui
           </button>
-          <p onClick={toggle}>Non</p>
+          <p className="hover" onClick={toggle}>Non</p>
         </div>
       </Modal>
 
-      <Modal isOpen={redirected} toggle={toggleRedirectedModal} size="sm">
+      <Modal isOpen={redirected} toggle={toggleRedirectedModal} size="md">
         <div className="redirected">
           <p>
             Tu es revenu à l'écran des joueur car ton adversaire a quitté la
