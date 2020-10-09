@@ -13,6 +13,11 @@ const CharacterModal = ({
     character.display = "innocent";
   };
 
+  const removeElimination = () => {
+    toggle();
+    character.display = "";
+  };
+
   const choixFinal = () => {
     toggle();
     if (character.opponentCharacter === true) {
@@ -54,9 +59,16 @@ const CharacterModal = ({
                 <button className="button" onClick={choixFinal}>
                   Je suis sur.e, c'est iel!
                 </button>
-                <button className="button grey" onClick={elimination}>
-                  Ce n'est pas iel.
-                </button>
+                {character.display !== "innocent" && (
+                  <button className="button grey" onClick={elimination}>
+                    Ce n'est pas iel.
+                  </button>
+                )}
+                {character.display === "innocent" && (
+                  <button className="button grey" onClick={removeElimination}>
+                    En fait c'est peut-être iel...
+                  </button>
+                )}
               </>
             )}
           </div>
