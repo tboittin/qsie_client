@@ -31,7 +31,7 @@ const SideScreen = ({
         chat={chat}
       />
       {!chat && 
-      <p onClick={toggleChat}>Chat OFF</p>
+      <p className="hover" onClick={toggleChat}>Chat OFF</p>
     }
       {/* {(proximity === 'distance') &&  */}
       {chat &&

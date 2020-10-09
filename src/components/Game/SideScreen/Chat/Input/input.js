@@ -4,7 +4,7 @@ import "./input.css";
 
 const Input = ({ message, setMessage, sendMessage, toggleChat }) => (
   <form className="form">
-    <p className="switch-chat-off" onClick={toggleChat}>Chat ON</p>
+    <p className="switch-chat-off hover" onClick={toggleChat}>Chat ON</p>
     <input
       className="input"
       type="text"
