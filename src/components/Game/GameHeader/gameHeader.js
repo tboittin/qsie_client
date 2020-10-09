@@ -4,7 +4,7 @@ import { Modal } from "reactstrap";
 
 import "./gameHeader.scss";
 
-const GameHeader = () => {
+const GameHeader = ({sendEndGame, changeRoom}) => {
   const [home, setHome] = useState(false);
   const [modal, setModal] = useState(false);
 
@@ -12,6 +12,8 @@ const GameHeader = () => {
 
   const goBackToHome = () => {
     toggle();
+    sendEndGame();
+    changeRoom();
     setHome(true);
   };
   return (

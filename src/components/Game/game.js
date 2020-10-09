@@ -55,13 +55,13 @@ const Game = ({
     setRedirectToRooms(true);
   };
 
-  if (!opponentCharacter) {
-    opponentCharacter = {
-      name: "5000",
-      opponentCharacter: true,
-      display: "unknown",
-    };
-  }
+  // if (!opponentCharacter) {
+  //   opponentCharacter = {
+  //     name: "5000",
+  //     opponentCharacter: true,
+  //     display: "unknown",
+  //   };
+  // }
 
   console.log("Game Monitoring");
   varMonitoring();
@@ -70,11 +70,10 @@ const Game = ({
     <div className="game">
       <div className="left-panel">
           <GameHeader
-            name={name}
-            opponentName={opponentName}
-            userCharacter={userCharacter}
+            sendEndGame={sendEndGame}
+            changeRoom={changeRoom}
           />
-          {isGameStarted && (
+          {isGameStarted && opponentCharacter && (
             <GameGrid
               opponentCharacter={opponentCharacter}
               characters={characters}
