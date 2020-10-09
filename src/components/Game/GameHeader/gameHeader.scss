@@ -14,3 +14,13 @@
     align-self: center;
   }
 }
+
+.modalHeader {
+  padding: 1vw;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  .button {
+    width: auto;
+  }
+}
