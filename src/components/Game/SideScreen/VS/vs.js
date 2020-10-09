@@ -4,12 +4,12 @@ import CharacterModal from "../../GameGrid/Character/CharacterModal/characterMod
 
 import "./vs.scss";
 
-const VS = ({ name, opponentName, userCharacter }) => {
+const VS = ({ name, opponentName, userCharacter, chat }) => {
   const [modal, setModal] = useState(false);
   const toggle = () => setModal(!modal);
   return (
     <>
-      <div className="vs">
+      <div className={`${chat ? 'vs' : 'vs-withoutChat'}`}>
         <div className="user hover">
           <img
             src={userCharacter.image}

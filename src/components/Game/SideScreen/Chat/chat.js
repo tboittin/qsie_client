@@ -5,7 +5,7 @@ import "./chat.css";
 import Input from "./Input/input";
 import Messages from "./Messages/messages";
 
-const Chat = ({name, messages, message, setMessage, sendMessage}) => {
+const Chat = ({name, messages, message, setMessage, sendMessage, toggleChat}) => {
 
   return (
     <div className="chat">
@@ -17,6 +17,7 @@ const Chat = ({name, messages, message, setMessage, sendMessage}) => {
         message={message}
         setMessage={setMessage}
         sendMessage={sendMessage}
+        toggleChat={toggleChat}
       />
     </div>
   );

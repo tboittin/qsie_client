@@ -30,4 +30,34 @@
         width: 20vh;
         text-align: center;
     }
+
+    &-withoutChat {
+        height: 86vh;
+        flex-direction: column;
+        padding-top: 20%;
+
+        img {
+            object-fit: cover;
+            height: 30vh;
+        }
+        .charName {
+            height: 2vh;
+            font-size: 1.2rem;
+        }
+    
+        .opponent {
+            text-align: center;
+            align-self: center;
+    
+            p {
+                height: 30vh;
+                margin-bottom: 0;
+            }
+        }
+    
+        .user {
+            text-align: center;
+            align-self: center;
+        }
+    }
 }

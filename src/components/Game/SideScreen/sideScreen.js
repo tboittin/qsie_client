@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import VS from "./VS/vs";
 import Chat from "./Chat/chat";
 
@@ -18,14 +18,23 @@ const SideScreen = ({
   handleChangeRoom,
   sendEndGame
 }) => {
+  const [chat, setChat] = useState(true);
+  const toggleChat = () => {
+    setChat(!chat);
+  }
   return (
     <div className="sideScreen">
       <VS
         name={name}
         opponentName={opponentName}
         userCharacter={userCharacter}
+        chat={chat}
       />
-      {(proximity === 'distance') &&
+      {!chat && 
+      <p onClick={toggleChat}>Chat OFF</p>
+    }
+      {/* {(proximity === 'distance') &&  */}
+      {chat &&
         <Chat
           name={name}
           room={room}
@@ -33,6 +42,7 @@ const SideScreen = ({
           message={message}
           messages={messages}
           setMessage={setMessage}
+          toggleChat={toggleChat}
         />
       }
       
