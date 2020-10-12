@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { Link, Redirect } from "react-router-dom";
+import Circles from "../Circles/circles";
 
 import "./chooseCharacter.scss";
 
@@ -36,6 +37,7 @@ const ChooseCharacter = ({
             </p>
           </div>
         </div>
+        <Circles numberOfCircles={4} highlitedOne={3} />
       </div>
       {!opponentStillThere && (
         <div>

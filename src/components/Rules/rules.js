@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Circles from "../Circles/circles";
 
 import "./rules.scss";
 
@@ -21,6 +22,7 @@ const Rules = () => {
       <Link to={`/join`}>
         <button className="button">J'ai compris les règles</button>
       </Link>
+      <Circles numberOfCircles={4} highlitedOne={0} />
     </div>
   );
 };

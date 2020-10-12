@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
+import Circles from "../Circles/circles";
 
 import "./join.scss";
 
@@ -40,6 +41,7 @@ const Join = ({ updateName, nameError }) => {
           Prochaine étape
         </button>
         <p className="light">Les données ne sortent pas du jeu.</p>
+        <Circles numberOfCircles={4} highlitedOne={1} />
       </div>
       {redirectToRoom && <Redirect to={"/rooms"} />}
     </>

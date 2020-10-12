@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
+import Circles from "../Circles/circles";
 
 import "./rooms.scss";
 
@@ -91,6 +92,7 @@ const Rooms = ({
             onClick={getRooms}
           />
         </div>
+        <Circles numberOfCircles={4} highlitedOne={2} />
       </div>
 
       <Modal isOpen={modal} toggle={toggle} size="lg">
