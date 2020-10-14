@@ -9,7 +9,8 @@ import Rules from "./components/Rules/rules";
 import ChooseCharacter from "./components/ChooseCharacter/chooseCharacter";
 import Rooms from "./components/Rooms/rooms";
 
-import * as CHARACTERS from "./characters.json";
+// import * as CHARACTERS from "./characters.json";
+import * as CHARACTERS from "./character_min.json";
 import Proximity from "./components/Proximity/proximity";
 
 let socket;
@@ -35,9 +36,9 @@ const App = () => {
   const [redirected, setRedirected] = useState(false);
 
   const varMonitoring = () => {
-    console.log('isGameStarted: ', isGameStarted);
-    console.log('isGameOver: ', isGameOver);
-    console.log('winner: ', winner);
+    // console.log('isGameStarted: ', isGameStarted);
+    // console.log('isGameOver: ', isGameOver);
+    // console.log('winner: ', winner);
   }
 
   const cleanCharacters = () => {
@@ -79,7 +80,6 @@ const App = () => {
     socket.emit("joinRoom", { name, room }, (error) => {
       alert(error);
     });
-    console.log(`${name} joined ${room}`);
   };
 
   // Dans chooseCharacter
@@ -93,7 +93,6 @@ const App = () => {
   };
 
   const characterPicked = () => {
-    console.log(`${userCharacter.name} picked in ${room}`);
     socket.emit("characterPicked", {
       name,
       clientCharacter: userCharacter,
@@ -135,7 +134,6 @@ const App = () => {
   };
   // // retourne à l'écran de choix des rooms et supprime la value de room
   const changeRoom = () => {
-    console.log("changeRoom");
     setMessages([]);
     setRoom("");
     setWinner(false);
@@ -196,12 +194,10 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    console.log(opponentCharacter);
   }, [opponentCharacter]);
 
   useEffect(()=> {
     socket.on("redirectToRooms", () => {
-      console.log('redirected to room');
       setOpponentStillThere(false);
     })
   })

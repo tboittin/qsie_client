@@ -1,0 +1,218 @@
+[
+    {
+      "name": "Harry Potter",
+      "opponentCharacter": false,
+      "display": "unknown",
+      "image":"./illustrations/QSI_1-min.png"
+    },
+    {
+      "name": "Ron Weasley",
+      "opponentCharacter": false,
+      "display": "unknown",
+      "image":"./illustrations/QSI_2-min.png"
+    },
+    {
+      "name": "Hermione Granger",
+      "opponentCharacter": false,
+      "display": "unknown",
+      "image":"./illustrations/QSI_3-min.png"
+    },
+    {
+      "name": "Drago Malfoy",
+      "opponentCharacter": false,
+      "display": "unknown",
+      "image":"./illustrations/QSI_4-min.png"
+    },
+    {
+      "name": "Luna Lovegood",
+      "opponentCharacter": false,
+      "display": "unknown",
+      "image":"./illustrations/QSI_5-min.png"
+    },
+    {
+      "name": "Neville Londubat",
+      "opponentCharacter": false,
+      "display": "unknown",
+      "image":"./illustrations/QSI_6-min.png"
+    },
+    {
+      "name": "Fred Weasley",
+      "opponentCharacter": false,
+      "display": "unknown",
+      "image":"./illustrations/QSI_7-min.png"
+    },
+    {
+      "name": "Georges Weasle",
+      "opponentCharacter": false,
+      "display": "unknown",
+      "image":"./illustrations/QSI_8-min.png"
+    },
+    {
+      "name": "Giny Weasley",
+      "opponentCharacter": false,
+      "display": "unknown",
+      "image":"./illustrations/QSI_9-min.png"
+    },
+    {
+      "name": "Milicent Bullstrod",
+      "opponentCharacter": false,
+      "display": "unknown",
+      "image":"./illustrations/QSI_10-min.png"
+    },
+    {
+      "name": "Cho Chang",
+      "opponentCharacter": false,
+      "display": "unknown",
+      "image":"./illustrations/QSI_11-min.png"
+    },
+    {
+      "name": "Cedric Diggory",
+      "opponentCharacter": false,
+      "display": "unknown",
+      "image":"./illustrations/QSI_12-min.png"
+    },
+    {
+      "name": "Rubeus Hagrid",
+      "opponentCharacter": false,
+      "display": "unknown",
+      "image":"./illustrations/QSI_13-min.png"
+    },
+    {
+      "name": "Minerva McGonagall",
+      "opponentCharacter": false,
+      "display": "unknown",
+      "image":"./illustrations/QSI_14-min.png"
+    },
+    {
+      "name": "Albus Dumbledore",
+      "opponentCharacter": false,
+      "display": "unknown",
+      "image":"./illustrations/QSI_15-min.png"
+    },
+    {
+      "name": "Parvati Patil",
+      "opponentCharacter": false,
+      "display": "unknown",
+      "image":"./illustrations/QSI_16-min.png"
+    },
+    {
+      "name": "Lavande Brown",
+      "opponentCharacter": false,
+      "display": "unknown",
+      "image":"./illustrations/QSI_17-min.png"
+    },
+    {
+      "name": "Percy Weasley",
+      "opponentCharacter": false,
+      "display": "unknown",
+      "image":"./illustrations/QSI_18-min.png"
+    },
+    {
+      "name": "Sirius Black",
+      "opponentCharacter": false,
+      "display": "unknown",
+      "image":"./illustrations/QSI_19-min.png"
+    },
+    {
+      "name": "Viktor Krum",
+      "opponentCharacter": false,
+      "display": "unknown",
+      "image":"./illustrations/QSI_20-min.png"
+    },
+    {
+      "name": "Fleur Delacour",
+      "opponentCharacter": false,
+      "display": "unknown",
+      "image":"./illustrations/QSI_21-min.png"
+    },
+    {
+      "name": "Beatrix Lestrange",
+      "opponentCharacter": false,
+      "display": "unknown",
+      "image":"./illustrations/QSI_22-min.png"
+    },
+    {
+      "name": "Dobby",
+      "opponentCharacter": false,
+      "display": "unknown",
+      "image":"./illustrations/QSI_23-min.png"
+    },
+    {
+      "name": "Norbert Dragonneau",
+      "opponentCharacter": false,
+      "display": "unknown",
+      "image":"./illustrations/QSI_24-min.png"
+    },
+    {
+      "name": "Tom Elvis Jedusor",
+      "opponentCharacter": false,
+      "display": "unknown",
+      "image":"./illustrations/QSI_25-min.png"
+    },
+    {
+      "name": "QSIE_Test_26",
+      "opponentCharacter": false,
+      "display": "unknown",
+      "image":"./illustrations/QSI_26-min.png"
+    },
+    {
+      "name": "QSIE_Test_27",
+      "opponentCharacter": false,
+      "display": "unknown",
+      "image":"./illustrations/QSI_27-min.png"
+    },
+    {
+      "name": "QSIE_Test_28",
+      "opponentCharacter": false,
+      "display": "unknown",
+      "image":"./illustrations/QSI_28-min.png"
+    },
+    {
+      "name": "QSIE_Test_29",
+      "opponentCharacter": false,
+      "display": "unknown",
+      "image":"./illustrations/QSI_29-min.png"
+    },
+    {
+      "name": "QSIE_Test_30",
+      "opponentCharacter": false,
+      "display": "unknown",
+      "image":"./illustrations/QSI_30-min.png"
+    },
+    {
+      "name": "QSIE_Test_31",
+      "opponentCharacter": false,
+      "display": "unknown",
+      "image":"./illustrations/QSI_31-min.png"
+    },
+    {
+      "name": "QSIE_Test_32",
+      "opponentCharacter": false,
+      "display": "unknown",
+      "image":"./illustrations/QSI_32-min.png"
+    },
+    {
+      "name": "QSIE_Test_33",
+      "opponentCharacter": false,
+      "display": "unknown",
+      "image":"./illustrations/QSI_33-min.png"
+    },
+    {
+      "name": "QSIE_Test_34",
+      "opponentCharacter": false,
+      "display": "unknown",
+      "image":"./illustrations/QSI_34-min.png"
+    },
+    {
+      "name": "QSIE_Test_35",
+      "opponentCharacter": false,
+      "display": "unknown",
+      "image":"./illustrations/QSI_35-min.png"
+    },
+    {
+      "name": "QSIE_Test_36",
+      "opponentCharacter": false,
+      "display": "unknown",
+      "image":"./illustrations/QSI_36-min.png"
+    }
+  ]
