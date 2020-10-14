@@ -10,6 +10,11 @@ const VS = ({ name, opponentName, userCharacter, chat }) => {
   return (
     <>
       <div className={`${chat ? 'vs' : 'vs-withoutChat'}`}>
+        <div className="opponent hover">
+          <p>
+            
+          </p><p className="charName">{opponentName}</p>
+        </div>
         <div className="user hover">
           <img
             src={userCharacter.image}
@@ -17,11 +22,6 @@ const VS = ({ name, opponentName, userCharacter, chat }) => {
             onClick={toggle}
           />
           <p className="charName">{userCharacter.name} ({name})</p>
-        </div>
-        <div className="opponent hover">
-          <p>
-            
-          </p><p className="charName">{opponentName}</p>
         </div>
       </div>
       <Modal

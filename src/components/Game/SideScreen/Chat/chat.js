@@ -1,6 +1,6 @@
 import React from "react";
 
-import "./chat.css";
+import "./chat.scss";
 
 import Input from "./Input/input";
 import Messages from "./Messages/messages";
