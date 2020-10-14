@@ -34,7 +34,7 @@ const Rooms = ({
     if (!opponentStillThere) {
       redirectedToRooms();
     }
-  });
+  }, []);
 
   const roomInitiale = (roomName) => {
     let initiale = roomName.substring(0, 1);
