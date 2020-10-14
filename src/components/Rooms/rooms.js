@@ -114,7 +114,7 @@ const Rooms = ({
         </div>
       </Modal>
 
-      {redirectToProximity && <Redirect to="/proximity" />}
+      {redirectToProximity && <Redirect to="/chooseCharacter" />}
     </>
   );
 };
