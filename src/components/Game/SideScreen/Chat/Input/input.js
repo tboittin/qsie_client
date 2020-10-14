@@ -2,9 +2,8 @@ import React from "react";
 
 import "./input.css";
 
-const Input = ({ message, setMessage, sendMessage, toggleChat }) => (
+const Input = ({ message, setMessage, sendMessage }) => (
   <form className="form">
-    <p className="switch-chat-off hover" onClick={toggleChat}>Chat ON</p>
     <input
       className="input"
       type="text"

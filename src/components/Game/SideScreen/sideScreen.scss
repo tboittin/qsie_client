@@ -1,3 +1,21 @@
 .sideScreen {
-    height: 100vh;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+
+    .sideScreenInner-chat {
+        height: 90%;
+        background: #F8F8F8;
+        border: 1px solid #F8F8F8;
+        border-radius: 0px 0px 5px 5px;
+        margin-right: 3vw;
+    }
+
+    .sideScreenInner {
+        margin-right: 3vw;
+        width: 20vw;
+        margin: auto;
+    }
 }

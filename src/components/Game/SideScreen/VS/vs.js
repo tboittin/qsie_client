@@ -9,11 +9,10 @@ const VS = ({ name, opponentName, userCharacter, chat }) => {
   const toggle = () => setModal(!modal);
   return (
     <>
-      <div className={`${chat ? 'vs' : 'vs-withoutChat'}`}>
+      <div className={`${chat ? "vs" : "vs-withoutChat"}`}>
         <div className="opponent hover">
-          <p>
-            
-          </p><p className="charName">{opponentName}</p>
+          <div className="opponent-img"></div>
+          <p className="charName">{opponentName}</p>
         </div>
         <div className="user hover">
           <img
@@ -21,14 +20,12 @@ const VS = ({ name, opponentName, userCharacter, chat }) => {
             alt={userCharacter.name}
             onClick={toggle}
           />
-          <p className="charName">{userCharacter.name} ({name})</p>
+          <p className="charName">
+            {userCharacter.name} ({name})
+          </p>
         </div>
       </div>
-      <Modal
-       isOpen={modal}
-       toggle={toggle}
-       size="xl"
-      >
+      <Modal isOpen={modal} toggle={toggle} size="xl">
         <CharacterModal
           character={userCharacter}
           modal={modal}

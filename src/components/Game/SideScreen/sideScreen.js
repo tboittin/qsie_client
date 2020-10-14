@@ -4,6 +4,7 @@ import Chat from "./Chat/chat";
 
 import "./sideScreen.scss";
 import Surrender from "./Surrender/surrender";
+import ToggleChat from "./toggleChat/toggleChat";
 
 const SideScreen = ({
   name,
@@ -14,39 +15,41 @@ const SideScreen = ({
   messages,
   setMessage,
   sendMessage,
-  proximity,
   handleChangeRoom,
-  sendEndGame
+  sendEndGame,
 }) => {
   const [chat, setChat] = useState(true);
   const toggleChat = () => {
     setChat(!chat);
-  }
+  };
   return (
     <div className="sideScreen">
-      <VS
-        name={name}
-        opponentName={opponentName}
-        userCharacter={userCharacter}
-        chat={chat}
-      />
-      {!chat && 
-      <p className="hover" onClick={toggleChat}>Chat OFF</p>
-    }
-      {/* {(proximity === 'distance') &&  */}
-      {chat &&
-        <Chat
+      <div className={"sideScreenInner"+(chat ? "-chat" : "")}>
+        <ToggleChat chat={chat} toggleChat={toggleChat} />
+        <VS
           name={name}
-          room={room}
-          sendMessage={sendMessage}
-          message={message}
-          messages={messages}
-          setMessage={setMessage}
-          toggleChat={toggleChat}
+          opponentName={opponentName}
+          userCharacter={userCharacter}
+          chat={chat}
         />
-      }
-      
-      <Surrender handleChangeRoom={handleChangeRoom} sendEndGame={sendEndGame} />
+        {/* {(proximity === 'distance') &&  */}
+        {chat && (
+          <Chat
+            name={name}
+            room={room}
+            sendMessage={sendMessage}
+            message={message}
+            messages={messages}
+            setMessage={setMessage}
+            toggleChat={toggleChat}
+          />
+        )}
+      </div>
+
+      <Surrender
+        handleChangeRoom={handleChangeRoom}
+        sendEndGame={sendEndGame}
+      />
     </div>
   );
 };

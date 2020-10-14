@@ -3,6 +3,10 @@
     justify-content: space-evenly;
     width: 100%;
     height: 20vh;
+    border: 1px solid #F8F8F8;
+    border-radius: 0px 0px 5px 5px;
+    margin-right: 5vw;
+    background-color: #FFF;
 
     img {
         object-fit: cover;
@@ -32,13 +36,14 @@
     }
 
     &-withoutChat {
-        height: 86vh;
+        display: flex;
+        height: 50vh;
         flex-direction: column;
-        padding-top: 20%;
+        background-color: #F8F8F8;
 
         img {
             object-fit: cover;
-            height: 30vh;
+            height: 25vh;
         }
         .charName {
             height: 2vh;
@@ -48,9 +53,12 @@
         .opponent {
             text-align: center;
             align-self: center;
+            height: 50%;
+            order: 2;
     
-            p {
+            .opponent-img {
                 height: 30vh;
+                width: 20vh;
                 margin-bottom: 0;
             }
         }
@@ -58,6 +66,7 @@
         .user {
             text-align: center;
             align-self: center;
+            order: 1;
         }
     }
 }
