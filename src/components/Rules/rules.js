@@ -9,17 +9,26 @@ const Rules = () => {
     <div className="rules">
       <h1>Principes</h1>
       <p>
-        Fille ou garçon? C'est la première question que l'on pose lorsqu'on
-        apprend que l'on va être parent; la première réponse à cocher dans la
-        plupart des questionnaires; le premier choix à faire quand on veut se
-        rendre dans des toilettes publiques.
+        Le but du jeu est de découvrir le personnage de ton adversaire en lui
+        posant des questions sur celui-ci.
       </p>
       <p>
-        Cette conception binaire du genre commence aujourd'hui à évoluer vers un
-        modèle plus inclusif, mais le changement perne encore à s'imposer comme
-        une évidence.
+        En fonction de ses réponses, tu pourras avancer par déduction jusqu’à
+        n’avoir plus qu’un personnage.
       </p>
-      <Link to={`/join`}>
+      <p>
+        Pour pouvoir en savoir plus sur chaque personnage et pour pouvoir les
+        éliminer ou les choisir, il te suffit de cliquer sur chaque image.
+      </p>
+      <p>
+        En fonction de si ton adversaire se trouve à tes côtés ou à distance, tu
+        peux activer ou désactiver le chat.
+      </p>
+      <p>
+        Pour ne pas donner d’indices sur le genre pendant la partie, iel est
+        utilisé comme pronom pour tous les personnages.
+      </p>
+      <Link to={`/join`} className="link">
         <button className="button">J'ai compris les règles</button>
       </Link>
       <Circles numberOfCircles={4} highlitedOne={0} />
