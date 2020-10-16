@@ -68,10 +68,10 @@
       font-size: 0.8rem;
       width: 70%;
       text-align: center;
-      margin: 0 auto 0 auto;
+      margin: 0 auto 3vh auto;
       line-height: 120%;
       height: 30%;
-      color: rgba(0,0,0,0.7);
+      color: rgba(0, 0, 0, 0.7);
     }
 
     .winDescription {
@@ -107,9 +107,11 @@
 
 @media (min-width: 1025px) {
   .winModal {
+    height: 70vh;
     .characters {
       p {
         font-size: 1.2rem;
+        margin: 0 auto 8vh auto;
       }
     }
   }
