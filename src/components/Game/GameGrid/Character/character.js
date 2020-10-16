@@ -36,6 +36,7 @@ const Character = ({ character, setWinner, setIsGameOver }) => {
           key={"modal-" + character.name}
           isOpen={modal}
           toggle={toggle}
+          centered={true}
           size="xl"
         >
           <CharacterModal

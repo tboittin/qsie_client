@@ -39,7 +39,7 @@ const CharacterModal = ({
           <div className="face">
             <img src={character.image} alt={character.name} />
             <h2>{character.name}</h2>
-            <h2>{character.pronoun}</h2>
+            <h2>({character.pronom})</h2>
           </div>
           <div className="modal-menu">
             {!character.description && (
@@ -53,7 +53,11 @@ const CharacterModal = ({
                 sunt in culpa qui officia deserunt mollit anim id est laborum.
               </p>
             )}
-            {character.description && <p>{character.description}</p>}
+            {character.description && 
+              <div className="character-description">
+                {character.description.map(d=><p key={d.id}>{d}</p>)}
+              </div>
+            }
             {displayButtons && (
               <>
                 <button className="button" onClick={choixFinal}>
