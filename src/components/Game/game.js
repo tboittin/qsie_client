@@ -69,61 +69,71 @@ const Game = ({
   return (
     <div className="game">
       <div className="left-panel">
-          <GameHeader
-            sendEndGame={sendEndGame}
-            changeRoom={changeRoom}
+        <GameHeader sendEndGame={sendEndGame} changeRoom={changeRoom} />
+        {isGameStarted && opponentCharacter && (
+          <GameGrid
+            opponentCharacter={opponentCharacter}
+            characters={characters}
+            setWinner={setWinner}
+            setIsGameOver={setIsGameOver}
+            userCharacter={userCharacter}
           />
-          {isGameStarted && opponentCharacter && (
-            <GameGrid
-              opponentCharacter={opponentCharacter}
-              characters={characters}
-              setWinner={setWinner}
-              setIsGameOver={setIsGameOver}
-              userCharacter={userCharacter}
-            />
-          )}
-          {!isGameStarted && (
-            <div className="waiting">
-              <h1>En attente de l'autre joueur...</h1>
-            </div>
-          )}
+        )}
+        {!isGameStarted && (
+          <div className="waiting">
+            <h1>En attente de l'autre joueur...</h1>
+          </div>
+        )}
       </div>
       <div className="right-pannel">
-          <SideScreen
-            name={name}
-            opponentName={opponentName}
-            userCharacter={userCharacter}
-            room={room}
-            sendMessage={sendMessage}
-            message={message}
-            messages={messages}
-            setMessage={setMessage}
-            sendEndGame={sendEndGame}
-            proximity={proximity}
-            handleChangeRoom={handleChangeRoom}
-          />
+        <SideScreen
+          name={name}
+          opponentName={opponentName}
+          userCharacter={userCharacter}
+          room={room}
+          sendMessage={sendMessage}
+          message={message}
+          messages={messages}
+          setMessage={setMessage}
+          sendEndGame={sendEndGame}
+          proximity={proximity}
+          handleChangeRoom={handleChangeRoom}
+        />
       </div>
       <Modal isOpen={modal} size="xl" centered={true}>
         <div className="winModal">
+          <div className="winButtons">
+            <span onClick={handleReplay} className="replay hover">
+              Recommencer une partie
+            </span>
+            <span onClick={handleChangeRoom} className="changeRoom hover">
+              Changer d'adversaire
+            </span>
+          </div>
           {winner && <h1>Tu as gagné contre {opponentName}!</h1>}
           {!winner && <h1>{opponentName} a gagné!</h1>}
           <div className="characters">
             <div className="user">
               <img src={userCharacter.image} alt={userCharacter.name} />
-              <p>{userCharacter.name}</p>
+              <div className="winDescription">
+                {userCharacter.winDescription.map((m) => (
+                  <p>{m}</p>
+                ))}
+              </div>
             </div>
-            <div className="opponent">
-              <img src={opponentCharacter.image} alt={opponentCharacter.name} />
-              <p>{opponentCharacter.name}</p>
-            </div>
-          </div>
-          <div className="winButtons">
-            <button onClick={handleReplay} className="button replay">
-              Rejouer
-            </button>
-            <span onClick={handleChangeRoom} className="changeRoom">
-              Changer de salon
-            </span>
+            {isGameStarted && opponentCharacter && (
+              <div className="opponent">
+                <img
+                  src={opponentCharacter.image}
+                  alt={opponentCharacter.name}
+                />
+                <div className="winDescription">
+                  {opponentCharacter.winDescription.map((m) => (
+                    <p>{m}</p>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </Modal>
