@@ -38,7 +38,7 @@ const Rooms = ({
 
   const roomInitiale = (roomName) => {
     let initiale = roomName.substring(0, 1);
-    return initiale;
+    return initiale.toUpperCase();
   };
 
   const handleJoinRoom = () => {
@@ -57,7 +57,7 @@ const Rooms = ({
   return (
     <>
       <div className="rooms">
-        <h1>Choisis un.e partenaire de jeu</h1>
+        <h1>Choisis un·e partenaire de jeu</h1>
         <div className="rooms-list">
           {rooms.map((r) => (
             <div
@@ -74,23 +74,18 @@ const Rooms = ({
           ))}
         </div>
         <div className="own-room">
-          <h1>Ou crée ton propre salon</h1>
-          <button
-            className="button"
+          <h1
+            className="hover"
             onClick={() => {
               updateRoom(name);
               toggle();
             }}
           >
-            Créer son propre salon
-          </button>
+            Ou crée ton propre salon
+          </h1>
         </div>
-        <div className="refresh">
-          <img
-            src="./change_icon.png"
-            alt="actualiser la liste des joueurs"
-            onClick={getRooms}
-          />
+        <div className="refresh hover" onClick={()=>getRooms()}>
+          Rafraîchir pour faire apparaître des adversaires
         </div>
         <Circles numberOfCircles={4} highlitedOne={2} />
       </div>
@@ -101,7 +96,9 @@ const Rooms = ({
           <button onClick={handleJoinRoom} className="button-modal">
             Oui
           </button>
-          <p className="hover" onClick={toggle}>Non</p>
+          <p className="hover" onClick={toggle}>
+            Non
+          </p>
         </div>
       </Modal>
 

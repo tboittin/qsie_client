@@ -11,7 +11,6 @@ import Rooms from "./components/Rooms/rooms";
 
 // import * as CHARACTERS from "./characters.json";
 import * as CHARACTERS from "./character_min.json";
-import Proximity from "./components/Proximity/proximity";
 
 let socket;
 
@@ -233,13 +232,6 @@ const App = () => {
             setIsGameStarted={setIsGameStarted}
             redirectedToRooms={redirectedToRooms}
             setOpponentStillThere={setOpponentStillThere}
-          />
-        </Route>
-        <Route path="/proximity">
-          <Proximity
-            setProximity={setProximity}
-            varMonitoring={varMonitoring} // Delete after tests
-            opponentStillThere={opponentStillThere}
           />
         </Route>
         <Route path="/chooseCharacter">

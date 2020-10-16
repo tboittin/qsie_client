@@ -1,10 +1,21 @@
 .rooms {
     display: flex;
-    width: 30vw;
+    width: 100vw;
     height: 100vh;
     justify-content: center;
     align-content: center;
     flex-direction: column;
+    background-image: url(./QSI_blop_2.png);
+    background-repeat: no-repeat;
+    background-position: 50%;
+    background-size: 65%;
+
+    h1,
+    .rooms-list,
+    .own-room {
+        width: 40vw !important;
+        margin: 1vh auto !important;
+    }
 
     .rooms-list {
         display: inline-flex;
@@ -24,8 +35,8 @@
                 border: 2px solid rgba(0, 0, 0, 0.2);
                 font-size: 72px;
                 align-self: center;
-                height: 7vw;
-                width: 7vw;
+                height: 11vw;
+                width: 11vw;
                 margin: 2vh;
                 text-align: center;
                 justify-self: center;
@@ -41,18 +52,21 @@
 
     }
 
-    h1 {
-        text-align: center;
+    .own-room {
+        h1 {
+            text-align: center;
+            color: #fff;
+            text-shadow: #b5b5b5 0 0 1px;
+        }
     }
 
     .refresh {
-        margin: 2vh;
+        width: 20vw;
+        margin: 2vh auto;
         text-align: center;
-
-        img {
-            object-fit: cover;
-            height: 8vh;
-        }
+        font-size: 15px;
+        color: rgba(181, 181, 181, 1);
+        text-decoration: underline;
     }
 }
 
@@ -71,4 +85,24 @@
 
 .redirected {
     padding: 2vh;
+}
+
+
+@media (min-width:1025px) {
+    .rooms {
+        background-size: 40%;
+
+        .rooms-list,
+        .own-room {
+            width: 30vw !important;
+        }
+
+        h1 {
+            width: 25vw!important;
+        }
+        .rooms-list .initiale span {
+            height: 7vw;
+            width: 7vw;
+        }
+    }
 }
