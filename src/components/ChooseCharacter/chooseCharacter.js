@@ -30,7 +30,7 @@ const ChooseCharacter = ({
             </Link>
           </div>
           <div className="personnage">
-            <p>{userCharacter.name}</p>
+            {userCharacter.name}
             <img src={userCharacter.image} alt={userCharacter.name} />
             <p className="characterChange" onClick={pickCharacter}>
               Choisir un autre personnage
