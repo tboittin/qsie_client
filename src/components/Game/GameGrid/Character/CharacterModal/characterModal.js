@@ -57,7 +57,7 @@ const CharacterModal = ({
             {displayButtons && (
               <>
                 <button className="button" onClick={choixFinal}>
-                  Je suis sur.e, c'est iel!
+                  Je suis sur·e, c'est iel!
                 </button>
                 {character.display !== "innocent" && (
                   <button className="button grey" onClick={elimination}>

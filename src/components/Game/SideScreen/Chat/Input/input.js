@@ -16,12 +16,14 @@ const Input = ({ message, setMessage, sendMessage }) => (
         : null
       }
     />
-    <button
+    <img 
       className="sendButton"
       onClick={(event) => 
         sendMessage(event)
       }
-    >Send</button>
+      src='./QSI_GA_Send_w_BG.png'
+      alt="send"
+    />
   </form>
 );
 
