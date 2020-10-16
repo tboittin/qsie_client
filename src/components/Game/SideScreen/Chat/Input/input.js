@@ -21,7 +21,7 @@ const Input = ({ message, setMessage, sendMessage }) => (
       onClick={(event) => 
         sendMessage(event)
       }
-      src='./QSI_GA_Send_w_BG.png'
+      src='./QSI_GA_Send_w_BGx2.png'
       alt="send"
     />
   </form>
