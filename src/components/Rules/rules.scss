@@ -42,13 +42,7 @@
 @media (min-width:1025px) {
     .rules {
         background-size: 40%;
-        h1 {
-            width: 30vw;
-        }
-        p {
-            width: 30vw;
-        }
-        .button {
+        h1, p, .button {
             width: 30vw;
         }
     }

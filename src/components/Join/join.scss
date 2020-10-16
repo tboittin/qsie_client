@@ -1,14 +1,41 @@
 .join {
   display: flex;
-  width: 30vw;
+  width: 100vw;
   height: 100vh;
   justify-content: center;
   align-content: center;
   flex-direction: column;
+  background-image: url(./QSI_blop_2.png);
+  background-repeat: no-repeat;
+  background-position: 50%;
+  background-size: 65%;
+
+  h1,
+  input,
+  button,
+  p {
+    width: 40vw !important;
+    margin: 1vh auto !important;
+  }
 
   .light {
-    color: rgba(181,181,181,1);
+    color: rgba(181, 181, 181, 1);
     margin: 2vh;
     font-size: 15px;
+  }
+}
+
+
+@media (min-width:1025px) {
+  .join {
+    background-size: 40%;
+
+    h1,
+    input,
+    button,
+    p {
+      width: 30vw !important;
+      margin: 1vh auto !important;
+    }
   }
 }
