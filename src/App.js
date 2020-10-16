@@ -29,7 +29,6 @@ const App = () => {
   const [winner, setWinner] = useState(false);
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
-  const [proximity, setProximity] = useState("distance");
   const [nameError, setNameError] = useState(false);
   const [opponentStillThere, setOpponentStillThere] = useState(true);
   const [redirected, setRedirected] = useState(false);
@@ -256,7 +255,6 @@ const App = () => {
             isGameStarted={isGameStarted}
             isGameOver={isGameOver} //TODO
             winner={winner}
-            proximity={proximity}
             changeRoom={changeRoom}
             replay={replay}
             getUsersInRoom={getUsersInRoom}
