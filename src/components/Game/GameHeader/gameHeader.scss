@@ -10,23 +10,60 @@
     font-weight: 800;
     margin-top: 1vh;
     margin-left: 31px;
-    color: rgba(54,44,115,1);
+    color: rgba(54, 44, 115, 1);
     align-self: center;
   }
 }
 
-.modalHeader {
-  padding: 1vw;
+.rules-modal {
   display: flex;
+  width: 100vh;
+  height: 50vw;
+  justify-content: center;
+  align-content: center;
   flex-direction: column;
-  text-align: center;
-  .button {
-    width: auto;
+  font-size: 15px;
+  margin: 0 auto;
+  background-image: url(./QSI_blop_1.png);
+  background-repeat: no-repeat;
+  background-position: 50%;
+  background-size: 65%;
+
+  h1, p {
+    width: 35vw;
+  }
+
+  h1 {
+    margin: 0 auto;
+    padding-bottom: 2vh;
+  }
+
+  p {
+    z-index: 2;
+    margin: 0 auto;
+    padding-bottom: 1vh;
+    line-height: 15px;
   }
 }
 
 @media (min-width:1025px) {
-  .game-header{
+  .game-header {
     margin-left: 10%;
   }
+
+  .rules-modal {
+    height: 85vh;
+    width: 60vw;
+    font-size: 18px;
+    h1 {
+      width: 50%;
+    }
+    p {
+      line-height: 20px;
+      width: 50%;
+      padding-bottom: 2vh;
+    }
+  }
+
+
 }
