@@ -103,13 +103,13 @@ const Rooms = ({
         </div>
         <div className="own-room">
           <h1
-            className="hover"
+            className="button hover"
             onClick={() => {
               updateRoom(name);
               toggle();
             }}
           >
-            Ou crée ton propre salon
+            Ou, crée une nouvelle partie
           </h1>
         </div>
         <div className="refresh hover" onClick={()=>getRooms()}>
