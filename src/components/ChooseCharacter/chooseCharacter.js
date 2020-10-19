@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, Redirect } from "react-router-dom";
 import Circles from "../Circles/circles";
 
@@ -10,8 +10,16 @@ const ChooseCharacter = ({
   characterPicked,
   varMonitoring,
   opponentStillThere,
+  name,
 }) => {
-  // useEffect for picking character
+  const [redirectToHome, setRedirectToHome] = useState(false);
+
+  useEffect(() => {
+    if (name === "") {
+      setRedirectToHome(true);
+    }
+  }, [])
+
   useEffect(() => {
     pickCharacter();
   }, []);
@@ -39,11 +47,8 @@ const ChooseCharacter = ({
         </div>
         <Circles numberOfCircles={4} highlitedOne={3} />
       </div>
-      {!opponentStillThere && (
-        <div>
-          <Redirect to="/rooms" />
-        </div>
-      )}
+      {!opponentStillThere && (<Redirect to="/rooms" />)}
+      {redirectToHome && <Redirect to="/" />}
     </>
   );
 };

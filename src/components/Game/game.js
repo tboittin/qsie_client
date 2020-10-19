@@ -31,6 +31,7 @@ const Game = ({
   varMonitoring,
   opponentStillThere,
   startGame,
+  cleanCharacters,
 }) => {
   const [modal, setModal] = useState(false);
   const toggle = () => setModal(!modal);
@@ -38,16 +39,46 @@ const Game = ({
     false
   );
   const [redirectToRooms, setRedirectToRooms] = useState(false);
+  const [winCharacterUser, setWinCharacterUser] = useState({});
+  const [winCharacterOpponent, setWinCharacterOpponent] = useState({});
+  const [redirectToHome, setRedirectToHome] = useState(false);
+
+  useEffect(() => {
+    if (name === "") {
+      console.log('name is empty')
+      setRedirectToHome(true);
+    } else {
+      console.log('name:',name)
+    }
+  }, [])
 
   useEffect(() => {
     if (isGameOver) {
       sendEndGame();
+      cleanCharacters();
+      console.log('winCharacterUser');
+      console.log(winCharacterUser);
+      console.log('winCharacterOpponent');
+      console.log(winCharacterOpponent);
       toggle();
     }
   }, [isGameOver]);
 
   useEffect(() => {
-    startGame();
+    if (isGameStarted) {
+      console.log("Creating new characters");
+      createWinCharacters();
+      console.log('winCharacterUser');
+      console.log(winCharacterUser);
+      console.log('winCharacterOpponent');
+      console.log(winCharacterOpponent);
+    }
+  }, [isGameStarted]);
+
+  useEffect(() => {
+    if (name !== ""){
+      startGame();
+    }
   }, []);
 
   const handleReplay = () => {
@@ -67,6 +98,26 @@ const Game = ({
   //     display: "unknown",
   //   };
   // }
+
+  const createWinCharacters = () => {
+    function WinCharacter (name, image, winDescription) {
+      this.name = name;
+      this.image = image;
+      this.winDescription = winDescription;
+    };
+    const winCharacterUser = new WinCharacter(
+      userCharacter.name,
+      userCharacter.image,
+      userCharacter.winDescription
+    );
+    const winCharacterOpponent = new WinCharacter(
+      opponentCharacter.name,
+      opponentCharacter.image,
+      opponentCharacter.winDescription
+    );
+    setWinCharacterUser(winCharacterUser);
+    setWinCharacterOpponent(winCharacterOpponent);
+  };
 
   console.log("Game Monitoring");
   varMonitoring();
@@ -118,24 +169,24 @@ const Game = ({
           {winner && <h1>Tu as gagné contre {opponentName}!</h1>}
           {!winner && <h1>{opponentName} a gagné!</h1>}
           <div className="characters">
-            {isGameStarted && userCharacter && (
+            {isGameOver && winCharacterUser && (
               <div className="user">
-                <img src={userCharacter.image} alt={userCharacter.name} />
+                <img src={winCharacterUser.image} alt={winCharacterUser.name} />
                 <div className="winDescription">
-                  {userCharacter.winDescription.map((m) => (
+                  {winCharacterUser.winDescription.map((m) => (
                     <p>{m}</p>
                   ))}
                 </div>
               </div>
             )}
-            {isGameStarted && opponentCharacter && (
+            {isGameOver && winCharacterOpponent && (
               <div className="opponent">
                 <img
-                  src={opponentCharacter.image}
-                  alt={opponentCharacter.name}
+                  src={winCharacterOpponent.image}
+                  alt={winCharacterOpponent.name}
                 />
                 <div className="winDescription">
-                  {opponentCharacter.winDescription.map((m) => (
+                  {winCharacterOpponent.winDescription.map((m) => (
                     <p>{m}</p>
                   ))}
                 </div>
@@ -151,6 +202,7 @@ const Game = ({
           <Redirect to="/rooms" />
         </div>
       )}
+      {redirectToHome && <Redirect to="/" />}
     </div>
   );
 };

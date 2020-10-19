@@ -276,6 +276,7 @@ const App = () => {
             opponentStillThere={opponentStillThere}
             creator={creator}
             visitor={visitor}
+            name={name}
           />
         </Route>
         <Route path="/game">

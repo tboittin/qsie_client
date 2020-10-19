@@ -20,10 +20,18 @@ const Rooms = ({
   redirectedToRooms,
   setOpponentStillThere,
   setCreator,
-  setVisitor
+  setVisitor,
+  setIsGameOver,
 }) => {
   const [modal, setModal] = useState(false);
   const [status, setStatus] = useState('');
+  const [redirectToHome, setRedirectToHome] = useState(false);
+  
+  useEffect(() => {
+    if (name === "") {
+      setRedirectToHome(true);
+    }
+  }, [])
 
   const toggle = (status) => {
     if (modal === false) {
@@ -36,7 +44,9 @@ const Rooms = ({
   const [redirectToProximity, setRedirectToProximity] = useState(false);
 
   useEffect(() => {
+    if (name !== ""){
     getRooms();
+    }
   }, []);
 
   useEffect(() => {
@@ -69,6 +79,7 @@ const Rooms = ({
   const toggleRedirectedModal = () => {
     getRooms();
     setRedirected(false);
+    setIsGameOver(false); // DEV
     setOpponentStillThere(true);
   };
   return (
@@ -129,6 +140,7 @@ const Rooms = ({
       </Modal>
 
       {redirectToProximity && <Redirect to="/chooseCharacter" />}
+      {redirectToHome && <Redirect to="/" />}
     </>
   );
 };
