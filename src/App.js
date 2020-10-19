@@ -18,6 +18,7 @@ const App = () => {
   const ENDPOINT = "http://localhost:5000/";
   // const ENDPOINT = "https://qsie-server.herokuapp.com/";
   const characters = [...CHARACTERS.default];
+  
   const [name, setName] = useState("");
   const [opponentName, setOpponentName] = useState("");
   const [room, setRoom] = useState("");
@@ -46,6 +47,10 @@ const App = () => {
   const cleanCharacters = () => {
     setUserCharacter({});
     setOpponentCharacter({});
+    for (let i = 0; i < characters.length; i++) {
+      characters[i].display = "unknown";
+      characters[i].opponentCharacter = "false";
+    }
   };
 
   // Dans Join
@@ -59,7 +64,6 @@ const App = () => {
 
     // Unmount part
     return () => {
-      socket.emit("disconnecting-message")
       socket.emit("disconnect", {name, room});
 
       socket.off();
@@ -153,7 +157,6 @@ const App = () => {
 
   // Replay
   const replay = () => {
-    cleanCharacters();
     setWinner(false);
     setIsGameOver(false);
     setIsGameStarted(false);
@@ -301,6 +304,8 @@ const App = () => {
             creator={creator}
             visitor={visitor}
             startGame={startGame}
+            setIsGameStarted={setIsGameStarted}
+            cleanCharacters={cleanCharacters}
           />
         </Route>
       </Switch>
