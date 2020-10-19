@@ -55,7 +55,7 @@ const Game = ({
   useEffect(() => {
     if (isGameOver) {
       sendEndGame();
-      cleanCharacters();
+      console.log('cleanCharacters');
       console.log('winCharacterUser');
       console.log(winCharacterUser);
       console.log('winCharacterOpponent');
@@ -73,7 +73,7 @@ const Game = ({
       console.log('winCharacterOpponent');
       console.log(winCharacterOpponent);
     }
-  }, [isGameStarted]);
+  }, [isGameStarted, opponentCharacter]);
 
   useEffect(() => {
     if (name !== ""){
@@ -82,22 +82,16 @@ const Game = ({
   }, []);
 
   const handleReplay = () => {
+    cleanCharacters();
     replay();
     setRedirectToChooseCharacter(true);
   };
 
   const handleChangeRoom = () => {
+    cleanCharacters();
     changeRoom();
     setRedirectToRooms(true);
   };
-
-  // if (!opponentCharacter) {
-  //   opponentCharacter = {
-  //     name: "5000",
-  //     opponentCharacter: true,
-  //     display: "unknown",
-  //   };
-  // }
 
   const createWinCharacters = () => {
     function WinCharacter (name, image, winDescription) {
