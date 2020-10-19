@@ -53,11 +53,14 @@
     }
 
     .own-room {
+        display: flex;
         h1 {
             text-align: center;
             color: #fff;
             text-shadow: #b5b5b5 0 0 1px;
+            padding: 1vh 1vw;
         }
+
     }
 
     .refresh {
@@ -98,7 +101,7 @@
         }
 
         h1 {
-            width: 25vw!important;
+            width: 20vw!important;
         }
         .rooms-list .initiale span {
             height: 7vw;
