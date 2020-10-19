@@ -32,11 +32,15 @@ const App = () => {
   const [nameError, setNameError] = useState(false);
   const [opponentStillThere, setOpponentStillThere] = useState(true);
   const [redirected, setRedirected] = useState(false);
+  const [creator, setCreator] = useState(false);
+  const [visitor, setVisitor] = useState(false);
 
   const varMonitoring = () => {
-    // console.log('isGameStarted: ', isGameStarted);
-    // console.log('isGameOver: ', isGameOver);
-    // console.log('winner: ', winner);
+    console.log('isGameStarted: ', isGameStarted);
+    console.log('isGameOver: ', isGameOver);
+    console.log('winner: ', winner);
+    console.log('creator:', creator)
+    console.log('visitor:', visitor)
   }
 
   const cleanCharacters = () => {
@@ -56,7 +60,7 @@ const App = () => {
     // Unmount part
     return () => {
       socket.emit("disconnecting-message")
-      socket.emit("disconnect", {name, room}); // TODO abandonner s'il est en game
+      socket.emit("disconnect", {name, room});
 
       socket.off();
     };
@@ -71,6 +75,11 @@ const App = () => {
   // // ajouter la room créée dans le state
   const updateRoom = (room) => {
     setRoom(room);
+    if (room === name) {
+      setCreator(true);
+    } else {
+      setVisitor(true);
+    };
   };
 
   // // rejoint la room
@@ -79,6 +88,18 @@ const App = () => {
       alert(error);
     });
   };
+
+  const isCreator = () => {
+    console.log('isCreator');
+    setVisitor(false);
+    setCreator(true);
+  }
+
+  const isVisitor = () => {
+    console.log('isVisitor');
+    setCreator(false);
+    setVisitor(true);
+  }
 
   // Dans chooseCharacter
   // // choisir aléatoirement un personnage dans la liste et le positionner en tant que userCharacter -useEffect
@@ -99,6 +120,14 @@ const App = () => {
   };
 
   // Game
+
+  const startGame = () => {
+    socket.emit("startGame", {
+      name,
+      clientCharacter: userCharacter,
+      room,
+    })
+  }
   // // reçoit les joueurs dans la Room
   const getUsersInRoom = () => {
     socket.on("usersInRoom", (users) => {
@@ -231,6 +260,8 @@ const App = () => {
             setIsGameStarted={setIsGameStarted}
             redirectedToRooms={redirectedToRooms}
             setOpponentStillThere={setOpponentStillThere}
+            isCreator = {isCreator}
+            isVisitor = {isVisitor}
           />
         </Route>
         <Route path="/chooseCharacter">
@@ -240,6 +271,8 @@ const App = () => {
             characterPicked={characterPicked}
             varMonitoring={varMonitoring} // Delete after tests
             opponentStillThere={opponentStillThere}
+            creator={creator}
+            visitor={visitor}
           />
         </Route>
         <Route path="/game">
@@ -265,6 +298,9 @@ const App = () => {
             sendEndGame={sendEndGame}
             varMonitoring={varMonitoring} // Delete after tests
             opponentStillThere={opponentStillThere}
+            creator={creator}
+            visitor={visitor}
+            startGame={startGame}
           />
         </Route>
       </Switch>

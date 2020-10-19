@@ -30,6 +30,7 @@ const Game = ({
   proximity,
   varMonitoring,
   opponentStillThere,
+  startGame,
 }) => {
   const [modal, setModal] = useState(false);
   const toggle = () => setModal(!modal);
@@ -44,6 +45,10 @@ const Game = ({
       toggle();
     }
   }, [isGameOver]);
+
+  useEffect(() => {
+    startGame();
+  }, []);
 
   const handleReplay = () => {
     replay();
@@ -113,14 +118,16 @@ const Game = ({
           {winner && <h1>Tu as gagné contre {opponentName}!</h1>}
           {!winner && <h1>{opponentName} a gagné!</h1>}
           <div className="characters">
-            <div className="user">
-              <img src={userCharacter.image} alt={userCharacter.name} />
-              <div className="winDescription">
-                {userCharacter.winDescription.map((m) => (
-                  <p>{m}</p>
-                ))}
+            {isGameStarted && userCharacter && (
+              <div className="user">
+                <img src={userCharacter.image} alt={userCharacter.name} />
+                <div className="winDescription">
+                  {userCharacter.winDescription.map((m) => (
+                    <p>{m}</p>
+                  ))}
+                </div>
               </div>
-            </div>
+            )}
             {isGameStarted && opponentCharacter && (
               <div className="opponent">
                 <img

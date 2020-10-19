@@ -19,10 +19,19 @@ const Rooms = ({
   setRedirected,
   redirectedToRooms,
   setOpponentStillThere,
+  setCreator,
+  setVisitor
 }) => {
   const [modal, setModal] = useState(false);
+  const [status, setStatus] = useState('');
 
-  const toggle = () => setModal(!modal);
+  const toggle = (status) => {
+    if (modal === false) {
+      setStatus(status)
+      setModal(true)
+    }
+    setModal(!modal)
+  };
 
   const [redirectToProximity, setRedirectToProximity] = useState(false);
 
@@ -42,6 +51,14 @@ const Rooms = ({
   };
 
   const handleJoinRoom = () => {
+    if (status === 'creator') {
+      console.log('creator');
+      setCreator(true);
+    };
+    if (status === 'visitor') {
+      console.log('visitor');
+      setVisitor(true);
+    };
     joinRoom();
     setRedirectToProximity(true);
   };

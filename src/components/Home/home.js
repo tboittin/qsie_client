@@ -19,10 +19,10 @@ const Home = () => {
         src="./home/QSI_HS_Logo.png"
         alt="Logo Qui Sont-Iels"
       />
-      {/* <Link to={`/rules`}>
+      <Link to={`/rules`}>
         <button className="button homeLink">Jouer</button>
-      </Link> */}
-      <p className="homeLink">Le jeu sera disponible très bientôt.</p>
+      </Link>
+      {/* <p className="homeLink">Le jeu sera disponible très bientôt.</p> */}
     </div>
   );
 };
