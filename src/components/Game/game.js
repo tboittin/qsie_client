@@ -55,8 +55,9 @@ const Game = ({
   useEffect(() => {
     if (isGameOver) {
       sendEndGame();
+      createWinCharacters(); //soit mettre ici
       console.log('cleanCharacters');
-      console.log('winCharacterUser');
+      console.log('winCharacterUser');//soit là
       console.log(winCharacterUser);
       console.log('winCharacterOpponent');
       console.log(winCharacterOpponent);
@@ -65,15 +66,13 @@ const Game = ({
   }, [isGameOver]);
 
   useEffect(() => {
-    if (isGameStarted) {
       console.log("Creating new characters");
       createWinCharacters();
       console.log('winCharacterUser');
       console.log(winCharacterUser);
       console.log('winCharacterOpponent');
       console.log(winCharacterOpponent);
-    }
-  }, [isGameStarted, opponentCharacter]);
+  }, [isGameStarted]);
 
   useEffect(() => {
     if (name !== ""){
@@ -173,7 +172,7 @@ const Game = ({
                 </div>
               </div>
             )}
-            {isGameOver && winCharacterOpponent && (
+            {isGameOver && (winCharacterOpponent.winDescription !== undefined) && (
               <div className="opponent">
                 <img
                   src={winCharacterOpponent.image}

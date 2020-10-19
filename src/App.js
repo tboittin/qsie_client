@@ -9,14 +9,13 @@ import Rules from "./components/Rules/rules";
 import ChooseCharacter from "./components/ChooseCharacter/chooseCharacter";
 import Rooms from "./components/Rooms/rooms";
 
-// import * as CHARACTERS from "./characters.json";
 import * as CHARACTERS from "./character_min.json";
 
 let socket;
 
 const App = () => {
-  // const ENDPOINT = "http://localhost:5000/";
-  const ENDPOINT = "https://qsie-server.herokuapp.com/";
+  const ENDPOINT = "http://localhost:5000/";
+  // const ENDPOINT = "https://qsie-server.herokuapp.com/";
   const characters = [...CHARACTERS.default];
   
   const [name, setName] = useState("");
