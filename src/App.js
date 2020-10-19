@@ -14,8 +14,7 @@ import * as CHARACTERS from "./character_min.json";
 let socket;
 
 const App = () => {
-  const ENDPOINT = "http://localhost:5000/";
-  // const ENDPOINT = "https://qsie-server.herokuapp.com/";
+  const ENDPOINT = "https://qsie-server.herokuapp.com/";
   const characters = [...CHARACTERS.default];
 
   const [name, setName] = useState("");
@@ -33,8 +32,6 @@ const App = () => {
   const [opponentStillThere, setOpponentStillThere] = useState(true);
   const [redirected, setRedirected] = useState(false);
   const [leftTheGame, setLeftTheGame] = useState(false);
-  const [creator, setCreator] = useState(false);
-  const [visitor, setVisitor] = useState(false);
 
   // Nettoyage des personnages attribués aux joueurs + nettoyage de l'affichage des personnages entre les parties
   const cleanCharacters = () => {
@@ -73,11 +70,6 @@ const App = () => {
   // // ajouter la room créée dans le state
   const updateRoom = (room) => {
     setRoom(room);
-    if (room === name) {
-      setCreator(true);
-    } else {
-      setVisitor(true);
-    }
   };
 
   // // rejoint la room
