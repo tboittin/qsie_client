@@ -19,7 +19,6 @@ const GameGrid = ({
       characterDeck(opponentCharacter, characters, 20);
     }
   }, [opponentCharacter]);
-  // Comprendre pourquoi j'ai des warning de missing depencies
 
   const characterDeck = (opponentCharacter, characters, size) => {
     console.log("opponentCharacter in gameGrid");

@@ -13,42 +13,33 @@ const Rooms = ({
   getRooms,
   updateRoom,
   joinRoom,
-  varMonitoring,
   opponentStillThere,
   redirected,
   setRedirected,
   redirectedToRooms,
   setOpponentStillThere,
-  setCreator,
-  setVisitor,
   setIsGameOver,
   leftTheGame,
   setLeftTheGame,
-  leftRoom,
 }) => {
   const [modal, setModal] = useState(false);
-  const [status, setStatus] = useState('');
   const [redirectToHome, setRedirectToHome] = useState(false);
-  
+
   useEffect(() => {
     if (name === "") {
       setRedirectToHome(true);
     }
-  }, [])
+  }, []);
 
-  const toggle = (status) => {
-    if (modal === false) {
-      setStatus(status)
-      setModal(true)
-    }
-    setModal(!modal)
+  const toggle = () => {
+    setModal(!modal);
   };
 
   const [redirectToProximity, setRedirectToProximity] = useState(false);
 
   useEffect(() => {
-    if (name !== ""){
-    getRooms();
+    if (name !== "") {
+      getRooms();
     }
   }, []);
 
@@ -64,20 +55,9 @@ const Rooms = ({
   };
 
   const handleJoinRoom = () => {
-    if (status === 'creator') {
-      console.log('creator');
-      setCreator(true);
-    };
-    if (status === 'visitor') {
-      console.log('visitor');
-      setVisitor(true);
-    };
     joinRoom();
     setRedirectToProximity(true);
   };
-
-  console.log("Rooms monitoring");
-  varMonitoring();
 
   const toggleRedirectedModal = () => {
     getRooms();
@@ -86,29 +66,33 @@ const Rooms = ({
     setOpponentStillThere(true);
   };
 
-  const toggleLeaveModal = () => { //TODO
+  const toggleLeaveModal = () => {
     getRooms();
     setLeftTheGame(false);
-  }
+  };
 
   return (
     <>
       <div className="rooms">
         <h1>Choisis un·e partenaire de jeu</h1>
         <div className="rooms-list">
-          {rooms.filter(r => r !== name.trim().toLowerCase()).map((r) => (
-            <div
-              className="initiale hover"
-              key={r.id}
-              onClick={() => {
-                updateRoom(r.name);
-                toggle();
-              }}
-            >
-              <span>{roomInitiale(r.name)}</span>
-              <div className="subtitle">{r.name}</div>
-            </div>
-          ))}
+          {rooms
+            .filter((r) => r !== name.trim().toLowerCase())
+            .map((r) => (
+              <div
+                className="initiale hover"
+                key={r.id}
+                onClick={() => {
+                  updateRoom(r.name);
+                  toggle();
+                }}
+              >
+                <div className="circle">
+                  <span>{roomInitiale(r.name)}</span>
+                </div>
+                <div className="subtitle">{r.name}</div>
+              </div>
+            ))}
         </div>
         <div className="own-room">
           <h1
@@ -121,7 +105,7 @@ const Rooms = ({
             Ou, crée une nouvelle partie
           </h1>
         </div>
-        <div className="refresh hover" onClick={()=>getRooms()}>
+        <div className="refresh hover" onClick={() => getRooms()}>
           Rafraîchir pour faire apparaître des adversaires
         </div>
         <Circles numberOfCircles={4} highlitedOne={2} />
@@ -141,9 +125,7 @@ const Rooms = ({
 
       <Modal isOpen={leftTheGame} toggle={toggleLeaveModal} size="md">
         <div className="redirected">
-          <p>
-            Tu es revenu à l'écran des joueurs.
-          </p>
+          <p>Tu es revenu à l'écran des joueurs.</p>
         </div>
       </Modal>
 

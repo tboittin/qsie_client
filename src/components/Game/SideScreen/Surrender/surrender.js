@@ -6,12 +6,12 @@ import "./surrender.scss";
 const Surrender = ({ handleChangeRoom, sendEndGame, leftRoom }) => {
   const [modal, setModal] = useState(false);
   const toggle = () => setModal(!modal);
-  
+
   const handleSurrender = () => {
-      sendEndGame();
-      leftRoom();
-      handleChangeRoom();
-  }
+    sendEndGame();
+    leftRoom();
+    handleChangeRoom();
+  };
   return (
     <>
       <div className="surrender hover" onClick={toggle}>

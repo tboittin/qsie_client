@@ -36,14 +36,7 @@ const App = () => {
   const [creator, setCreator] = useState(false);
   const [visitor, setVisitor] = useState(false);
 
-  const varMonitoring = () => {
-    console.log("isGameStarted: ", isGameStarted);
-    console.log("isGameOver: ", isGameOver);
-    console.log("winner: ", winner);
-    console.log("creator:", creator);
-    console.log("visitor:", visitor);
-  };
-
+  // Nettoyage des personnages attribués aux joueurs + nettoyage de l'affichage des personnages entre les parties
   const cleanCharacters = () => {
     setUserCharacter({});
     setOpponentCharacter({});
@@ -94,18 +87,6 @@ const App = () => {
     });
   };
 
-  const isCreator = () => {
-    console.log("isCreator");
-    setVisitor(false);
-    setCreator(true);
-  };
-
-  const isVisitor = () => {
-    console.log("isVisitor");
-    setCreator(false);
-    setVisitor(true);
-  };
-
   // Dans chooseCharacter
   // // choisir aléatoirement un personnage dans la liste et le positionner en tant que userCharacter -useEffect
   const pickCharacter = () => {
@@ -116,6 +97,7 @@ const App = () => {
     setUserCharacter(character);
   };
 
+  // Emission du personnage vers le serveur
   const characterPicked = () => {
     socket.emit("characterPicked", {
       name,
@@ -125,7 +107,8 @@ const App = () => {
   };
 
   // Game
-
+  // Emet startGame lorsqu'on arrive dans le salon, le premier joueur à émettre startGame ne provoque pas de réponse server car il doit attendre le second
+  // // le second joueur à emettre startGame lance la partie pour les deux joueurs
   const startGame = () => {
     socket.emit("startGame", {
       name,
@@ -173,6 +156,7 @@ const App = () => {
     socket.emit("changeRoom", room);
   };
 
+  // Affiche une popup lorsqu'on est éjecté de la partie
   const redirectedToRooms = () => {
     socket.emit("redirectedToRooms", room);
     setMessages([]);
@@ -183,9 +167,12 @@ const App = () => {
     setRedirected(true);
   };
 
+  // Affiche une popup lorsqu'on quitte la partie
+  // // sert principalement à corriger la liste des rooms: l'adversaire est toujours dans la room à l'affichage de la popup
+  // // la liste des rooms est rafraichie en fermant la popup et on se retrouve avec une liste correcte
   const leftRoom = () => {
     setLeftTheGame(true);
-  }
+  };
 
   // useEffect for socket
   useEffect(() => {
@@ -254,11 +241,9 @@ const App = () => {
             room={room}
             setRoom={setRoom}
             rooms={rooms}
-            // nameError={nameError}
             getRooms={getRooms}
             updateRoom={updateRoom}
             joinRoom={joinRoom}
-            varMonitoring={varMonitoring} // Delete after tests
             opponentStillThere={opponentStillThere}
             redirected={redirected}
             setRedirected={setRedirected}
@@ -267,8 +252,6 @@ const App = () => {
             setIsGameStarted={setIsGameStarted}
             redirectedToRooms={redirectedToRooms}
             setOpponentStillThere={setOpponentStillThere}
-            isCreator={isCreator}
-            isVisitor={isVisitor}
             leftTheGame={leftTheGame}
             setLeftTheGame={setLeftTheGame}
           />
@@ -278,16 +261,13 @@ const App = () => {
             userCharacter={userCharacter}
             pickCharacter={pickCharacter}
             characterPicked={characterPicked}
-            varMonitoring={varMonitoring} // Delete after tests
             opponentStillThere={opponentStillThere}
-            creator={creator}
-            visitor={visitor}
             name={name}
           />
         </Route>
         <Route path="/game">
           <Game
-            name={name} // TODO fenêtre attente du 2e joueur
+            name={name}
             room={room}
             userCharacter={userCharacter}
             opponentName={opponentName}
@@ -296,7 +276,7 @@ const App = () => {
             message={message}
             messages={messages}
             isGameStarted={isGameStarted}
-            isGameOver={isGameOver} //TODO
+            isGameOver={isGameOver}
             winner={winner}
             changeRoom={changeRoom}
             replay={replay}
@@ -306,10 +286,7 @@ const App = () => {
             setWinner={setWinner}
             setIsGameOver={setIsGameOver}
             sendEndGame={sendEndGame}
-            varMonitoring={varMonitoring} // Delete after tests
             opponentStillThere={opponentStillThere}
-            creator={creator}
-            visitor={visitor}
             startGame={startGame}
             setIsGameStarted={setIsGameStarted}
             cleanCharacters={cleanCharacters}

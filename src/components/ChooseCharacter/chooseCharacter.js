@@ -8,7 +8,6 @@ const ChooseCharacter = ({
   userCharacter,
   pickCharacter,
   characterPicked,
-  varMonitoring,
   opponentStillThere,
   name,
 }) => {
@@ -18,14 +17,11 @@ const ChooseCharacter = ({
     if (name === "") {
       setRedirectToHome(true);
     }
-  }, [])
+  }, []);
 
   useEffect(() => {
     pickCharacter();
   }, []);
-
-  console.log("chooseCharacter monitoring");
-  varMonitoring();
 
   return (
     <>

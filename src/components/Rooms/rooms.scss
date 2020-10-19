@@ -30,7 +30,7 @@
             justify-content: center;
             align-content: center;
 
-            span {
+            .circle {
                 border-radius: 50%;
                 border: 2px solid rgba(0, 0, 0, 0.2);
                 font-size: 72px;
@@ -41,6 +41,8 @@
                 text-align: center;
                 justify-self: center;
                 align-self: center;
+                display: flex;
+                justify-content: center;
             }
 
             .subtitle {
@@ -54,6 +56,7 @@
 
     .own-room {
         display: flex;
+
         h1 {
             text-align: center;
             color: #fff;
@@ -101,11 +104,14 @@
         }
 
         h1 {
-            width: 20vw!important;
+            width: 20vw !important;
         }
-        .rooms-list .initiale span {
-            height: 7vw;
-            width: 7vw;
+
+        .rooms-list .initiale .circle {
+            height: 110px;
+            width: 110px;
+            text-align: center;
+            margin: 0 auto;
         }
     }
 }

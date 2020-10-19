@@ -23,13 +23,8 @@ const Character = ({ character, setWinner, setIsGameOver }) => {
 
   return (
     <>
-      <div
-        className={`character hover`}
-        onClick={toggle}
-      >
-        <img
-        src={character.image} alt={character.name} 
-        />
+      <div className={`character hover`} onClick={toggle}>
+        <img src={character.image} alt={character.name} />
         <div className={`overlay ${characterDisplay()}`}></div>
         <p className="characterName">{character.name}</p>
         <Modal

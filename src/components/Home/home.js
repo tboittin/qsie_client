@@ -7,7 +7,7 @@ const Home = () => {
   return (
     <div className="home">
       <p className="description">
-        Jeu de déduction, crée en collaboration avec 
+        Jeu de déduction, crée en collaboration avec
         <span className="refuge"> Le Refuge Genève</span>, Qui Sont-Iels? tente
         de faire évoluer la discussion sur les stéréotypes de genre et
         d’orientation.

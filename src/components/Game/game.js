@@ -27,12 +27,10 @@ const Game = ({
   winner,
   replay,
   changeRoom,
-  proximity,
-  varMonitoring,
   opponentStillThere,
   startGame,
   cleanCharacters,
-  leftRoom
+  leftRoom,
 }) => {
   const [modal, setModal] = useState(false);
   const toggle = () => setModal(!modal);
@@ -105,9 +103,6 @@ const Game = ({
     setWinCharacterOpponent(winCharacterOpponent);
   };
 
-  console.log("Game Monitoring");
-  varMonitoring();
-
   return (
     <div className="game">
       <div className="left-panel">
@@ -138,7 +133,6 @@ const Game = ({
           messages={messages}
           setMessage={setMessage}
           sendEndGame={sendEndGame}
-          proximity={proximity}
           handleChangeRoom={handleChangeRoom}
           leftRoom={leftRoom}
         />

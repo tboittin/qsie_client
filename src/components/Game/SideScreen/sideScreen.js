@@ -25,7 +25,7 @@ const SideScreen = ({
   };
   return (
     <div className="sideScreen">
-      <div className={"sideScreenInner"+(chat ? "-chat" : "")}>
+      <div className={"sideScreenInner" + (chat ? "-chat" : "")}>
         <ToggleChat chat={chat} toggleChat={toggleChat} />
         <VS
           name={name}
@@ -33,7 +33,6 @@ const SideScreen = ({
           userCharacter={userCharacter}
           chat={chat}
         />
-        {/* {(proximity === 'distance') &&  */}
         {chat && (
           <Chat
             name={name}

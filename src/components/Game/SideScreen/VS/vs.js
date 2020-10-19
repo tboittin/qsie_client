@@ -12,9 +12,9 @@ const VS = ({ name, opponentName, userCharacter, chat }) => {
       <div className={`${chat ? "vs" : "vs-withoutChat"}`}>
         <div className="opponent hover">
           <img
-            className='opponent-img'
-            src='./QSI_unknown.png'
-            alt='adversaire'
+            className="opponent-img"
+            src="./QSI_unknown.png"
+            alt="adversaire"
           />
           <p className="charName">{opponentName}</p>
         </div>

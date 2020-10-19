@@ -53,11 +53,13 @@ const CharacterModal = ({
                 sunt in culpa qui officia deserunt mollit anim id est laborum.
               </p>
             )}
-            {character.description && 
+            {character.description && (
               <div className="character-description">
-                {character.description.map(d=><p key={d.id}>{d}</p>)}
+                {character.description.map((d) => (
+                  <p key={d.id}>{d}</p>
+                ))}
               </div>
-            }
+            )}
             {displayButtons && (
               <>
                 <button className="button" onClick={choixFinal}>
