@@ -17,7 +17,7 @@ const App = () => {
   const ENDPOINT = "http://localhost:5000/";
   // const ENDPOINT = "https://qsie-server.herokuapp.com/";
   const characters = [...CHARACTERS.default];
-  
+
   const [name, setName] = useState("");
   const [opponentName, setOpponentName] = useState("");
   const [room, setRoom] = useState("");
@@ -32,16 +32,17 @@ const App = () => {
   const [nameError, setNameError] = useState(false);
   const [opponentStillThere, setOpponentStillThere] = useState(true);
   const [redirected, setRedirected] = useState(false);
+  const [leftTheGame, setLeftTheGame] = useState(false);
   const [creator, setCreator] = useState(false);
   const [visitor, setVisitor] = useState(false);
 
   const varMonitoring = () => {
-    console.log('isGameStarted: ', isGameStarted);
-    console.log('isGameOver: ', isGameOver);
-    console.log('winner: ', winner);
-    console.log('creator:', creator)
-    console.log('visitor:', visitor)
-  }
+    console.log("isGameStarted: ", isGameStarted);
+    console.log("isGameOver: ", isGameOver);
+    console.log("winner: ", winner);
+    console.log("creator:", creator);
+    console.log("visitor:", visitor);
+  };
 
   const cleanCharacters = () => {
     setUserCharacter({});
@@ -56,14 +57,15 @@ const App = () => {
   // // updateName: ajouter le joueur dans le back & vérifier que son nom n'est pas déjà pris + déconnecter quand l'user quitte la page
   const updateName = (name) => {
     setName(name);
-    socket.emit("login", { name }, (error) => { //
+    socket.emit("login", { name }, (error) => {
+      //
       alert(error);
       setNameError(true);
     });
 
     // Unmount part
     return () => {
-      socket.emit("disconnect", {name, room});
+      socket.emit("disconnect", { name, room });
 
       socket.off();
     };
@@ -82,7 +84,7 @@ const App = () => {
       setCreator(true);
     } else {
       setVisitor(true);
-    };
+    }
   };
 
   // // rejoint la room
@@ -93,16 +95,16 @@ const App = () => {
   };
 
   const isCreator = () => {
-    console.log('isCreator');
+    console.log("isCreator");
     setVisitor(false);
     setCreator(true);
-  }
+  };
 
   const isVisitor = () => {
-    console.log('isVisitor');
+    console.log("isVisitor");
     setCreator(false);
     setVisitor(true);
-  }
+  };
 
   // Dans chooseCharacter
   // // choisir aléatoirement un personnage dans la liste et le positionner en tant que userCharacter -useEffect
@@ -129,8 +131,8 @@ const App = () => {
       name,
       clientCharacter: userCharacter,
       room,
-    })
-  }
+    });
+  };
   // // reçoit les joueurs dans la Room
   const getUsersInRoom = () => {
     socket.on("usersInRoom", (users) => {
@@ -143,7 +145,7 @@ const App = () => {
     if (message) {
       event.preventDefault();
       socket.emit("sendMessage", { message, room, name });
-      setMessage('');
+      setMessage("");
     }
   };
 
@@ -179,6 +181,10 @@ const App = () => {
     setIsGameOver(false);
     setIsGameStarted(false);
     setRedirected(true);
+  };
+
+  const leftRoom = () => {
+    setLeftTheGame(true);
   }
 
   // useEffect for socket
@@ -222,14 +228,13 @@ const App = () => {
     getUsersInRoom();
   }, []);
 
-  useEffect(() => {
-  }, [opponentCharacter]);
+  useEffect(() => {}, [opponentCharacter]);
 
-  useEffect(()=> {
+  useEffect(() => {
     socket.on("redirectToRooms", () => {
       setOpponentStillThere(false);
-    })
-  })
+    });
+  });
 
   return (
     <Router>
@@ -262,8 +267,10 @@ const App = () => {
             setIsGameStarted={setIsGameStarted}
             redirectedToRooms={redirectedToRooms}
             setOpponentStillThere={setOpponentStillThere}
-            isCreator = {isCreator}
-            isVisitor = {isVisitor}
+            isCreator={isCreator}
+            isVisitor={isVisitor}
+            leftTheGame={leftTheGame}
+            setLeftTheGame={setLeftTheGame}
           />
         </Route>
         <Route path="/chooseCharacter">
@@ -306,6 +313,7 @@ const App = () => {
             startGame={startGame}
             setIsGameStarted={setIsGameStarted}
             cleanCharacters={cleanCharacters}
+            leftRoom={leftRoom}
           />
         </Route>
       </Switch>

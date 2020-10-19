@@ -17,6 +17,7 @@ const SideScreen = ({
   sendMessage,
   handleChangeRoom,
   sendEndGame,
+  leftRoom,
 }) => {
   const [chat, setChat] = useState(true);
   const toggleChat = () => {
@@ -49,6 +50,7 @@ const SideScreen = ({
       <Surrender
         handleChangeRoom={handleChangeRoom}
         sendEndGame={sendEndGame}
+        leftRoom={leftRoom}
       />
     </div>
   );

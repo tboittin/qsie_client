@@ -32,6 +32,7 @@ const Game = ({
   opponentStillThere,
   startGame,
   cleanCharacters,
+  leftRoom
 }) => {
   const [modal, setModal] = useState(false);
   const toggle = () => setModal(!modal);
@@ -45,37 +46,28 @@ const Game = ({
 
   useEffect(() => {
     if (name === "") {
-      console.log('name is empty')
+      console.log("name is empty");
       setRedirectToHome(true);
     } else {
-      console.log('name:',name)
+      console.log("name:", name);
     }
-  }, [])
+  }, []);
 
   useEffect(() => {
     if (isGameOver) {
       sendEndGame();
-      createWinCharacters(); //soit mettre ici
-      console.log('cleanCharacters');
-      console.log('winCharacterUser');//soit là
-      console.log(winCharacterUser);
-      console.log('winCharacterOpponent');
-      console.log(winCharacterOpponent);
+      createWinCharacters();
+      console.log("cleanCharacters");
       toggle();
     }
   }, [isGameOver]);
 
   useEffect(() => {
-      console.log("Creating new characters");
-      createWinCharacters();
-      console.log('winCharacterUser');
-      console.log(winCharacterUser);
-      console.log('winCharacterOpponent');
-      console.log(winCharacterOpponent);
+    createWinCharacters();
   }, [isGameStarted]);
 
   useEffect(() => {
-    if (name !== ""){
+    if (name !== "") {
       startGame();
     }
   }, []);
@@ -87,17 +79,18 @@ const Game = ({
   };
 
   const handleChangeRoom = () => {
+    leftRoom();
     cleanCharacters();
     changeRoom();
     setRedirectToRooms(true);
   };
 
   const createWinCharacters = () => {
-    function WinCharacter (name, image, winDescription) {
+    function WinCharacter(name, image, winDescription) {
       this.name = name;
       this.image = image;
       this.winDescription = winDescription;
-    };
+    }
     const winCharacterUser = new WinCharacter(
       userCharacter.name,
       userCharacter.image,
@@ -147,6 +140,7 @@ const Game = ({
           sendEndGame={sendEndGame}
           proximity={proximity}
           handleChangeRoom={handleChangeRoom}
+          leftRoom={leftRoom}
         />
       </div>
       <Modal isOpen={modal} size="xl" centered={true}>
@@ -172,7 +166,7 @@ const Game = ({
                 </div>
               </div>
             )}
-            {isGameOver && (winCharacterOpponent.winDescription !== undefined) && (
+            {isGameOver && winCharacterOpponent.winDescription !== undefined && (
               <div className="opponent">
                 <img
                   src={winCharacterOpponent.image}

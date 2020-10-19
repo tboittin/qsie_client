@@ -3,12 +3,13 @@ import { Modal } from "reactstrap";
 
 import "./surrender.scss";
 
-const Surrender = ({ handleChangeRoom, sendEndGame }) => {
+const Surrender = ({ handleChangeRoom, sendEndGame, leftRoom }) => {
   const [modal, setModal] = useState(false);
   const toggle = () => setModal(!modal);
   
   const handleSurrender = () => {
       sendEndGame();
+      leftRoom();
       handleChangeRoom();
   }
   return (

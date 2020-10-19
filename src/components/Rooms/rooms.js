@@ -22,6 +22,9 @@ const Rooms = ({
   setCreator,
   setVisitor,
   setIsGameOver,
+  leftTheGame,
+  setLeftTheGame,
+  leftRoom,
 }) => {
   const [modal, setModal] = useState(false);
   const [status, setStatus] = useState('');
@@ -79,15 +82,21 @@ const Rooms = ({
   const toggleRedirectedModal = () => {
     getRooms();
     setRedirected(false);
-    setIsGameOver(false); // DEV
+    setIsGameOver(false);
     setOpponentStillThere(true);
   };
+
+  const toggleLeaveModal = () => { //TODO
+    getRooms();
+    setLeftTheGame(false);
+  }
+
   return (
     <>
       <div className="rooms">
         <h1>Choisis un·e partenaire de jeu</h1>
         <div className="rooms-list">
-          {rooms.map((r) => (
+          {rooms.filter(r => r !== name.trim().toLowerCase()).map((r) => (
             <div
               className="initiale hover"
               key={r.id}
@@ -130,11 +139,19 @@ const Rooms = ({
         </div>
       </Modal>
 
+      <Modal isOpen={leftTheGame} toggle={toggleLeaveModal} size="md">
+        <div className="redirected">
+          <p>
+            Tu es revenu à l'écran des joueurs.
+          </p>
+        </div>
+      </Modal>
+
       <Modal isOpen={redirected} toggle={toggleRedirectedModal} size="md">
         <div className="redirected">
           <p>
             Tu es revenu à l'écran des joueur car ton adversaire a quitté la
-            partie
+            partie.
           </p>
         </div>
       </Modal>
