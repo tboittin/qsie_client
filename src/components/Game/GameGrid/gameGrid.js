@@ -23,7 +23,7 @@ const GameGrid = ({
 
   const characterDeck = (opponentCharacter, characters, size) => {
     console.log("opponentCharacter in gameGrid");
-    console.log(opponentCharacter);
+    opponentCharacter.opponentCharacter = true;
     let finalDeck = [];
 
     // Fixe le bug selon lequel le personnage du jouer est une solution
