@@ -25,16 +25,16 @@ const Home = () => {
         src="./home/QSI_HS_Logo.png"
         alt="Logo Qui Sont-Iels"
       />
-      {/* <Link to={`/rules`}>
+      <Link to={`/rules`}>
         <button className="button homeLink">Jouer</button>
-      </Link> */}
+      </Link>
       <img
         className="spielact hover"
         src="./spielact-logo.webp"
         alt="logo du spielact festival"
         href='https://www.spielact.ch/'
       />
-      <p className="homeLink">Le jeu sera disponible très bientôt.</p>
+      {/* <p className="homeLink">Le jeu sera disponible très bientôt.</p> */}
     </div>
   );
 };
