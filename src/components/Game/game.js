@@ -7,6 +7,7 @@ import { Modal } from "reactstrap";
 import GameGrid from "./GameGrid/gameGrid";
 import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
 import SideScreen from "./SideScreen/sideScreen";
+import Spielact from "./Spielact/spielact";
 
 const Game = ({
   name,
@@ -95,7 +96,7 @@ const Game = ({
       userCharacter.winDescription
     );
     const winCharacterOpponent = new WinCharacter(
-      opponentCharacter.name,
+      opponentCharacter.name,// TODO résoudre le problème de Lara
       opponentCharacter.image,
       opponentCharacter.winDescription
     );
@@ -121,6 +122,7 @@ const Game = ({
             <h1>En attente de l'autre joueur...</h1>
           </div>
         )}
+        <Spielact />
       </div>
       <div className="right-pannel">
         <SideScreen
