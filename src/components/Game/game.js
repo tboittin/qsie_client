@@ -85,6 +85,10 @@ const Game = ({
   };
 
   const createWinCharacters = () => {
+    console.log('userCharacter');
+    console.log(userCharacter);
+    console.log('opponentCharacter');
+    console.log(opponentCharacter);
     function WinCharacter(name, image, winDescription) {
       this.name = name;
       this.image = image;
