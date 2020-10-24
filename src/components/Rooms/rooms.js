@@ -12,7 +12,6 @@ const Rooms = ({
   rooms,
   getRooms,
   updateRoom,
-  joinRoom,
   opponentStillThere,
   redirected,
   setRedirected,
@@ -21,42 +20,26 @@ const Rooms = ({
   setIsGameOver,
   leftTheGame,
   setLeftTheGame,
+  setVisitor,
+  setCreator,
 }) => {
   const [modal, setModal] = useState(false);
   const [redirectToHome, setRedirectToHome] = useState(false);
+  const [redirectToChooseCharacter, setRedirectToChooseCharacter] = useState(false);
 
-  useEffect(() => {
-    if (name === "") {
-      setRedirectToHome(true);
-    }
-  }, []);
-
-  const toggle = () => {
-    setModal(!modal);
+  const isVisitor = () => {
+    setCreator(false);
+    setVisitor(true);
   };
 
-  const [redirectToProximity, setRedirectToProximity] = useState(false);
-
-  useEffect(() => {
-    if (name !== "") {
-      getRooms();
-    }
-  }, []);
-
-  useEffect(() => {
-    if (!opponentStillThere) {
-      redirectedToRooms();
-    }
-  }, []);
+  const isCreator = () => {
+    setVisitor(false);
+    setCreator(true);
+  };
 
   const roomInitiale = (roomName) => {
     let initiale = roomName.substring(0, 1);
     return initiale.toUpperCase();
-  };
-
-  const handleJoinRoom = () => {
-    joinRoom();
-    setRedirectToProximity(true);
   };
 
   const toggleRedirectedModal = () => {
@@ -71,6 +54,29 @@ const Rooms = ({
     setLeftTheGame(false);
   };
 
+  const toggle = () => {
+    setModal(!modal);
+  };
+
+  useEffect(() => {
+    if (name !== "") {
+      console.log('getting rooms');
+      getRooms();
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!opponentStillThere) {
+      redirectedToRooms();
+    }
+  }, []);
+
+  useEffect(() => {
+    if (name === "") {
+      setRedirectToHome(true);
+    }
+  }, []);
+
   return (
     <>
       <div className="rooms">
@@ -84,6 +90,7 @@ const Rooms = ({
                 key={r.id}
                 onClick={() => {
                   updateRoom(r.name);
+                  isVisitor();
                   toggle();
                 }}
               >
@@ -99,6 +106,7 @@ const Rooms = ({
             className="button hover"
             onClick={() => {
               updateRoom(name);
+              isCreator();
               toggle();
             }}
           >
@@ -114,7 +122,7 @@ const Rooms = ({
       <Modal isOpen={modal} toggle={toggle} size="lg">
         <div className="rooms-modal">
           <span>Veux-tu rejoindre le salon: {room} ?</span>
-          <button onClick={handleJoinRoom} className="button-modal">
+          <button onClick={() => setRedirectToChooseCharacter(true)} className="button-modal">
             Oui
           </button>
           <p className="hover" onClick={toggle}>
@@ -138,7 +146,7 @@ const Rooms = ({
         </div>
       </Modal>
 
-      {redirectToProximity && <Redirect to="/chooseCharacter" />}
+      {redirectToChooseCharacter && <Redirect to="/chooseCharacter" />}
       {redirectToHome && <Redirect to="/" />}
     </>
   );

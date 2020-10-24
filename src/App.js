@@ -15,6 +15,7 @@ let socket;
 
 const App = () => {
   const ENDPOINT = "https://qsie-server.herokuapp.com/";
+  // const ENDPOINT = "http://localhost:5000/";
   const characters = [...CHARACTERS.default];
 
   const [name, setName] = useState("");
@@ -32,6 +33,8 @@ const App = () => {
   const [opponentStillThere, setOpponentStillThere] = useState(true);
   const [redirected, setRedirected] = useState(false);
   const [leftTheGame, setLeftTheGame] = useState(false);
+  const [visitor, setVisitor] = useState(false);
+  const [creator, setCreator] = useState(false);
 
   // Nettoyage des personnages attribués aux joueurs + nettoyage de l'affichage des personnages entre les parties
   const cleanCharacters = () => {
@@ -42,6 +45,10 @@ const App = () => {
       characters[i].opponentCharacter = "false";
     }
   };
+
+  const cleanMessages = () => {
+    setMessages([]);
+  }
 
   // Dans Join
   // // updateName: ajouter le joueur dans le back & vérifier que son nom n'est pas déjà pris + déconnecter quand l'user quitte la page
@@ -133,6 +140,7 @@ const App = () => {
 
   // Replay
   const replay = () => {
+    cleanMessages();
     setWinner(false);
     setIsGameOver(false);
     setIsGameStarted(false);
@@ -140,7 +148,7 @@ const App = () => {
   };
   // // retourne à l'écran de choix des rooms et supprime la value de room
   const changeRoom = () => {
-    setMessages([]);
+    cleanMessages();
     setRoom("");
     setWinner(false);
     setIsGameOver(false);
@@ -235,7 +243,6 @@ const App = () => {
             rooms={rooms}
             getRooms={getRooms}
             updateRoom={updateRoom}
-            joinRoom={joinRoom}
             opponentStillThere={opponentStillThere}
             redirected={redirected}
             setRedirected={setRedirected}
@@ -246,6 +253,8 @@ const App = () => {
             setOpponentStillThere={setOpponentStillThere}
             leftTheGame={leftTheGame}
             setLeftTheGame={setLeftTheGame}
+            setVisitor={setVisitor}
+            setCreator={setCreator}
           />
         </Route>
         <Route path="/chooseCharacter">
@@ -255,6 +264,9 @@ const App = () => {
             characterPicked={characterPicked}
             opponentStillThere={opponentStillThere}
             name={name}
+            joinRoom={joinRoom}
+            visitor={visitor}
+            creator={creator}
           />
         </Route>
         <Route path="/game">

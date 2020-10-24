@@ -10,8 +10,17 @@ const ChooseCharacter = ({
   characterPicked,
   opponentStillThere,
   name,
+  joinRoom,
+  visitor,
+  creator,
 }) => {
   const [redirectToHome, setRedirectToHome] = useState(false);
+  
+  useEffect(() => {
+    if (visitor) {
+      joinRoom()
+    }
+  }, [])
 
   useEffect(() => {
     if (name === "") {
@@ -22,6 +31,12 @@ const ChooseCharacter = ({
   useEffect(() => {
     pickCharacter();
   }, []);
+  
+  const handleCharacterPicked = () => {
+    if (creator) {
+      joinRoom()}
+    characterPicked()
+  }
 
   return (
     <>
@@ -29,7 +44,7 @@ const ChooseCharacter = ({
         <div className="choose-character-inner">
           <div className="text">
             <h1>Choisis le personnage que tu incarneras</h1>
-            <Link to={`/game`} onClick={characterPicked}>
+            <Link to={`/game`} onClick={handleCharacterPicked}>
               <button className="button">Jouer</button>
             </Link>
           </div>
