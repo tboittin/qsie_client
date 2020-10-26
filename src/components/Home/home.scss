@@ -6,6 +6,7 @@
     display: flex;
     justify-content: center;
     flex-basis: 100vw;
+
     .logo {
         height: 30vh;
         width: 30vw;
@@ -50,13 +51,67 @@
 
     .refuge {
         font-weight: 400;
-        color: rgba(54,44,115,1);
+        color: rgba(54, 44, 115, 1);
         font-style: italic;
     }
-    
+
     .spielact {
         height: 7vh;
         position: absolute;
         bottom: 4vh;
+    }
+
+    .small-devices {
+        display: none;
+    }
+
+    .large-devices {
+        display: inline;
+    }
+}
+
+@media (max-width:1024px) {
+    .home {
+        background-size: cover;
+        background-position: center;
+
+        .topLeft {
+            display: none;
+        }
+
+        .bottomRight {
+            display: none;
+        }
+
+        .description {
+            right: auto;
+            width: 75vw;
+            text-align: center;
+        }
+
+        .logo {
+            width: 70vw;
+        }
+
+        .homeLink {
+            font-size: 15px;
+            bottom: 13vh;
+            width: 100%;
+            text-align: center;
+            padding: 0 20vw;
+            left: 0vw;
+        }
+
+        .small-devices {
+            display: inline;
+        }
+
+        .large-devices {
+            display: none;
+        }
+
+        .spielact {
+            height: 4vh;
+        }
     }
 }
