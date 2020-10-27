@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Link, Redirect } from "react-router-dom";
 import Circles from "../Circles/circles";
 
 import "./chooseCharacter.scss";
@@ -13,8 +12,14 @@ const ChooseCharacter = ({
   joinRoom,
   visitor,
   creator,
+  setScreen,
 }) => {
-  const [redirectToHome, setRedirectToHome] = useState(false);
+
+  useEffect(() => {
+    if (!opponentStillThere) {
+      setScreen('rooms')
+    }
+  }, [opponentStillThere])
   
   useEffect(() => {
     if (visitor) {
@@ -24,7 +29,7 @@ const ChooseCharacter = ({
 
   useEffect(() => {
     if (name === "") {
-      setRedirectToHome(true);
+      setScreen('home');
     }
   }, []);
 
@@ -34,8 +39,10 @@ const ChooseCharacter = ({
   
   const handleCharacterPicked = () => {
     if (creator) {
-      joinRoom()}
+      joinRoom()
+    }
     characterPicked()
+    setScreen('game')
   }
 
   return (
@@ -43,10 +50,12 @@ const ChooseCharacter = ({
       <div className="choose-character-outer">
         <div className="choose-character-inner">
           <div className="text">
-            <h1>Choisis le personnage que tu incarneras</h1>
-            <Link to={`/game`} onClick={handleCharacterPicked}>
-              <button className="button">Jouer</button>
-            </Link>
+            <h1>Choisis le personnage que tu incarneras</h1> 
+            <button
+              className="button"
+              onClick={handleCharacterPicked}>
+              Jouer
+            </button> 
           </div>
           <div className="personnage">
             {userCharacter.name}
@@ -58,8 +67,6 @@ const ChooseCharacter = ({
         </div>
         <Circles numberOfCircles={4} highlitedOne={3} />
       </div>
-      {!opponentStillThere && (<Redirect to="/rooms" />)}
-      {redirectToHome && <Redirect to="/" />}
     </>
   );
 };

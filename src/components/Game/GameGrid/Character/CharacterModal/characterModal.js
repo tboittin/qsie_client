@@ -55,9 +55,9 @@ const CharacterModal = ({
             )}
             {character.description && (
               <div className="character-description">
-                {character.description.map((d) => (
+                {character.description.map((d) => 
                   <p key={d.id}>{d}</p>
-                ))}
+                )}
               </div>
             )}
             {displayButtons && (

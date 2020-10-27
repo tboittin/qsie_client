@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import "./home.scss";
 
-const Home = () => {
+const Home = ({setScreen}) => {
   return (
     <div className="home">
       <div className="description">
@@ -25,9 +25,12 @@ const Home = () => {
         src="./home/QSI_HS_Logo.png"
         alt="Logo Qui Sont-Iels"
       />
-      <Link to={`/rules`}>
-        <button className="button homeLink large-devices">Jouer</button>
-      </Link>
+      <button
+        className="button homeLink large-devices"
+        onClick={()=>setScreen('rules')}
+      >
+        Jouer
+      </button>
       <img
         className="spielact hover"
         src="./spielact-logo.webp"

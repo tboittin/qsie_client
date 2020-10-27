@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
 import Circles from "../Circles/circles";
 
 import "./rooms.scss";
@@ -22,11 +21,10 @@ const Rooms = ({
   setLeftTheGame,
   setVisitor,
   setCreator,
+  setScreen
 }) => {
   const [modal, setModal] = useState(false);
-  const [redirectToHome, setRedirectToHome] = useState(false);
-  const [redirectToChooseCharacter, setRedirectToChooseCharacter] = useState(false);
-
+  
   const isVisitor = () => {
     setCreator(false);
     setVisitor(true);
@@ -73,7 +71,7 @@ const Rooms = ({
 
   useEffect(() => {
     if (name === "") {
-      setRedirectToHome(true);
+      setScreen('home')
     }
   }, []);
 
@@ -122,7 +120,7 @@ const Rooms = ({
       <Modal isOpen={modal} toggle={toggle} size="lg">
         <div className="rooms-modal">
           <span>Veux-tu rejoindre le salon: {room} ?</span>
-          <button onClick={() => setRedirectToChooseCharacter(true)} className="button-modal">
+          <button onClick={() => setScreen('chooseCharacter')} className="button-modal">
             Oui
           </button>
           <p className="hover" onClick={toggle}>
@@ -145,9 +143,6 @@ const Rooms = ({
           </p>
         </div>
       </Modal>
-
-      {redirectToChooseCharacter && <Redirect to="/chooseCharacter" />}
-      {redirectToHome && <Redirect to="/" />}
     </>
   );
 };

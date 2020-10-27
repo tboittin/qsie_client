@@ -1,10 +1,9 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import Circles from "../Circles/circles";
 
 import "./rules.scss";
 
-const Rules = (modal) => (
+const Rules = ({setScreen}) => (
   <div className={"rules"}>
     <h1>Principes</h1>
     <p>
@@ -27,9 +26,12 @@ const Rules = (modal) => (
       Pour ne pas donner d’indices sur le genre pendant la partie, iel est
       utilisé comme pronom pour tous les personnages.
     </p>
-    <Link to={`/join`} className="link">
-      <button className="button">J'ai compris les règles</button>
-    </Link>
+    <button
+      className="button"
+      onClick={()=>setScreen('join')}
+    >
+      J'ai compris les règles
+    </button>
     <Circles numberOfCircles={4} highlitedOne={0} />
   </div>
 );
