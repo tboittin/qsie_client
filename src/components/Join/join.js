@@ -1,12 +1,10 @@
 import React, { useState } from "react";
-import { Redirect } from "react-router-dom";
 import Circles from "../Circles/circles";
 
 import "./join.scss";
 
-const Join = ({ updateName, nameError }) => {
+const Join = ({ updateName, nameError, setScreen }) => {
   const [joinName, setJoinName] = useState("");
-  const [redirectToRoom, setRedirectToRoom] = useState(false);
 
   const goToRooms = (event) => {
     if (!joinName) {
@@ -19,7 +17,7 @@ const Join = ({ updateName, nameError }) => {
   };
 
   const handleRedirectToRoom = () => {
-    setRedirectToRoom(true);
+    setScreen('rooms');
   };
 
   return (
@@ -41,7 +39,6 @@ const Join = ({ updateName, nameError }) => {
         <p className="light">Les données ne sortent pas du jeu.</p>
         <Circles numberOfCircles={4} highlitedOne={1} />
       </div>
-      {redirectToRoom && <Redirect to={"/rooms"} />}
     </>
   );
 };

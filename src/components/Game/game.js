@@ -5,7 +5,6 @@ import "./game.scss";
 import GameHeader from "./GameHeader/gameHeader";
 import { Modal } from "reactstrap";
 import GameGrid from "./GameGrid/gameGrid";
-import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
 import SideScreen from "./SideScreen/sideScreen";
 import Spielact from "./Spielact/spielact";
 
@@ -32,25 +31,28 @@ const Game = ({
   startGame,
   cleanCharacters,
   leftRoom,
+  setScreen
 }) => {
   const [modal, setModal] = useState(false);
   const toggle = () => setModal(!modal);
-  const [redirectToChooseCharacter, setRedirectToChooseCharacter] = useState(
-    false
-  );
-  const [redirectToRooms, setRedirectToRooms] = useState(false);
   const [winCharacterUser, setWinCharacterUser] = useState({});
   const [winCharacterOpponent, setWinCharacterOpponent] = useState({});
-  const [redirectToHome, setRedirectToHome] = useState(false);
 
   useEffect(() => {
     if (name === "") {
       console.log("name is empty");
-      setRedirectToHome(true);
+      setScreen('home');
     } else {
       console.log("name:", name);
     }
   }, []);
+
+  
+  useEffect(() => {
+    if (!opponentStillThere) {
+      setScreen('rooms')
+    }
+  }, [opponentStillThere]);
 
   useEffect(() => {
     if (isGameOver) {
@@ -74,14 +76,14 @@ const Game = ({
   const handleReplay = () => {
     cleanCharacters();
     replay();
-    setRedirectToChooseCharacter(true);
+    setScreen('chooseCharacter');
   };
 
   const handleChangeRoom = () => {
     leftRoom();
     cleanCharacters();
     changeRoom();
-    setRedirectToRooms(true);
+    setScreen('rooms');
   };
 
   const createWinCharacters = () => {
@@ -157,7 +159,7 @@ const Game = ({
                 <img src={winCharacterUser.image} alt={winCharacterUser.name} />
                 <div className="winDescription">
                   {winCharacterUser.winDescription.map((m) => (
-                    <p>{m}</p>
+                    <p key={m.index}>{m}</p>
                   ))}
                 </div>
               </div>
@@ -170,7 +172,7 @@ const Game = ({
                 />
                 <div className="winDescription">
                   {winCharacterOpponent.winDescription.map((m) => (
-                    <p>{m}</p>
+                    <p key={m.index}>{m}</p>
                   ))}
                 </div>
               </div>
@@ -178,14 +180,6 @@ const Game = ({
           </div>
         </div>
       </Modal>
-      {redirectToChooseCharacter && <Redirect to={"/chooseCharacter"} />}
-      {redirectToRooms && <Redirect to={"/rooms"} />}
-      {!opponentStillThere && (
-        <div>
-          <Redirect to="/rooms" />
-        </div>
-      )}
-      {redirectToHome && <Redirect to="/" />}
     </div>
   );
 };

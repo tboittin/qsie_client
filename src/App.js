@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import io from "socket.io-client";
 
 import Join from "./components/Join/join";
@@ -14,10 +13,11 @@ import * as CHARACTERS from "./character_min.json";
 let socket;
 
 const App = () => {
-  const ENDPOINT = "https://qsie-server.herokuapp.com/";
-  // const ENDPOINT = "http://localhost:5000/";
+  // const ENDPOINT = "https://qsie-server.herokuapp.com/";
+  const ENDPOINT = "http://localhost:5000/";
   const characters = [...CHARACTERS.default];
 
+  const [screen, setScreen] = useState('home');
   const [name, setName] = useState("");
   const [opponentName, setOpponentName] = useState("");
   const [room, setRoom] = useState("");
@@ -48,7 +48,7 @@ const App = () => {
 
   const cleanMessages = () => {
     setMessages([]);
-  }
+  };
 
   // Dans Join
   // // updateName: ajouter le joueur dans le back & vérifier que son nom n'est pas déjà pris + déconnecter quand l'user quitte la page
@@ -82,7 +82,9 @@ const App = () => {
   // // rejoint la room
   const joinRoom = () => {
     socket.emit("joinRoom", { name, room }, (error) => {
-      alert(error);
+      if(screen === 'rooms') {
+        alert(error);
+      }
     });
   };
 
@@ -224,81 +226,90 @@ const App = () => {
   });
 
   return (
-    <Router>
-      <Switch>
-        <Route path="/" exact>
-          <Home />
-        </Route>
-        <Route path="/rules">
-          <Rules />
-        </Route>
-        <Route path="/join">
-          <Join updateName={updateName} nameError={nameError} />
-        </Route>
-        <Route path="/rooms">
-          <Rooms
-            name={name}
-            room={room}
-            setRoom={setRoom}
-            rooms={rooms}
-            getRooms={getRooms}
-            updateRoom={updateRoom}
-            opponentStillThere={opponentStillThere}
-            redirected={redirected}
-            setRedirected={setRedirected}
-            setWinner={setWinner}
-            setIsGameOver={setIsGameOver}
-            setIsGameStarted={setIsGameStarted}
-            redirectedToRooms={redirectedToRooms}
-            setOpponentStillThere={setOpponentStillThere}
-            leftTheGame={leftTheGame}
-            setLeftTheGame={setLeftTheGame}
-            setVisitor={setVisitor}
-            setCreator={setCreator}
-          />
-        </Route>
-        <Route path="/chooseCharacter">
-          <ChooseCharacter
-            userCharacter={userCharacter}
-            pickCharacter={pickCharacter}
-            characterPicked={characterPicked}
-            opponentStillThere={opponentStillThere}
-            name={name}
-            joinRoom={joinRoom}
-            visitor={visitor}
-            creator={creator}
-          />
-        </Route>
-        <Route path="/game">
-          <Game
-            name={name}
-            room={room}
-            userCharacter={userCharacter}
-            opponentName={opponentName}
-            opponentCharacter={opponentCharacter}
-            characters={characters}
-            message={message}
-            messages={messages}
-            isGameStarted={isGameStarted}
-            isGameOver={isGameOver}
-            winner={winner}
-            changeRoom={changeRoom}
-            replay={replay}
-            getUsersInRoom={getUsersInRoom}
-            setMessage={setMessage}
-            sendMessage={sendMessage}
-            setWinner={setWinner}
-            setIsGameOver={setIsGameOver}
-            sendEndGame={sendEndGame}
-            opponentStillThere={opponentStillThere}
-            startGame={startGame}
-            setIsGameStarted={setIsGameStarted}
-            cleanCharacters={cleanCharacters}
-            leftRoom={leftRoom}
-          />
-        </Route>
-      </Switch>
-    </Router>
+    <>
+      {(screen === 'home') &&
+        <Home
+          setScreen={setScreen}
+        />
+      }
+      {(screen === 'rules') &&
+        <Rules
+          setScreen={setScreen}
+        />
+      }
+      {(screen === 'join') &&
+        <Join
+          updateName={updateName}
+          nameError={nameError}
+          setScreen={setScreen}
+        />
+      }
+      {(screen === 'rooms') &&
+        <Rooms
+          name={name}
+          room={room}
+          setRoom={setRoom}
+          rooms={rooms}
+          getRooms={getRooms}
+          updateRoom={updateRoom}
+          opponentStillThere={opponentStillThere}
+          redirected={redirected}
+          setRedirected={setRedirected}
+          setWinner={setWinner}
+          setIsGameOver={setIsGameOver}
+          setIsGameStarted={setIsGameStarted}
+          redirectedToRooms={redirectedToRooms}
+          setOpponentStillThere={setOpponentStillThere}
+          leftTheGame={leftTheGame}
+          setLeftTheGame={setLeftTheGame}
+          setVisitor={setVisitor}
+          setCreator={setCreator}
+          setScreen={setScreen}
+        />
+      }
+      {(screen === 'chooseCharacter') &&
+        <ChooseCharacter
+          userCharacter={userCharacter}
+          pickCharacter={pickCharacter}
+          characterPicked={characterPicked}
+          opponentStillThere={opponentStillThere}
+          name={name}
+          joinRoom={joinRoom}
+          visitor={visitor}
+          creator={creator}
+          setScreen={setScreen}
+        />
+      }
+      {(screen === 'game') &&
+        <Game
+          name={name}
+          room={room}
+          userCharacter={userCharacter}
+          opponentName={opponentName}
+          opponentCharacter={opponentCharacter}
+          characters={characters}
+          message={message}
+          messages={messages}
+          isGameStarted={isGameStarted}
+          isGameOver={isGameOver}
+          winner={winner}
+          changeRoom={changeRoom}
+          replay={replay}
+          getUsersInRoom={getUsersInRoom}
+          setMessage={setMessage}
+          sendMessage={sendMessage}
+          setWinner={setWinner}
+          setIsGameOver={setIsGameOver}
+          sendEndGame={sendEndGame}
+          opponentStillThere={opponentStillThere}
+          startGame={startGame}
+          setIsGameStarted={setIsGameStarted}
+          cleanCharacters={cleanCharacters}
+          leftRoom={leftRoom}
+          setScreen={setScreen}
+        />
+      }
+    </>
   );
 };
 
