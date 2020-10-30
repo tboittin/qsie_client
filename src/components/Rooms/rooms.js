@@ -23,9 +23,14 @@ const Rooms = ({
   setCreator,
   setScreen,
   redirectedToHome,
+  getRoomLength,
+  roomLength,
+  setRoomLength,
+  visitor,
+  creator,
 }) => {
   const [modal, setModal] = useState(false);
-  
+
   const isVisitor = () => {
     setCreator(false);
     setVisitor(true);
@@ -59,12 +64,11 @@ const Rooms = ({
 
   useEffect(() => {
     if (name !== "") {
-      console.log('getting rooms');
       getRooms();
     }
   }, [setScreen]);
 
-  useEffect(() => { // TODO Clarifier
+  useEffect(() => {
     if (!opponentStillThere) {
       redirectedToRooms();
     }
@@ -75,6 +79,30 @@ const Rooms = ({
       redirectedToHome();
     }
   }, [setScreen]);
+
+  const goToChooseCharacter = (event, room) => {
+    if (visitor) {
+      if (roomLength) {
+        if (roomLength !== 1) {
+          event.preventDefault();
+          toggle();
+          alert(
+            "Ce joueur a déjà un·e adversaire, choisis-en un·e autre ou crée une nouvelle partie."
+          );
+          getRooms();
+          setRoomLength("");
+        } else {
+          setScreen("chooseCharacter");
+          setRoomLength("");
+        }
+      }
+    }
+
+    if (creator) {
+      setScreen("chooseCharacter");
+      setRoomLength("");
+    }
+  };
 
   return (
     <>
@@ -88,9 +116,10 @@ const Rooms = ({
                 className="initiale hover"
                 key={r.id}
                 onClick={() => {
-                  updateRoom(r.name);
                   isVisitor();
-                  toggle();
+                  updateRoom(r.name);
+                  getRoomLength(r.name);
+                  toggle("visitorLink", r.name);
                 }}
               >
                 <div className="circle">
@@ -104,9 +133,9 @@ const Rooms = ({
           <h1
             className="button hover"
             onClick={() => {
-              updateRoom(name);
               isCreator();
-              toggle();
+              updateRoom(name);
+              toggle("creatorLink", name);
             }}
           >
             Ou, crée une nouvelle partie
@@ -120,8 +149,11 @@ const Rooms = ({
 
       <Modal isOpen={modal} toggle={toggle} size="lg">
         <div className="rooms-modal">
-          <span>Veux-tu rejoindre le salon: {room} ?</span>
-          <button onClick={() => setScreen('chooseCharacter')} className="button-modal">
+          <span>Veux-tu jouer avec {room} ?</span>
+          <button
+            onClick={(event) => goToChooseCharacter(event, room)}
+            className="button-modal"
+          >
             Oui
           </button>
           <p className="hover" onClick={toggle}>

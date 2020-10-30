@@ -26,6 +26,8 @@ const App = () => {
   const [userCharacter, setUserCharacter] = useState({});
   const [opponentCharacter, setOpponentCharacter] = useState({});
 
+  const [roomLength, setRoomLength] = useState('');
+
   const [isGameStarted, setIsGameStarted] = useState(false);
   const [isGameOver, setIsGameOver] = useState(false);
   const [winner, setWinner] = useState(false);
@@ -100,13 +102,27 @@ const App = () => {
   };
 
   // Dans Join
+
+  const checkIfUserExists = (name) => {
+    socket.emit('existingUser', name, (callbackValue) => {
+      if (callbackValue === true) {
+        setNameError(true);
+      };
+      if (callbackValue === false) {
+        setNameError(false);
+      };
+      if (callbackValue !== true && callbackValue !== false) {
+        console.log('existingUser callbackValue error');
+      };
+    });
+  };
+
   // // updateName: ajouter le joueur dans le back & vérifier que son nom n'est pas déjà pris + déconnecter quand l'user quitte la page
   const updateName = (name) => {
+    console.log('updateName',name);
     setName(name);
-    socket.emit("login", { name }, (error) => {
-      alert(error);
-      setNameError(true);
-    });
+    console.log('login', name)
+    socket.emit("login", name );
 
     // Unmount part
     return () => {
@@ -121,6 +137,10 @@ const App = () => {
   const getRooms = () => {
     socket.emit("getRooms");
   };
+
+  const getRoomLength = (room) => {
+    socket.emit('getRoomLength', room);
+  }
 
   // // ajouter la room créée dans le state
   const updateRoom = (room) => {
@@ -229,35 +249,16 @@ const App = () => {
     reinitializeUser();
   }
 
-  // useEffect for socket
   useEffect(() => {
     socket = io(ENDPOINT);
   }, []);
 
   useEffect(() => {
-    socket.on("rooms", (rooms) => {
-      setRooms(rooms);
-    });
-  }, [setRooms, rooms]);
+    socket.on('existingUser', existingUserValue => setNameError(existingUserValue))
+  })
 
   useEffect(() => {
-    socket.on("startGame", ({ opponentName, opponentCharacter }) => {
-      setOpponentName(opponentName);
-      setOpponentCharacter(opponentCharacter);
-      setIsGameStarted(true);
-    });
-  }, []);
-
-  useEffect(() => {
-    socket.on("message", (message) => {
-      setMessages([...messages, message]);
-    });
-  }, [messages]);
-
-  useEffect(() => {
-    socket.on("endGame", () => {
-      setIsGameOver(true);
-    });
+    getUsersInRoom();
   }, []);
 
   useEffect(() => {
@@ -267,10 +268,33 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    getUsersInRoom();
+    socket.on("endGame", () => {
+      setIsGameOver(true);
+    });
   }, []);
 
-  useEffect(() => {}, [opponentCharacter]);
+  useEffect(() => {
+    socket.on("rooms", (rooms) => {
+      setRooms(rooms);
+    });
+  }, [setRooms, rooms]);
+
+  useEffect(() => {
+    socket.on("message", (message) => {
+      setMessages([...messages, message]);
+    });
+  }, [messages]);
+
+
+  useEffect(() => {
+
+    socket.on("startGame", ({ opponentName, opponentCharacter }) => {
+      setOpponentName(opponentName);
+      setOpponentCharacter(opponentCharacter);
+      setIsGameStarted(true);
+    });
+
+  }, [opponentCharacter]);
 
   useEffect(() => {
     socket.on("redirectToRooms", () => {
@@ -281,8 +305,15 @@ const App = () => {
   useEffect(() => {
     socket.on('reinitializeMe', () => {
       reinitializeUser();
+    });
+  });
+
+  useEffect(() => {
+    socket.on('roomLength', (length) => {
+      setRoomLength(length);
+      console.log('roomLength', roomLength);
     })
-  })
+  }, [roomLength]);
 
   return (
     <>
@@ -298,6 +329,7 @@ const App = () => {
       }
       {(screen === 'join') &&
         <Join
+          checkIfUserExists={checkIfUserExists}
           updateName={updateName}
           nameError={nameError}
           setScreen={setScreen}
@@ -325,6 +357,11 @@ const App = () => {
           setCreator={setCreator}
           setScreen={setScreen}
           redirectedToHome={redirectedToHome}
+          getRoomLength={getRoomLength}
+          roomLength={roomLength}
+          setRoomLength={setRoomLength}
+          visitor={visitor}
+          creator={creator}
         />
       }
       {(screen === 'chooseCharacter') &&
