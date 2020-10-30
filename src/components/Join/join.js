@@ -9,7 +9,7 @@ const Join = ({ checkIfUserExists, updateName, nameError, setScreen }) => {
   const [modal, setModal] = useState(false);
 
   const toggle = () => {
-    setModal(!modal)
+    setModal(!modal);
   };
 
   const blockEmptyName = (event) => {
@@ -42,7 +42,7 @@ const Join = ({ checkIfUserExists, updateName, nameError, setScreen }) => {
     } else {
       checkIfUserExists(joinName);
       toggle();
-    };
+    }
   };
 
   return (
@@ -65,8 +65,9 @@ const Join = ({ checkIfUserExists, updateName, nameError, setScreen }) => {
         <Circles numberOfCircles={4} highlitedOne={1} />
       </div>
       <Modal isOpen={modal} toggle={toggle} size="lg">
-        <span>Veux-tu t'appeler {joinName} ?</span>
-        <button
+        <div className='joinModal'>
+          <span>Veux-tu t'appeler {joinName} ?</span>
+          <button
             onClick={(event) => goToRooms(event)}
             className="button-modal"
           >
@@ -75,6 +76,7 @@ const Join = ({ checkIfUserExists, updateName, nameError, setScreen }) => {
           <p className="hover" onClick={toggle}>
             Non
           </p>
+        </div>
       </Modal>
     </>
   );
