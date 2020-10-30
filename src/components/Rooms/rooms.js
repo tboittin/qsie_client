@@ -149,7 +149,12 @@ const Rooms = ({
 
       <Modal isOpen={modal} toggle={toggle} size="lg">
         <div className="rooms-modal">
-          <span>Veux-tu jouer avec {room} ?</span>
+          {visitor &&
+            <span>Veux-tu jouer avec {room} ?</span>
+          }
+          {creator &&
+            <span>Veux-tu lancer ta propre partie ?</span>
+          }
           <button
             onClick={(event) => goToChooseCharacter(event, room)}
             className="button-modal"
