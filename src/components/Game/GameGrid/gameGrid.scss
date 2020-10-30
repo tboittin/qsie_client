@@ -1,5 +1,5 @@
 .grid {
-  height: 100vh;
+  height: 80vh;
   width: 100%;
   display: flex;
   flex-wrap: wrap;
@@ -10,8 +10,7 @@
 
 @media (min-width: 1025px) {
   .grid {
-    height: 80%;
-    width: 80%;
-    margin-left: 10%;
+    width: 90%;
+    margin: 0 auto;
   }
 }

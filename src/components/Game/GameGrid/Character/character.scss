@@ -1,21 +1,20 @@
 .character {
-  width: 12vw;
-  height: 12vw;
+  width: auto;
+  height: 17vh;
   margin: 1% 1%;
   text-align: center;
 
   img {
     object-fit: cover;
-    height: 80%;
-
+    height: 100%;
   }
 
   .overlay {
-    height: 10vw;
-    width: 10vw;
-    margin: 0 auto;
+    height: 16vh;
+    width: 16vh;
     z-index: 10;
-    bottom: 80%;
+    bottom: 100%;
+    margin: 0 auto;
     position: relative;
     border-radius: 50%;
   }
@@ -30,23 +29,20 @@
 
   .characterName {
     position: relative;
-    bottom: 80%;
-    margin: 0;
+    bottom: 100%;
   }
 
 }
 
 @media (min-width: 1025px) {
   .character {
-    height: 20vh;
-    width: 20vh;
+    height: 15vh;
     margin: 0;
 
     .overlay {
       display: block;
-      margin: auto;
-      height: 0.8*20vh;
-      width: 0.8*20vh;
+      height: 15vh;
+      width: 15vh;
     }
 
     p {
@@ -55,3 +51,19 @@
     }
   }
 }
+
+// @media (min-width: 1440px) {
+//   .character {
+//     height: 170px;
+//     width: auto;
+//     .overlay {
+//       height: 11vh;
+//       width: 11vh;
+//     }
+
+//     p {
+//       font-size: 1.5rem;
+//     }
+
+//   }
+// }
