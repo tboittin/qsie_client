@@ -49,7 +49,8 @@ const Game = ({
   useEffect(() => {
     console.log('useEffect game', 'opponentStillThere', opponentStillThere);
     if (opponentStillThere === false) {
-      setScreen('rooms')
+      setScreen('rooms');
+      cleanCharacters();
     }
   }, [opponentStillThere])
 
@@ -57,7 +58,7 @@ const Game = ({
     if (isGameOver) {
       sendEndGame();
       createWinCharacters();
-      console.log("cleanCharacters");
+      cleanCharacters();
       toggle();
     }
   }, [isGameOver]);
