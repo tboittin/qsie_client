@@ -31,7 +31,8 @@ const Game = ({
   startGame,
   cleanCharacters,
   leftRoom,
-  setScreen
+  setScreen,
+  redirectedToHome,
 }) => {
   const [modal, setModal] = useState(false);
   const toggle = () => setModal(!modal);
@@ -40,19 +41,17 @@ const Game = ({
 
   useEffect(() => {
     if (name === "") {
-      console.log("name is empty");
-      setScreen('home');
-    } else {
-      console.log("name:", name);
+      redirectedToHome()
     }
   }, []);
 
-  
+
   useEffect(() => {
-    if (!opponentStillThere) {
+    console.log('useEffect game', 'opponentStillThere', opponentStillThere);
+    if (opponentStillThere === false) {
       setScreen('rooms')
     }
-  }, [opponentStillThere]);
+  }, [opponentStillThere])
 
   useEffect(() => {
     if (isGameOver) {
@@ -80,6 +79,7 @@ const Game = ({
   };
 
   const handleChangeRoom = () => {
+    // sendEndGame();
     leftRoom();
     cleanCharacters();
     changeRoom();

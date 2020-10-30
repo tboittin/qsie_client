@@ -18,23 +18,72 @@ const App = () => {
   const characters = [...CHARACTERS.default];
 
   const [screen, setScreen] = useState('home');
+
   const [name, setName] = useState("");
   const [opponentName, setOpponentName] = useState("");
   const [room, setRoom] = useState("");
   const [rooms, setRooms] = useState([]);
   const [userCharacter, setUserCharacter] = useState({});
   const [opponentCharacter, setOpponentCharacter] = useState({});
+
   const [isGameStarted, setIsGameStarted] = useState(false);
   const [isGameOver, setIsGameOver] = useState(false);
   const [winner, setWinner] = useState(false);
+
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
+
   const [nameError, setNameError] = useState(false);
+
   const [opponentStillThere, setOpponentStillThere] = useState(true);
   const [redirected, setRedirected] = useState(false);
   const [leftTheGame, setLeftTheGame] = useState(false);
+
   const [visitor, setVisitor] = useState(false);
   const [creator, setCreator] = useState(false);
+
+  // Nettoyage de toutes les données
+  const reinitializeUser = () => {
+    console.log('reinitialization');
+    socket.emit('reinitialize', (name));
+    setName('');
+    setOpponentName('');
+    setRoom('');
+    setRooms([]);
+    setUserCharacter('');
+    setOpponentCharacter('');
+    setIsGameStarted(false);
+    setIsGameOver(false);
+    setWinner(false);
+    setMessage('');
+    setMessages([]);
+    setNameError(false);
+    setOpponentStillThere(true);
+    setRedirected(false);
+    setLeftTheGame(false);
+    setVisitor(false);
+    setCreator(false);
+    cleanCharacters();
+  }
+
+  // Nettoyage des données à l'écran rooms
+  const reinitializeUserRoom = () => {
+    cleanMessages();
+    setOpponentName('');
+    setRoom("");
+    setWinner(false);
+    setIsGameOver(false);
+    setIsGameStarted(false);
+  }
+
+  
+  // Nettoyage des données à l'écran chooseCharacter
+  const reinitializeUserChooseCharacter = () => {
+    cleanMessages();
+    setWinner(false);
+    setIsGameOver(false);
+    setIsGameStarted(false);
+  }
 
   // Nettoyage des personnages attribués aux joueurs + nettoyage de l'affichage des personnages entre les parties
   const cleanCharacters = () => {
@@ -55,7 +104,6 @@ const App = () => {
   const updateName = (name) => {
     setName(name);
     socket.emit("login", { name }, (error) => {
-      //
       alert(error);
       setNameError(true);
     });
@@ -111,11 +159,18 @@ const App = () => {
   // Emet startGame lorsqu'on arrive dans le salon, le premier joueur à émettre startGame ne provoque pas de réponse server car il doit attendre le second
   // // le second joueur à emettre startGame lance la partie pour les deux joueurs
   const startGame = () => {
-    socket.emit("startGame", {
-      name,
-      clientCharacter: userCharacter,
-      room,
-    });
+    socket.emit(
+      "startGame",
+      {
+        name,
+        clientCharacter: userCharacter,
+        room,
+      },
+      (error) => {
+        setScreen('home');
+        alert(error);
+      }
+    );
   };
   // // reçoit les joueurs dans la Room
   const getUsersInRoom = () => {
@@ -139,34 +194,26 @@ const App = () => {
   };
 
   // WinScreen
-
   // Replay
   const replay = () => {
-    cleanMessages();
-    setWinner(false);
-    setIsGameOver(false);
-    setIsGameStarted(false);
+    reinitializeUserChooseCharacter();
     socket.emit("replay");
   };
+
   // // retourne à l'écran de choix des rooms et supprime la value de room
   const changeRoom = () => {
-    cleanMessages();
-    setRoom("");
-    setWinner(false);
-    setIsGameOver(false);
-    setIsGameStarted(false);
-    socket.emit("changeRoom", room);
+    reinitializeUserRoom();
+    socket.emit("changeRoom",
+    room,
+    name //DEV
+    );
   };
-
-  // Affiche une popup lorsqu'on est éjecté de la partie
+  
   const redirectedToRooms = () => {
+    console.log('redirectedToRooms, room:', room);
     socket.emit("redirectedToRooms", room);
-    setMessages([]);
-    setRoom("");
-    setWinner(false);
-    setIsGameOver(false);
-    setIsGameStarted(false);
-    setRedirected(true);
+    reinitializeUserRoom();
+    setRedirected(true);// Sert à afficher une popup lorsqu'on est éjecté de la partie
   };
 
   // Affiche une popup lorsqu'on quitte la partie
@@ -175,6 +222,12 @@ const App = () => {
   const leftRoom = () => {
     setLeftTheGame(true);
   };
+
+  //Redirected to Home (error)
+  const redirectedToHome = () => {
+    setScreen('home');
+    reinitializeUser();
+  }
 
   // useEffect for socket
   useEffect(() => {
@@ -225,6 +278,12 @@ const App = () => {
     });
   });
 
+  useEffect(() => {
+    socket.on('reinitializeMe', () => {
+      reinitializeUser();
+    })
+  })
+
   return (
     <>
       {(screen === 'home') &&
@@ -265,6 +324,7 @@ const App = () => {
           setVisitor={setVisitor}
           setCreator={setCreator}
           setScreen={setScreen}
+          redirectedToHome={redirectedToHome}
         />
       }
       {(screen === 'chooseCharacter') &&
@@ -278,6 +338,7 @@ const App = () => {
           visitor={visitor}
           creator={creator}
           setScreen={setScreen}
+          redirectedToHome={redirectedToHome}
         />
       }
       {(screen === 'game') &&
@@ -307,6 +368,7 @@ const App = () => {
           cleanCharacters={cleanCharacters}
           leftRoom={leftRoom}
           setScreen={setScreen}
+          redirectedToHome={redirectedToHome}
         />
       }
     </>

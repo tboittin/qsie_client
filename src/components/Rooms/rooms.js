@@ -21,7 +21,8 @@ const Rooms = ({
   setLeftTheGame,
   setVisitor,
   setCreator,
-  setScreen
+  setScreen,
+  redirectedToHome,
 }) => {
   const [modal, setModal] = useState(false);
   
@@ -61,19 +62,19 @@ const Rooms = ({
       console.log('getting rooms');
       getRooms();
     }
-  }, []);
+  }, [setScreen]);
 
-  useEffect(() => {
+  useEffect(() => { // TODO Clarifier
     if (!opponentStillThere) {
       redirectedToRooms();
     }
-  }, []);
+  }, [setScreen]);
 
   useEffect(() => {
     if (name === "") {
-      setScreen('home')
+      redirectedToHome();
     }
-  }, []);
+  }, [setScreen]);
 
   return (
     <>

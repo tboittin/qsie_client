@@ -8,8 +8,8 @@ const Surrender = ({ handleChangeRoom, sendEndGame, leftRoom }) => {
   const toggle = () => setModal(!modal);
 
   const handleSurrender = () => {
-    sendEndGame();
-    leftRoom();
+    // sendEndGame();
+    // leftRoom();
     handleChangeRoom();
   };
   return (

@@ -13,10 +13,12 @@ const ChooseCharacter = ({
   visitor,
   creator,
   setScreen,
+  redirectedToHome,
 }) => {
 
   useEffect(() => {
-    if (!opponentStillThere) {
+    console.log('useEffect chooseCharacter', 'opponentStillThere', opponentStillThere);
+    if (opponentStillThere === false) {
       setScreen('rooms')
     }
   }, [opponentStillThere])
@@ -29,7 +31,7 @@ const ChooseCharacter = ({
 
   useEffect(() => {
     if (name === "") {
-      setScreen('home');
+      redirectedToHome();
     }
   }, []);
 
