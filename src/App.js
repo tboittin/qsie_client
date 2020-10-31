@@ -100,6 +100,7 @@ const App = () => {
   
   // Nettoyage des données à l'écran chooseCharacter
   const reinitializeUserChooseCharacter = () => {
+    console.log('reinitializeUserCharacter');
     cleanMessages();
     setWinner(false);
     setIsGameOver(false);
