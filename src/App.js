@@ -13,8 +13,8 @@ import * as CHARACTERS from "./character_min.json";
 let socket;
 
 const App = () => {
-  const ENDPOINT = "https://qsie-server.herokuapp.com/";
-  // const ENDPOINT = "http://localhost:5000/";
+  // const ENDPOINT = "https://qsie-server.herokuapp.com/";
+  const ENDPOINT = "http://localhost:5000/";
   const characters = [...CHARACTERS.default];
 
   const [screen, setScreen] = useState('home');
@@ -43,6 +43,25 @@ const App = () => {
 
   const [visitor, setVisitor] = useState(false);
   const [creator, setCreator] = useState(false);
+
+  const consoleEverything = () => {
+    console.log('name:',name);
+    console.log('room:',room);
+    console.log('opponentName:',opponentName);
+    console.log('userCharacter:', userCharacter);
+    console.log('opponentCharacter:', opponentCharacter);
+    console.log('isGameStarted:', isGameStarted);
+    console.log('isGameOver:', isGameOver);
+    console.log('winner:',winner);
+    console.log('message:', message);
+    console.log('messages:', messages);
+    console.log('nameError:', nameError);
+    console.log('opponentStillThere:',opponentStillThere);
+    console.log('rediirected', redirected);
+    console.log('leftTheGame:', leftTheGame);
+    console.log('visitor:',visitor);
+    console.log('creator', creator);
+  }
 
   // Nettoyage de toutes les données
   const reinitializeUser = () => {
@@ -187,6 +206,7 @@ const App = () => {
         room,
       },
       (error) => {
+        consoleEverything();
         setScreen('home');
         alert(error);
       }
