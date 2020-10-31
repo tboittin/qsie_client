@@ -13,8 +13,8 @@ import * as CHARACTERS from "./character_min.json";
 let socket;
 
 const App = () => {
-  // const ENDPOINT = "https://qsie-server.herokuapp.com/";
-  const ENDPOINT = "http://localhost:5000/";
+  const ENDPOINT = "https://qsie-server.herokuapp.com/";
+  // const ENDPOINT = "http://localhost:5000/";
   const characters = [...CHARACTERS.default];
 
   const [screen, setScreen] = useState('home');
