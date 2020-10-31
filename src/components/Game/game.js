@@ -111,7 +111,7 @@ const Game = ({
     <div className="game">
       <div className="left-panel">
         <GameHeader sendEndGame={sendEndGame} changeRoom={changeRoom} />
-        {isGameStarted && opponentCharacter && (
+        {isGameStarted && opponentCharacter && 
           <GameGrid
             opponentCharacter={opponentCharacter}
             characters={characters}
@@ -119,8 +119,8 @@ const Game = ({
             setIsGameOver={setIsGameOver}
             userCharacter={userCharacter}
           />
-        )}
-        {!isGameStarted && (opponentCharacter === {})(
+        }
+        {!isGameStarted && (
           <div className="waiting">
             <h1>En attente de l'autre joueur...</h1>
           </div>
