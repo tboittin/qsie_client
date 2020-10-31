@@ -314,7 +314,7 @@ const App = () => {
       setIsGameStarted(true);
     });
 
-  }, [opponentCharacter]);
+  }, []);
 
   useEffect(() => {
     socket.on("redirectToRooms", () => {
@@ -359,29 +359,26 @@ const App = () => {
         <Rooms
           name={name}
           room={room}
-          setRoom={setRoom}
           rooms={rooms}
-          getRooms={getRooms}
-          updateRoom={updateRoom}
           opponentStillThere={opponentStillThere}
           redirected={redirected}
+          leftTheGame={leftTheGame}
+          roomLength={roomLength}
+          visitor={visitor}
+          creator={creator}
+          getRooms={getRooms}
+          updateRoom={updateRoom}
           setRedirected={setRedirected}
-          setWinner={setWinner}
           setIsGameOver={setIsGameOver}
-          setIsGameStarted={setIsGameStarted}
           redirectedToRooms={redirectedToRooms}
           setOpponentStillThere={setOpponentStillThere}
-          leftTheGame={leftTheGame}
           setLeftTheGame={setLeftTheGame}
           setVisitor={setVisitor}
           setCreator={setCreator}
           setScreen={setScreen}
           redirectedToHome={redirectedToHome}
           getRoomLength={getRoomLength}
-          roomLength={roomLength}
           setRoomLength={setRoomLength}
-          visitor={visitor}
-          creator={creator}
         />
       }
       {(screen === 'chooseCharacter') &&
@@ -413,7 +410,6 @@ const App = () => {
           winner={winner}
           changeRoom={changeRoom}
           replay={replay}
-          getUsersInRoom={getUsersInRoom}
           setMessage={setMessage}
           sendMessage={sendMessage}
           setWinner={setWinner}
@@ -421,7 +417,6 @@ const App = () => {
           sendEndGame={sendEndGame}
           opponentStillThere={opponentStillThere}
           startGame={startGame}
-          setIsGameStarted={setIsGameStarted}
           cleanCharacters={cleanCharacters}
           leftRoom={leftRoom}
           setScreen={setScreen}

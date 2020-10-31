@@ -19,14 +19,14 @@ const Game = ({
   messages,
   isGameStarted,
   isGameOver,
+  winner,
+  changeRoom,
+  replay,
   setMessage,
   sendMessage,
   setWinner,
   setIsGameOver,
   sendEndGame,
-  winner,
-  replay,
-  changeRoom,
   opponentStillThere,
   startGame,
   cleanCharacters,
@@ -120,7 +120,7 @@ const Game = ({
             userCharacter={userCharacter}
           />
         )}
-        {!isGameStarted && (
+        {!isGameStarted && (opponentCharacter === {})(
           <div className="waiting">
             <h1>En attente de l'autre joueur...</h1>
           </div>
