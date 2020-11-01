@@ -27,7 +27,7 @@ const Join = ({ checkIfUserExists, updateName, nameError, setScreen }) => {
       sameName(event);
       toggle();
     } else {
-      updateName(joinName);
+      updateName(joinName.trim().toLowerCase());
       handleRedirectToRoom();
     }
   };
@@ -66,7 +66,7 @@ const Join = ({ checkIfUserExists, updateName, nameError, setScreen }) => {
       </div>
       <Modal isOpen={modal} toggle={toggle} size="lg">
         <div className='joinModal'>
-          <span>Veux-tu t'appeler {joinName} ?</span>
+          <span>Veux-tu t'appeler {joinName.trim().toLowerCase()} ?</span>
           <button
             onClick={(event) => goToRooms(event)}
             className="button-modal"
