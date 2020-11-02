@@ -39,7 +39,6 @@ const CharacterModal = ({
           <div className="face">
             <img src={character.image} alt={character.name} />
             <h2>{character.name}</h2>
-            <h2>({character.pronom})</h2>
           </div>
           <div className="modal-menu">
             {!character.description && (

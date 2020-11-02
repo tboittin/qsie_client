@@ -88,20 +88,23 @@ const Game = ({
   };
 
   const createWinCharacters = () => {
-    function WinCharacter(name, image, winDescription) {
+    function WinCharacter(name, image, winDescription, pronom) {
       this.name = name;
       this.image = image;
       this.winDescription = winDescription;
+      this.pronom = pronom
     }
     const winCharacterUser = new WinCharacter(
       userCharacter.name,
       userCharacter.image,
-      userCharacter.winDescription
+      userCharacter.winDescription,
+      userCharacter.pronom
     );
     const winCharacterOpponent = new WinCharacter(
       opponentCharacter.name,// TODO résoudre le problème de Lara
       opponentCharacter.image,
-      opponentCharacter.winDescription
+      opponentCharacter.winDescription,
+      opponentCharacter.pronom
     );
     setWinCharacterUser(winCharacterUser);
     setWinCharacterOpponent(winCharacterOpponent);
@@ -158,6 +161,7 @@ const Game = ({
             {isGameOver && winCharacterUser && (
               <div className="user">
                 <img src={winCharacterUser.image} alt={winCharacterUser.name} />
+                <h2>({winCharacterUser.pronom})</h2>
                 <div className="winDescription">
                   {winCharacterUser.winDescription.map((m) => (
                     <p key={m.index}>{m}</p>
@@ -171,6 +175,8 @@ const Game = ({
                   src={winCharacterOpponent.image}
                   alt={winCharacterOpponent.name}
                 />
+                
+                <h2>({winCharacterOpponent.pronom})</h2>
                 <div className="winDescription">
                   {winCharacterOpponent.winDescription.map((m) => (
                     <p key={m.index}>{m}</p>
