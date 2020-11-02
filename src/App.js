@@ -304,7 +304,7 @@ const App = () => {
     socket.on("message", (message) => {
       setMessages([...messages, message]);
     });
-  }, [messages]);
+  },[message]);
 
 
   useEffect(() => {
