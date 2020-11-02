@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Circles from "../Circles/circles";
 
 import "./chooseCharacter.scss";
@@ -15,19 +15,22 @@ const ChooseCharacter = ({
   setScreen,
   redirectedToHome,
 }) => {
+  useEffect(() => {
+    console.log(
+      "useEffect chooseCharacter",
+      "opponentStillThere",
+      opponentStillThere
+    );
+    if (opponentStillThere === false) {
+      setScreen("rooms");
+    }
+  }, [opponentStillThere]);
 
   useEffect(() => {
-    console.log('useEffect chooseCharacter', 'opponentStillThere', opponentStillThere);
-    if (opponentStillThere === false) {
-      setScreen('rooms')
-    }
-  }, [opponentStillThere])
-  
-  useEffect(() => {
     if (visitor) {
-      joinRoom()
+      joinRoom();
     }
-  }, [])
+  }, []);
 
   useEffect(() => {
     if (name === "") {
@@ -38,30 +41,33 @@ const ChooseCharacter = ({
   useEffect(() => {
     pickCharacter();
   }, []);
-  
+
   const handleCharacterPicked = () => {
     if (creator) {
-      joinRoom()
+      joinRoom();
     }
-    characterPicked()
-    setScreen('game')
-  }
+    characterPicked();
+    setScreen("game");
+  };
+
+  console.log(userCharacter);
 
   return (
     <>
       <div className="choose-character-outer">
         <div className="choose-character-inner">
           <div className="text">
-            <h1>Choisis le personnage que tu incarneras</h1> 
-            <button
-              className="button"
-              onClick={handleCharacterPicked}>
+            <h1>Choisis le personnage que tu incarneras</h1>
+            <button className="button" onClick={handleCharacterPicked}>
               Jouer
-            </button> 
+            </button>
           </div>
           <div className="personnage">
             {userCharacter.name}
             <img src={userCharacter.image} alt={userCharacter.name} />
+            {userCharacter.description && userCharacter.description.map((d) => (
+              <span key={d.index}>{d}</span>
+            ))}
             <p className="characterChange" onClick={pickCharacter}>
               Choisir un autre personnage
             </p>
