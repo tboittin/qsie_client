@@ -1,7 +1,7 @@
 .character {
   width: auto;
   height: 17vh;
-  margin: 1% 1%;
+  margin: 1% 2%;
   text-align: center;
 
   img {
@@ -52,18 +52,8 @@
   }
 }
 
-// @media (min-width: 1440px) {
-//   .character {
-//     height: 170px;
-//     width: auto;
-//     .overlay {
-//       height: 11vh;
-//       width: 11vh;
-//     }
-
-//     p {
-//       font-size: 1.5rem;
-//     }
-
-//   }
-// }
+@media (min-width: 1355px) {
+  .character {
+    margin: 0 14px;
+  }
+}
