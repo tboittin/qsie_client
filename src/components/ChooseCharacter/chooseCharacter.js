@@ -65,9 +65,10 @@ const ChooseCharacter = ({
           <div className="personnage">
             {userCharacter.name}
             <img src={userCharacter.image} alt={userCharacter.name} />
-            {userCharacter.description && userCharacter.description.map((d) => (
-              <span key={d.index}>{d}</span>
-            ))}
+            {userCharacter.description &&
+              userCharacter.description.map((d) => (
+                <span key={d.index} className="large-devices">{d}</span>
+              ))}
             <p className="characterChange" onClick={pickCharacter}>
               Choisir un autre personnage
             </p>
