@@ -1,8 +1,8 @@
 .vs {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-around;
     width: 100%;
-    height: 20vh;
+    height: 20%;
     border: 1px solid #F8F8F8;
     border-radius: 0px 0px 5px 5px;
     margin-right: 5vw;
@@ -10,7 +10,8 @@
 
     img {
         object-fit: cover;
-        height: 16vh;
+        height: 12vh;
+        padding: 1vh 1vw;
     }
 
     .charName {
@@ -20,7 +21,6 @@
 
     .opponent {
         height: 100%;
-        width: 20vh;
         text-align: center;
 
         .opponent-img {
@@ -30,7 +30,6 @@
 
     .user {
         height: 100%;
-        width: 20vh;
         text-align: center;
     }
 
@@ -69,4 +68,8 @@
             padding: 10%;
         }
     }
+}
+
+@media(min-width: 1025px) {
+    
 }

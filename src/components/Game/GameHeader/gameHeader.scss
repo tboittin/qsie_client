@@ -4,6 +4,7 @@
   height: 14vh;
   background-color: white;
   margin: 0px;
+  margin-top: 10%;
 
   .logo {
     font-size: 60px;
@@ -49,6 +50,7 @@
 @media (min-width:1025px) {
   .game-header {
     margin-left: 5%;
+    margin-top: 0;
     .logo {
       margin-left: 0px;
     }
