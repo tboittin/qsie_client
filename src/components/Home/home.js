@@ -37,7 +37,7 @@ const Home = ({setScreen}) => {
         href='https://www.spielact.ch/'
       />
       {/* <p className="homeLink large-devices">Le jeu sera disponible très bientôt.</p> */}
-      <p className="homeLink small-devices">Le jeu n'est disponible que sur tablette et ordinateur.</p>
+      <p className="homeLink small-devices">Le jeu n'est disponible que sur tablette (mode paysage) et ordinateur.</p>
     </div>
   );
 };
