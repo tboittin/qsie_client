@@ -10,6 +10,7 @@
     background-repeat: no-repeat;
     background-position: 50%;
     background-size: 65%;
+    padding-bottom: 10%;
     h1 {
         margin: 0 auto;
         width: 40vw;
@@ -42,6 +43,7 @@
 
 @media (min-width:1025px) {
     .rules {
+        padding-bottom: 0;
         background-size: 40%;
         h1, p, .button {
             width: 30vw;
