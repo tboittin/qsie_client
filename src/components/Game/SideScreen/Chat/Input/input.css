@@ -1,9 +1,10 @@
 .form {
   display: flex;
   bottom: 0px;
-  margin: 15px;
+  margin: 0 2%;
   background-color: #FFF;
   border-radius: 5px;
+  height: 7vh;
 }
 
 .input {
@@ -27,9 +28,10 @@ select:focus {
   background: #4D54BF;
   display: inline-block;
   border: none;
-  width: 30%;
+  width: 7vh;
   font-size: 1rem;
   border-radius: 0 5px 5px 0;
+  height: 7vh;
 }
 
 .switch-chat-off {
