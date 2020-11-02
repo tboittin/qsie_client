@@ -10,8 +10,8 @@ const GameHeader = ({ sendEndGame, changeRoom }) => {
 
   return (
     <>
-      <div className="game-header" onClick={toggle}>
-        <div className="logo hover">QUI SONT-IELS?</div>
+      <div className="game-header">
+        <div className="logo hover" onClick={toggle}>QUI SONT-IELS?</div>
       </div>
       <Modal isOpen={modal} size="xl" centered={true} toggle={toggle}>
         <div className="rules-modal">
