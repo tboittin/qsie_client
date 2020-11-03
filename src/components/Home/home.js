@@ -32,7 +32,7 @@ const Home = ({setScreen}) => {
       </button>
       <img
         className="spielact hover"
-        src="./spielact-logo.webp"
+        src="./QSI_smalldevicespielact.png"
         alt="logo du spielact festival"
         href='https://www.spielact.ch/'
       />
