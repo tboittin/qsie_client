@@ -44,6 +44,8 @@ const App = () => {
   const [visitor, setVisitor] = useState(false);
   const [creator, setCreator] = useState(false);
 
+  const [json, setJson] = useState('');
+
   const consoleEverything = () => {
     console.log('name:',name);
     console.log('room:',room);
@@ -304,7 +306,7 @@ const App = () => {
     socket.on("message", (message) => {
       setMessages([...messages, message]);
     });
-  },[message]);
+  },[{message}]);
 
 
   useEffect(() => {
