@@ -11,22 +11,22 @@ const VS = ({ name, opponentName, userCharacter, chat }) => {
     <>
       <div className={`${chat ? "vs" : "vs-withoutChat"}`}>
         <div className="opponent hover">
+          <p className="charName">{opponentName}</p>
           <img
             className="opponent-img"
             src="./QSI_unknown.png"
             alt="adversaire"
           />
-          <p className="charName">{opponentName}</p>
         </div>
         <div className="user hover">
+          <p className="charName">
+            {userCharacter.name} ({name})
+          </p>
           <img
             src={userCharacter.image}
             alt={userCharacter.name}
             onClick={toggle}
           />
-          <p className="charName">
-            {userCharacter.name} ({name})
-          </p>
         </div>
       </div>
       <Modal isOpen={modal} toggle={toggle} size="xl">
