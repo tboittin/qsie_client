@@ -4,7 +4,7 @@
   margin: 0 2%;
   background-color: #FFF;
   border-radius: 5px;
-  height: 7vh;
+  height: 4rem;
 }
 
 .input {
@@ -28,10 +28,10 @@ select:focus {
   background: #4D54BF;
   display: inline-block;
   border: none;
-  width: 7vh;
+  width: 4rem;
   font-size: 1rem;
   border-radius: 0 5px 5px 0;
-  height: 7vh;
+  height: 4rem;
 }
 
 .switch-chat-off {
