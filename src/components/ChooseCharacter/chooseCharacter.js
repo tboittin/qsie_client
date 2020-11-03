@@ -50,8 +50,6 @@ const ChooseCharacter = ({
     setScreen("game");
   };
 
-  console.log(userCharacter);
-
   return (
     <>
       <div className="choose-character-outer">
