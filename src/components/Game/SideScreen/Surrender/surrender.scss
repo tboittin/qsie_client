@@ -1,7 +1,7 @@
 .surrender {
     position: relative;
     right: 3vw;
-    bottom: -1%;
+    bottom: -3.5%;
     font-size: 15px;
     line-height: 15px;
     color: #B5B5B5;
@@ -11,4 +11,10 @@
 
 .surrenderModal {
     text-align: center;
+}
+
+@media (min-width:1025px) {
+    .surrender {
+        bottom: -2.5%;
+    }
 }
