@@ -277,7 +277,10 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    socket.on('existingUser', existingUserValue => setNameError(existingUserValue))
+    socket.on('existingUser', existingUserValue => setNameError(existingUserValue));
+    return () => {
+      socket.off('existingUser');
+    }
   })
 
   useEffect(() => {
@@ -288,24 +291,36 @@ const App = () => {
     socket.on("users", (users) => {
       console.log(users);
     });
+    return () => {
+      socket.off('users');
+    }
   }, []);
 
   useEffect(() => {
     socket.on("endGame", () => {
       setIsGameOver(true);
     });
+    return () => {
+      socket.off('endGame');
+    }
   }, []);
 
   useEffect(() => {
     socket.on("rooms", (rooms) => {
       setRooms(rooms);
     });
+    return () => {
+      socket.off('rooms');
+    }
   }, [setRooms, rooms]);
 
   useEffect(() => {
     socket.on("message", (message) => {
       setMessages([...messages, message]);
     });
+    return () => {
+      socket.off("message");
+    }
   },[{message}]);
 
 
@@ -316,6 +331,9 @@ const App = () => {
       setOpponentCharacter(opponentCharacter);
       setIsGameStarted(true);
     });
+    return () => {
+      socket.off('startGame');
+    }
 
   }, []);
 
@@ -323,19 +341,28 @@ const App = () => {
     socket.on("redirectToRooms", () => {
       setOpponentStillThere(false);
     });
+    return () => {
+      socket.off('redirectToRooms');
+    }
   });
 
   useEffect(() => {
     socket.on('reinitializeMe', () => {
       reinitializeUser();
     });
+    return () => {
+      socket.off('reinitializeMe');
+    }
   });
 
   useEffect(() => {
     socket.on('roomLength', (length) => {
       setRoomLength(length);
       console.log('roomLength', roomLength);
-    })
+    });
+    return () => {
+      socket.off('roomLength');
+    }
   }, [roomLength]);
 
   return (
