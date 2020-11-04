@@ -36,18 +36,21 @@
 
 @media (min-width: 1025px) {
   .character {
-    height: 15vh;
+    height: 16vh;
     margin: 0;
+    max-height: 115px;
+    max-width: 115px;
 
     .overlay {
       display: block;
-      height: 15vh;
-      width: 15vh;
+      height: 16vh;
+      width: 16vh;
+      max-height: 115px;
+      max-width: 115px;
     }
 
     p {
       font-size: 18px;
-      margin: 0;
     }
   }
 }
@@ -56,10 +59,12 @@
   .character {
     margin: 0 14px;
     max-height: 150px;
-  }
+    max-width: 150px;
 
-  .overlay {
-    max-width: 130px;
-    max-height: 130px;
+    .overlay {
+      max-width: 150px;
+      max-height: 150px;
+    }
+    
   }
 }
