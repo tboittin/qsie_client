@@ -17,7 +17,7 @@ const App = () => {
   // const ENDPOINT = "http://localhost:5000/";
   const characters = [...CHARACTERS.default];
 
-  const [screen, setScreen] = useState('home');
+  const [screen, setScreen] = useState("home");
 
   const [name, setName] = useState("");
   const [opponentName, setOpponentName] = useState("");
@@ -26,7 +26,7 @@ const App = () => {
   const [userCharacter, setUserCharacter] = useState({});
   const [opponentCharacter, setOpponentCharacter] = useState({});
 
-  const [roomLength, setRoomLength] = useState('');
+  const [roomLength, setRoomLength] = useState("");
 
   const [isGameStarted, setIsGameStarted] = useState(false);
   const [isGameOver, setIsGameOver] = useState(false);
@@ -44,41 +44,41 @@ const App = () => {
   const [visitor, setVisitor] = useState(false);
   const [creator, setCreator] = useState(false);
 
-  const [json, setJson] = useState('');
+  const [json, setJson] = useState("");
 
   const consoleEverything = () => {
-    console.log('name:',name);
-    console.log('room:',room);
-    console.log('opponentName:',opponentName);
-    console.log('userCharacter:', userCharacter);
-    console.log('opponentCharacter:', opponentCharacter);
-    console.log('isGameStarted:', isGameStarted);
-    console.log('isGameOver:', isGameOver);
-    console.log('winner:',winner);
-    console.log('message:', message);
-    console.log('messages:', messages);
-    console.log('nameError:', nameError);
-    console.log('opponentStillThere:',opponentStillThere);
-    console.log('rediirected', redirected);
-    console.log('leftTheGame:', leftTheGame);
-    console.log('visitor:',visitor);
-    console.log('creator', creator);
-  }
+    console.log("name:", name);
+    console.log("room:", room);
+    console.log("opponentName:", opponentName);
+    console.log("userCharacter:", userCharacter);
+    console.log("opponentCharacter:", opponentCharacter);
+    console.log("isGameStarted:", isGameStarted);
+    console.log("isGameOver:", isGameOver);
+    console.log("winner:", winner);
+    console.log("message:", message);
+    console.log("messages:", messages);
+    console.log("nameError:", nameError);
+    console.log("opponentStillThere:", opponentStillThere);
+    console.log("rediirected", redirected);
+    console.log("leftTheGame:", leftTheGame);
+    console.log("visitor:", visitor);
+    console.log("creator", creator);
+  };
 
   // Nettoyage de toutes les données
   const reinitializeUser = () => {
-    console.log('reinitialization');
-    socket.emit('reinitialize', (name));
-    setName('');
-    setOpponentName('');
-    setRoom('');
+    console.log("reinitialization");
+    socket.emit("reinitialize", name);
+    setName("");
+    setOpponentName("");
+    setRoom("");
     setRooms([]);
-    setUserCharacter('');
-    setOpponentCharacter('');
+    setUserCharacter("");
+    setOpponentCharacter("");
     setIsGameStarted(false);
     setIsGameOver(false);
     setWinner(false);
-    setMessage('');
+    setMessage("");
     setMessages([]);
     setNameError(false);
     setOpponentStillThere(true);
@@ -87,27 +87,26 @@ const App = () => {
     setVisitor(false);
     setCreator(false);
     cleanCharacters();
-  }
+  };
 
   // Nettoyage des données à l'écran rooms
   const reinitializeUserRoom = () => {
     cleanMessages();
-    setOpponentName('');
+    setOpponentName("");
     setRoom("");
     setWinner(false);
     setIsGameOver(false);
     setIsGameStarted(false);
-  }
+  };
 
-  
   // Nettoyage des données à l'écran chooseCharacter
   const reinitializeUserChooseCharacter = () => {
-    console.log('reinitializeUserCharacter');
+    console.log("reinitializeUserCharacter");
     cleanMessages();
     setWinner(false);
     setIsGameOver(false);
     setIsGameStarted(false);
-  }
+  };
 
   // Nettoyage des personnages attribués aux joueurs + nettoyage de l'affichage des personnages entre les parties
   const cleanCharacters = () => {
@@ -126,25 +125,25 @@ const App = () => {
   // Dans Join
 
   const checkIfUserExists = (name) => {
-    socket.emit('existingUser', name, (callbackValue) => {
+    socket.emit("existingUser", name, (callbackValue) => {
       if (callbackValue === true) {
         setNameError(true);
-      };
+      }
       if (callbackValue === false) {
         setNameError(false);
-      };
+      }
       if (callbackValue !== true && callbackValue !== false) {
-        console.log('existingUser callbackValue error');
-      };
+        console.log("existingUser callbackValue error");
+      }
     });
   };
 
   // // updateName: ajouter le joueur dans le back & vérifier que son nom n'est pas déjà pris + déconnecter quand l'user quitte la page
   const updateName = (name) => {
-    console.log('updateName',name);
+    console.log("updateName", name);
     setName(name);
-    console.log('login', name)
-    socket.emit("login", name );
+    console.log("login", name);
+    socket.emit("login", name);
 
     // Unmount part
     return () => {
@@ -161,8 +160,8 @@ const App = () => {
   };
 
   const getRoomLength = (room) => {
-    socket.emit('getRoomLength', room);
-  }
+    socket.emit("getRoomLength", room);
+  };
 
   // // ajouter la room créée dans le state
   const updateRoom = (room) => {
@@ -172,7 +171,7 @@ const App = () => {
   // // rejoint la room
   const joinRoom = () => {
     socket.emit("joinRoom", { name, room }, (error) => {
-      if(screen === 'rooms') {
+      if (screen === "rooms") {
         alert(error);
       }
     });
@@ -210,7 +209,7 @@ const App = () => {
       },
       (error) => {
         consoleEverything();
-        setScreen('home');
+        setScreen("home");
         alert(error);
       }
     );
@@ -246,17 +245,18 @@ const App = () => {
   // // retourne à l'écran de choix des rooms et supprime la value de room
   const changeRoom = () => {
     reinitializeUserRoom();
-    socket.emit("changeRoom",
-    room,
-    name //DEV
+    socket.emit(
+      "changeRoom",
+      room,
+      name //DEV
     );
   };
-  
+
   const redirectedToRooms = () => {
-    console.log('redirectedToRooms, room:', room);
+    console.log("redirectedToRooms, room:", room);
     socket.emit("redirectedToRooms", room);
     reinitializeUserRoom();
-    setRedirected(true);// Sert à afficher une popup lorsqu'on est éjecté de la partie
+    setRedirected(true); // Sert à afficher une popup lorsqu'on est éjecté de la partie
   };
 
   // Affiche une popup lorsqu'on quitte la partie
@@ -268,20 +268,22 @@ const App = () => {
 
   //Redirected to Home (error)
   const redirectedToHome = () => {
-    setScreen('home');
+    setScreen("home");
     reinitializeUser();
-  }
+  };
 
   useEffect(() => {
     socket = io(ENDPOINT);
   }, []);
 
   useEffect(() => {
-    socket.on('existingUser', existingUserValue => setNameError(existingUserValue));
+    socket.on("existingUser", (existingUserValue) =>
+      setNameError(existingUserValue)
+    );
     return () => {
-      socket.off('existingUser');
-    }
-  })
+      socket.off("existingUser");
+    };
+  });
 
   useEffect(() => {
     getUsersInRoom();
@@ -292,8 +294,8 @@ const App = () => {
       console.log(users);
     });
     return () => {
-      socket.off('users');
-    }
+      socket.off("users");
+    };
   }, []);
 
   useEffect(() => {
@@ -301,8 +303,8 @@ const App = () => {
       setIsGameOver(true);
     });
     return () => {
-      socket.off('endGame');
-    }
+      socket.off("endGame");
+    };
   }, []);
 
   useEffect(() => {
@@ -310,8 +312,8 @@ const App = () => {
       setRooms(rooms);
     });
     return () => {
-      socket.off('rooms');
-    }
+      socket.off("rooms");
+    };
   }, [setRooms, rooms]);
 
   useEffect(() => {
@@ -320,21 +322,18 @@ const App = () => {
     });
     return () => {
       socket.off("message");
-    }
-  },[{message}]);
-
+    };
+  }, [{ message }]);
 
   useEffect(() => {
-
     socket.on("startGame", ({ opponentName, opponentCharacter }) => {
       setOpponentName(opponentName);
       setOpponentCharacter(opponentCharacter);
       setIsGameStarted(true);
     });
     return () => {
-      socket.off('startGame');
-    }
-
+      socket.off("startGame");
+    };
   }, []);
 
   useEffect(() => {
@@ -342,117 +341,125 @@ const App = () => {
       setOpponentStillThere(false);
     });
     return () => {
-      socket.off('redirectToRooms');
-    }
+      socket.off("redirectToRooms");
+    };
   });
 
   useEffect(() => {
-    socket.on('reinitializeMe', () => {
+    socket.on("reinitializeMe", () => {
       reinitializeUser();
     });
     return () => {
-      socket.off('reinitializeMe');
-    }
+      socket.off("reinitializeMe");
+    };
   });
 
   useEffect(() => {
-    socket.on('roomLength', (length) => {
+    socket.on("roomLength", (length) => {
       setRoomLength(length);
-      console.log('roomLength', roomLength);
+      console.log("roomLength", roomLength);
     });
     return () => {
-      socket.off('roomLength');
-    }
+      socket.off("roomLength");
+    };
   }, [roomLength]);
 
   return (
     <>
-      {(screen === 'home') &&
-        <Home
-          setScreen={setScreen}
-        />
-      }
-      {(screen === 'rules') &&
-        <Rules
-          setScreen={setScreen}
-        />
-      }
-      {(screen === 'join') &&
-        <Join
-          checkIfUserExists={checkIfUserExists}
-          updateName={updateName}
-          nameError={nameError}
-          setScreen={setScreen}
-        />
-      }
-      {(screen === 'rooms') &&
-        <Rooms
-          name={name}
-          room={room}
-          rooms={rooms}
-          opponentStillThere={opponentStillThere}
-          redirected={redirected}
-          leftTheGame={leftTheGame}
-          roomLength={roomLength}
-          visitor={visitor}
-          creator={creator}
-          getRooms={getRooms}
-          updateRoom={updateRoom}
-          setRedirected={setRedirected}
-          setIsGameOver={setIsGameOver}
-          redirectedToRooms={redirectedToRooms}
-          setOpponentStillThere={setOpponentStillThere}
-          setLeftTheGame={setLeftTheGame}
-          setVisitor={setVisitor}
-          setCreator={setCreator}
-          setScreen={setScreen}
-          redirectedToHome={redirectedToHome}
-          getRoomLength={getRoomLength}
-          setRoomLength={setRoomLength}
-        />
-      }
-      {(screen === 'chooseCharacter') &&
-        <ChooseCharacter
-          userCharacter={userCharacter}
-          pickCharacter={pickCharacter}
-          characterPicked={characterPicked}
-          opponentStillThere={opponentStillThere}
-          name={name}
-          joinRoom={joinRoom}
-          visitor={visitor}
-          creator={creator}
-          setScreen={setScreen}
-          redirectedToHome={redirectedToHome}
-        />
-      }
-      {(screen === 'game') &&
-        <Game
-          name={name}
-          room={room}
-          userCharacter={userCharacter}
-          opponentName={opponentName}
-          opponentCharacter={opponentCharacter}
-          characters={characters}
-          message={message}
-          messages={messages}
-          isGameStarted={isGameStarted}
-          isGameOver={isGameOver}
-          winner={winner}
-          changeRoom={changeRoom}
-          replay={replay}
-          setMessage={setMessage}
-          sendMessage={sendMessage}
-          setWinner={setWinner}
-          setIsGameOver={setIsGameOver}
-          sendEndGame={sendEndGame}
-          opponentStillThere={opponentStillThere}
-          startGame={startGame}
-          cleanCharacters={cleanCharacters}
-          leftRoom={leftRoom}
-          setScreen={setScreen}
-          redirectedToHome={redirectedToHome}
-        />
-      }
+      {screen === "home" && (
+        <div className="fade-in">
+          <Home setScreen={setScreen} screen={screen} />
+        </div>
+      )}
+      {screen === "rules" && (
+        <div className="fade-in">
+          <Rules setScreen={setScreen} />
+        </div>
+      )}
+      {screen === "join" && (
+        <div className="fade-in">
+          <Join
+            checkIfUserExists={checkIfUserExists}
+            updateName={updateName}
+            nameError={nameError}
+            setScreen={setScreen}
+          />
+        </div>
+      )}
+      {screen === "rooms" && (
+        <div className="fade-in">
+          <Rooms
+            name={name}
+            room={room}
+            rooms={rooms}
+            opponentStillThere={opponentStillThere}
+            redirected={redirected}
+            leftTheGame={leftTheGame}
+            roomLength={roomLength}
+            visitor={visitor}
+            creator={creator}
+            getRooms={getRooms}
+            updateRoom={updateRoom}
+            setRedirected={setRedirected}
+            setIsGameOver={setIsGameOver}
+            redirectedToRooms={redirectedToRooms}
+            setOpponentStillThere={setOpponentStillThere}
+            setLeftTheGame={setLeftTheGame}
+            setVisitor={setVisitor}
+            setCreator={setCreator}
+            setScreen={setScreen}
+            redirectedToHome={redirectedToHome}
+            getRoomLength={getRoomLength}
+            setRoomLength={setRoomLength}
+          />
+        </div>
+      )}
+      {screen === "chooseCharacter" && (
+        <div className="fade-in">
+          <ChooseCharacter
+            userCharacter={userCharacter}
+            pickCharacter={pickCharacter}
+            characterPicked={characterPicked}
+            opponentStillThere={opponentStillThere}
+            name={name}
+            joinRoom={joinRoom}
+            visitor={visitor}
+            creator={creator}
+            setScreen={setScreen}
+            redirectedToHome={redirectedToHome}
+          />
+        </div>
+      )}
+      {screen === "game" && (
+        <div className="fade-in">
+          <Game
+            name={name}
+            room={room}
+            userCharacter={userCharacter}
+            opponentName={opponentName}
+            opponentCharacter={opponentCharacter}
+            characters={characters}
+            message={message}
+            messages={messages}
+            isGameStarted={isGameStarted}
+            isGameOver={isGameOver}
+            winner={winner}
+            changeRoom={changeRoom}
+            replay={replay}
+            setMessage={setMessage}
+            sendMessage={sendMessage}
+            setWinner={setWinner}
+            setIsGameOver={setIsGameOver}
+            sendEndGame={sendEndGame}
+            opponentStillThere={opponentStillThere}
+            startGame={startGame}
+            cleanCharacters={cleanCharacters}
+            leftRoom={leftRoom}
+            setScreen={setScreen}
+            redirectedToHome={redirectedToHome}
+          />
+        </div>
+      )}
     </>
   );
 };
