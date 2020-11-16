@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import io from "socket.io-client";
 
+import "./Transitions.css";
+
 import Join from "./components/Join/join";
 import Game from "./components/Game/game";
 import Home from "./components/Home/home";
